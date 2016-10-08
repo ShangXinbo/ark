@@ -1,64 +1,42 @@
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-    <p>
-      Welcome to your Vue.js app!
-    </p>
-    <p>
-      To get a better understanding of how this boilerplate works, check out
-      <a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.
-      It is also recommended to go through the docs for
-      <a href="http://webpack.github.io/" target="_blank">Webpack</a> and
-      <a href="http://vuejs.github.io/vue-loader/" target="_blank">vue-loader</a>.
-      If you have any issues with the setup, please file an issue at this boilerplate's
-      <a href="https://github.com/vuejs-templates/webpack" target="_blank">repository</a>.
-    </p>
-    <p>
-      You may also want to checkout
-      <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
-      <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
-    </p>
-  </div>
+    <body>
+        <vheader></vheader>
+        <router-view></router-view>
+        <div class="footer"><p>Copyright&nbsp;&copy;&nbsp;2016&nbsp;集奥聚合</p></div>
+        <dialog-crowd-method></dialog-crowd-method>
+        <dialog-crowd-create></dialog-crowd-create>
+        <dialog-crowd-select></dialog-crowd-select>
+        <div id="shadowLayer" v-show="layerStatus"></div>
+    </body>
 </template>
-
 <script>
-import Hello from './components/Hello'
+import store from 'src/vuex/store';
+import {showLayer} from 'src/vuex/actions';
+import vheader from 'components/header/index.vue';
+import dialogCrowdMethod from 'components/dialog/crowdMethod';
+import dialogCrowdCreate from 'components/dialog/crowdCreate';
+import dialogCrowdSelect from 'components/dialog/crowdSelect';
 
 export default {
-  components: {
-    Hello
-  }
-}
+    store:store,
+    data:function(){
+        return {
+            layerStatus:''
+        };
+    },
+    components: {
+        'vheader':vheader,
+        'dialog-crowd-method':dialogCrowdMethod,
+        'dialog-crowd-create':dialogCrowdCreate,
+        'dialog-crowd-select':dialogCrowdSelect
+    },
+    vuex: {
+        getters:{
+            layerStatus:function(state){
+                return state.showLayer;
+            }
+        }
+    }
+};
 </script>
 
-<style>
-html {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
-}
-</style>
