@@ -26,7 +26,6 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import {closeDialogs} from 'src/vuex/actions';
 import API from 'src/services/api.js';
 export default {
     data: function () {
@@ -34,11 +33,6 @@ export default {
             l: 0,
             t: 0
         };
-    },
-    vuex: {
-        actions: {
-            closeDialogs
-        }
     },
     methods: {
         closeDialog: function () {

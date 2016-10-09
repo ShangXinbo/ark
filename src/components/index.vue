@@ -312,18 +312,11 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import { showUploadInit,closeDialogs } from 'src/vuex/actions';
 export default {
-    vuex:{
-        actions:{
-            showUploadInit,
-            closeDialogs
-        }
-    },
     methods: {
         crowdUpDialog: function(){
-            this.closeDialogs();
-            this.showUploadInit();
+            store.commit('CLOSE_DIALOG');
+            store.commit('SHOW_UPLOAD_INIT_DIALOG');
         }
     }
 };

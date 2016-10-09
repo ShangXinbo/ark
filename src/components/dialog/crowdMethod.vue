@@ -11,7 +11,6 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import {closeDialogs, showUploadCreate, showUploadSelect} from 'src/vuex/actions';
 export default {
     data: function () {
         return {
@@ -19,24 +18,17 @@ export default {
             t: 0
         };
     },
-    vuex: {
-        actions: {
-            closeDialogs,
-            showUploadCreate,
-            showUploadSelect
-        }
-    },
     methods: {
         closeDialog: function () {
-            this.closeDialogs();
+            store.commit('CLOSE_DIALOG');
         },
         showCreate: function () {
-            this.closeDialogs();
-            this.showUploadCreate();
+            store.commit('CLOSE_DIALOG');
+            store.commit('SHOW_UPLOAD_CREATE_DIALOG');
         },
         showSelect: function () {
-            this.closeDialogs();
-            this.showUploadSelect();
+            store.commit('CLOSE_DIALOG');
+            store.commit('SHOW_UPLOAD_SELECT_DIALOG');
         }
     },
     computed: {

@@ -42,7 +42,6 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import {closeDialogs} from 'src/vuex/actions';
 import API from 'src/services/api.js';
 export default {
     data: function () {
@@ -59,14 +58,9 @@ export default {
             token:''
         };
     },
-    vuex: {
-        actions: {
-            closeDialogs
-        }
-    },
     methods: {
         closeDialog: function () {
-            this.closeDialogs();
+            store.commit('CLOSE_DIALOG');
         },
         createSubmit: function () {
             this.$data.nameError = '';

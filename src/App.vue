@@ -11,7 +11,6 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import {showLayer} from 'src/vuex/actions';
 import vheader from 'components/header/index.vue';
 import dialogCrowdMethod from 'components/dialog/crowdMethod';
 import dialogCrowdCreate from 'components/dialog/crowdCreate';
