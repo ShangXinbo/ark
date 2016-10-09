@@ -23,9 +23,8 @@
                                 <input v-bind:value="filePath" class="input-text" type="text" disabled="disabled"/>
                                 <span style="position: relative;" v-on:click="selectFile">
                                     上传
-                                    <input v-model.file="fileVal" accept=".txt,.xls,.xlsx" v-on:change="changeFilePath"
-                                       name="file" class="upload-warp"
-                                       v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
+                                    <input v-model.file="fileVal" accept=".txt,.xls,.xlsx" v-on:change="changeFilePath" name="file" class="upload-warp"
+                                           v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
                                 </span>
                             </div>
                             <p class="error" v-show="fileError"><i></i><span>{{fileError}}</span></p>
@@ -55,7 +54,7 @@ export default {
             nameError: '',
             descError: '',
             fileError: '',
-            token:''
+            token: ''
         };
     },
     methods: {
