@@ -17,10 +17,12 @@
 </template>
 <script>
 import FN from 'src/services/functions.js';
-let user = new FN();
+import store from 'src/vuex/store.js';
 export default {
-    data(){
-        return JSON.parse(user.getCookie('user'));
+    data:function(){
+        return {
+            type:store.user? store.user.type:''
+        };
     }
 };
 </script>

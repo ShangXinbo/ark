@@ -1,6 +1,6 @@
 <template>
-    <div id="upload_init" class="dialog" v-bind:style="{'display':pop1,'margin-left':l,'margin-top':t}">
-        <a href="javascript:void(0);" class="dialog-close" v-on:click="closeDialog" title="关闭"></a>
+    <div id="upload_init" class="dialog" v-bind:style="{'display':visual,'margin-left':offsetLeft,'margin-top':offsetTop}">
+        <a href="javascript:void(0);" class="dialog-close" title="关闭" v-on:click="closeDialog"></a>
         <div class="dialog-body">
             <div class="dialog-bugButton">
                 <a href="javascript:void(0);" v-on:click="showCreate"><i class="icon03"></i><span>上传新人群</span></a>
@@ -14,8 +14,8 @@ import store from 'src/vuex/store';
 export default {
     data: function () {
         return {
-            l: 0,
-            t: 0
+            offsetLeft: 0,
+            offsetTop: 0
         };
     },
     methods: {
@@ -32,12 +32,8 @@ export default {
         }
     },
     computed: {
-        pop1: function () {
-            if (store.state.uploadInitDialog) {
-                return 'block';
-            } else {
-                return 'none';
-            }
+        visual: function () {
+            return store.state.dialog.crowdInit ? 'block' : 'none';
         }
     },
     mounted: function () {
@@ -46,11 +42,11 @@ export default {
         var centerDialog = function (el) {
             var dialog = document.querySelector(el);
             var dh = dialog.offsetHeight, dw = dialog.offsetWidth;
-            _this.$data.l = -dw / 2 + 'px';
-            _this.$data.t = -dh / 2 + 'px';
+            _this.$data.offsetLeft = -dw / 2 + 'px';
+            _this.$data.offsetTop = -dh / 2 + 'px';
         };
 
-        this.$watch('pop1', function (newVal, oldVal) {
+        this.$watch('visual', function (newVal, oldVal) {
             centerDialog('#upload_init');
         });
     }

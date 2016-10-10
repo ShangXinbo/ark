@@ -11,9 +11,12 @@ Vue.use(Vuex);
 
 const state = {
     showLayer: false,
-    uploadInitDialog: false,
-    uploadCreateDialog:false,
-    uploadSelectDialog:false
+    dialog:{
+        crowdInit:false,
+        crowdCreate:false,
+        crowdSelect:false
+    },
+    user: {}
 };
 
 const mutations = {
@@ -27,26 +30,30 @@ const mutations = {
     },
     // 关闭所有弹窗
     CLOSE_DIALOG(state){
-        state.uploadInitDialog = false;
-        state.uploadCreateDialog = false;
-        state.uploadSelectDialog = false;
+        state.dialog.crowdInit = false;
+        state.dialog.crowdCreate = false;
+        state.dialog.crowdSelect = false;
         state.showLayer = false;
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_INIT_DIALOG(state){
-        state.uploadInitDialog = true;
+        state.dialog.crowdInit = true;
         state.showLayer = true;
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_CREATE_DIALOG(state){
-        state.uploadCreateDialog = true;
+        state.dialog.crowdCreate = true;
         state.showLayer = true;
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_SELECT_DIALOG(state){
-        state.uploadSelectDialog = true;
+        state.dialog.crowdSelect = true;
         state.showLayer = true;
+    },
+    // 登录
+    LOGIN(state){
     }
+
 };
 
 export default new Vuex.Store({

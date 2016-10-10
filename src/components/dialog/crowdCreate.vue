@@ -1,6 +1,6 @@
 <template>
-    <div id="upload_create" class="dialog" v-bind:style="{'display':pop2,'margin-left':l,'margin-top':t}">
-        <a href="javascript:void(0);" class="dialog-close" v-on:click="closeDialog" title="关闭"></a>
+    <div id="upload_create" class="dialog" v-bind:style="{'display':visual,'margin-left':l,'margin-top':t}">
+        <a href="javascript:void(0);" class="dialog-close" title="关闭" v-on:click="closeDialog"></a>
         <div class="dialog-header"><h4>上传新人群</h4></div>
         <div class="dialog-body">
             <div class="dialog-upload">
@@ -9,7 +9,7 @@
                     <ul class="input-warp">
                         <li v-bind:class="{'error':nameError}">
                             <label>名称</label>
-                            <input class="input-text" v-model="fileName" type="text"/>
+                            <input class="input-text" v-model.text="fileName"/>
                             <p class="error" v-show="nameError"><i></i><span>{{nameError}}</span></p>
                         </li>
                         <li v-bind:class="{'error':descError}">
@@ -20,10 +20,12 @@
                         <li v-bind:class="{'error':fileError}">
                             <label>上传</label>
                             <div class="upload-warp">
-                                <input v-bind:value="filePath" class="input-text" type="text" disabled="disabled"/>
+                                <input v-model.text="filePath" class="input-text" disabled="disabled"/>
                                 <span style="position: relative;" v-on:click="selectFile">
                                     上传
-                                    <input v-model.file="fileVal" accept=".txt,.xls,.xlsx" v-on:change="changeFilePath" name="file" class="upload-warp"
+                                    <input accept=".txt,.xls,.xlsx" name="file" class="upload-warp"
+                                           v-model.file="fileVal"
+                                           v-on:change="changeFilePath"
                                            v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
                                 </span>
                             </div>
@@ -34,7 +36,7 @@
             </div>
         </div>
         <div class="dialog-footer">
-            <a class="red" v-on:click="createSubmit" href="javascript:void(0);">提交</a>
+            <a class="red" href="javascript:void(0);" v-on:click="createSubmit">提交</a>
             <a href="javascript:void(0);" v-on:click="closeDialog">取消</a>
         </div>
     </div>
@@ -47,15 +49,20 @@ export default {
         return {
             l: 0,
             t: 0,
+            token: '',
             fileName: '',
             fileDesc: '',
             fileVal: '',
             filePath: '',
             nameError: '',
             descError: '',
-            fileError: '',
-            token: ''
+            fileError: ''
         };
+    },
+    computed: {
+        visual: function () {
+            return store.state.dialog.crowdCreate ? 'block' : 'none';
+        }
     },
     methods: {
         closeDialog: function () {
@@ -97,15 +104,6 @@ export default {
         selectFile: function () {
 
         },
-    },
-    computed: {
-        pop2: function () {
-            if (store.state.uploadCreateDialog) {
-                return 'block';
-            } else {
-                return 'none';
-            }
-        }
     },
     mounted: function () {
         var _this = this;
