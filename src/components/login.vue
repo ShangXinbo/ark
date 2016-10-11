@@ -5,17 +5,17 @@
     <ul>
         <li>
             <i class="head"></i>
-            <input autocomplete="off" type="text" id="username">
+            <input autocomplete="off" type="text" id="username"/>
         </li>
         <li>
             <i class="password"></i>
-            <input  autocomplete="new-password" type="password" id="password">
+            <input autocomplete="new-password" type="password" id="password"/>
         </li>
         <li class="reminder" id="reminder">
 
         </li>
         <li>
-            <button id="input1" type="submit">登录</button>
+            <button id="input" type="submit">登录</button>
         </li>
     </ul>
 </div>
