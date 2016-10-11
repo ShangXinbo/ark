@@ -5,26 +5,45 @@
     <ul>
         <li>
             <i class="head"></i>
-            <input autocomplete="off" type="text" id="username"/>
+            <input autocomplete="off" v-model:value.text="username" />
         </li>
         <li>
             <i class="password"></i>
-            <input autocomplete="new-password" type="password" id="password"/>
+            <input autocomplete="new-password" v-model:value.password="password" />
         </li>
-        <li class="reminder" id="reminder"></li>
+        <li class="reminder">{{error}}</li>
         <li>
-            <button id="input" type="submit">登录</button>
+            <button id="input" v-on:click="login" type="submit">登录</button>
         </li>
     </ul>
 </div>
 </template>
 <script>
-import store from 'src/vuex/store';
+import API from 'src/services/api';
 export default {
+    data: function(){
+        return {
+            username:'',
+            password:'',
+            error:''
+        };
+    },
     methods: {
-        crowdUpDialog: function () {
-            store.commit('CLOSE_DIALOG');
-            store.commit('SHOW_UPLOAD_INIT_DIALOG');
+        login: function () {
+            if (!this.username) {
+                this.error = "请输入您的用户名!";
+                return false;
+            }
+            if (!this.password) {
+                this.error = "请输入您的密码!";
+                return false;
+            }
+
+            this.$http.post(API.login).then((response) => {
+                // success callback
+            }, (response) => {
+                // error callback
+            });
         }
     }
 };
