@@ -11,9 +11,7 @@
             <i class="password"></i>
             <input autocomplete="new-password" type="password" id="password"/>
         </li>
-        <li class="reminder" id="reminder">
-
-        </li>
+        <li class="reminder" id="reminder"></li>
         <li>
             <button id="input" type="submit">登录</button>
         </li>
