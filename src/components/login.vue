@@ -38,8 +38,11 @@ export default {
                 this.error = "请输入您的密码!";
                 return false;
             }
-
-            this.$http.post(API.login).then((response) => {
+            var vm = this;
+            this.$http.post(API.login,{
+                username:vm.username,
+                password:vm.password
+            },{emulateHTTP:true}).then((response) => {
                 // success callback
             }, (response) => {
                 // error callback

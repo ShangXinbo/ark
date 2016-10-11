@@ -6,24 +6,29 @@ const path = require('path');
 const glob = require('glob');
 const logger = require('morgan');
 const request = require('request');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(logger('dev'));
 
-app.use(function(req,res,next){
-    var file = glob.sync('.'+ req.path+'.js')[0];
-    if(file){
-        var data = require(file);
-        res.json({
-            code:200,
-            message:"",
-            detail: data(req,res)
-        });
-    }else{
-        res.send('error');
-    }
-});
+app
+    .use(bodyParser.json())
+    .use(bodyParser.urlencoded({extended: false}))
+    .use(function(req,res,next){
+        var file = glob.sync('.'+ req.path+'.js')[0];
+        console.log(req.body);
+        if(file){
+            var data = require(file);
+            res.json({
+                code:200,
+                message:"",
+                detail: data(req,res)
+            });
+        }else{
+            res.send('error');
+        }
+    });
 
 
 //php真实数据服务器代理
