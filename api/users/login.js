@@ -8,13 +8,12 @@ var Mock = require('mockjs');
 var Random = Mock.Random;
 module.exports = function (req, res) {
     var param = req.body;
-    console.log(req.body);
-   /* if (!param.username) {
+    if (!param.username) {
         return 'username null'
     }
     if (!param.password) {
         return 'password null'
-    }*/
+    }
     return {
         "user": {
             "id": 1,

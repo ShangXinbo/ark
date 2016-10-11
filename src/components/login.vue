@@ -42,10 +42,10 @@ export default {
             this.$http.post(API.login,{
                 username:vm.username,
                 password:vm.password
-            },{emulateHTTP:true}).then((response) => {
-                // success callback
-            }, (response) => {
-                // error callback
+            }).then(function(data){
+
+            },function(error){
+
             });
         }
     }
