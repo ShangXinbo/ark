@@ -26,7 +26,7 @@
 					</a>
 				</li>
 				<li class="clearStorage">
-					<a href="/modeling-screening.html">
+                    <a href="javascript:void(0)" v-on:click="goModel()">
 						<i class="index-icon ms"></i>
 						<h2>建模筛选</h2>
 						<h3>Modeling Screening</h3>
@@ -63,11 +63,15 @@
 </template>
 <script>
 import store from 'src/vuex/store';
+import router from 'src/services/routes';
 export default {
     methods: {
         crowdUpDialog: function(){
             store.commit('CLOSE_DIALOG');
             store.commit('SHOW_UPLOAD_INIT_DIALOG');
+        },
+        goModel:function(){
+            router.push('models');
         }
     }
 };

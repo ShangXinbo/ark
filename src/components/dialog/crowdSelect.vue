@@ -13,10 +13,10 @@
                     <th class="w100 last">上传日期</th>
                 </tr>
             </table>
-            <div class="scroll-warp w800">
+            <div class="scroll-warp w800" v-on:scroll="scroll" style="overflow-y:scroll; ">
                 <table class="scroll-content dialog-table">
                     <tr v-for="item in lists" v-bind:data-id="item.id" v-bind:data-name="item.name">
-                        <td class="w60"><i></i></td>
+                        <td class="w60"><i v-on:click="checkItem(item.id)"></i></td>
                         <td class="w150">{{item.name}}</td>
                         <td class="">{{item.uploadDesc}}</td>
                         <td class="w100">{{item.lines}}</td>
@@ -40,27 +40,36 @@ export default {
         return {
             offsetLeft: 0,
             offsetTop: 0,
-            lists:[]
+            lists: [],
+            selectId: ''
         };
     },
     methods: {
         closeDialog: function () {
             store.commit('CLOSE_DIALOG');
         },
-        selectSubmit: function () {
-
+        checkItem: function (id) {
+            var collection = document.querySelectorAll('.scroll-warp i');
+            for (var i = 0; i < collection.length; i++) {
+                collection[i].className = '';
+            }
+            this.selectId = id;
+            event.target.className = 'checked';
+        },
+        scroll: function () {
+            //TODO add lists
         }
     },
     computed: {
         visual: function () {
             var vm = this;
-            mAjax(this,{
-                url:API.upload_list_layer,
-                data:{
-                    page:1,
-                    rows:20
+            mAjax(this, {
+                url: API.upload_list_layer,
+                data: {
+                    page: 1,
+                    rows: 20
                 },
-                success:function(data){
+                success: function (data) {
                     vm.lists = data.detail.rows;
                 }
             });

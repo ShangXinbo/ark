@@ -7,6 +7,7 @@
 import VueRouter from 'vue-router';
 import common from 'src/common.vue';
 
+
 // 懒加载组件
 const login = function (resolve) {
     require(['components/login.vue'], resolve);
@@ -14,16 +15,24 @@ const login = function (resolve) {
 const index = function (resolve) {
     require(['components/index.vue'], resolve);
 };
+const models = function (resolve) {
+    require(['components/model/index.vue'], resolve);
+};
 
 const router = new VueRouter({
     routes: [
-        {path: '/login', name: 'login', component: login},
+        {
+            path: '/login', name: 'login', component: login
+        },
         {
             path: '/', component: common, children: [
-                {path: 'index', name:'index', component: index}
+                {path: 'index', name:'index', component: index},
+                {path: 'models', name:'models', component: models}
             ]
         },
-        {path: '*', redirect: '/index'}
+        {
+            path: '*', redirect: '/index'
+        }
     ]
 });
 export default router;
