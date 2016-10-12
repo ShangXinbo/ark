@@ -17,12 +17,16 @@
 </template>
 <script>
 import store from 'src/vuex/store.js';
+import {getCookie} from 'src/services/functions';
+import router from 'src/services/routes';
+
+let user = JSON.parse(getCookie('user'));
 
 export default {
     data: function () {
         return {
-            type: store.state.user ? store.state.user.type : '',
-            username: store.state.user.username ? store.state.user.username : ''
+            type: user ? user.type : '',
+            username: user.username ? user.username : ''
         };
     },
     computed: {

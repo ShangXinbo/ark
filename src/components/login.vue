@@ -55,7 +55,7 @@ export default {
                         mAjax(vm, {
                             url: API.get_user_info,
                             success: function (data) {
-                                setCookie('user',user);
+                                setCookie('user',JSON.stringify(data.detail.user));
                                 router.push('index');
                             }
                         });
