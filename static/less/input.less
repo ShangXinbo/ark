@@ -1,0 +1,111 @@
+@import (reference) "base.less";
+
+@inputLine: #E3E5EB;
+@inputBG: #F0F1F4;
+@inputLineError: #EDD4D9;
+@inputBGError: #F3E8EA;
+@inputTips: #ACAEBA;
+
+.input-warp{
+  width: 100%;
+  li{
+    width: 100%;
+    min-height: 48px;
+    padding-left: 50px;
+    margin-top: 26px;
+    position: relative;
+    .box-sizing();
+    &:first-child{
+      margin-top: 0 !important;
+    }
+    span.tips{
+      display: inline-block;
+      width: 30px;
+      font-size: 14px;
+      color: @inputTips;
+      cursor: default;
+      position: absolute;
+      top: 16px;
+      right: -40px;
+    }
+    &.disabled{
+      min-height: 0;
+      label{
+        height: 24px;
+        line-height: 24px;
+      }
+      .input-text{
+        height: 24px;
+        line-height: 24px;
+        padding: 0 0 0 13px;
+        border: none;
+        background-color: @whiteColor;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
+    }
+  }
+  label{
+    float: left;
+    width: 70px;
+    height: 48px;
+    padding-right: 18px;
+    font-size: 16px;
+    line-height: 48px;
+    color: @grayColor;
+    text-align: right;
+    position: absolute;
+    left: -38px;
+    top: 0;
+  }
+  input,textarea{
+    width: 100%;
+    font: 16px/21px @YaHei;
+    border: 1px solid @inputLine;
+    background-color: @inputBG;
+    color: @grayColor;
+    .box-sizing();
+    &.error{
+      border-color: @inputLineError;
+      background-color: @inputBGError;
+    }
+  }
+  p{
+    display: none;
+    height: 16px;
+    margin-top: 8px;
+    &.error{
+      display: block;
+    }
+    i{
+      display: inline-block;
+      vertical-align: top;
+      .wh(16px);
+      background: data-uri('@{url}/error-icon.png') no-repeat 0 0;
+    }
+    span{
+      display: inline-block;
+      vertical-align: top;
+      padding-left: 8px;
+      font-size: 14px;
+      line-height: 17px;
+      overflow: hidden;
+      color: @redColor;
+    }
+  }
+}
+.input-text{
+  height: 48px;
+  padding: 13px;
+}
+.input-area{
+  height: 117px;
+  padding: 6px 13px;
+}
+
+@media (max-width: 1366px){
+  .input-warp li{
+    margin-top: 20px;
+  }
+}

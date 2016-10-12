@@ -1,31 +1,36 @@
-<style scoped="true">@import "/static/css/login.css";</style>
+<style lang="less" scoped>
+    @import '../../static/less/login.less';
+</style>
 <template>
 <div class="main">
     <h2><img src="/static/img/logo-login.png" width="189" height="58" alt="集奥方舟" title="集奥方舟"></h2>
     <ul>
         <li>
             <i class="head"></i>
-            <input autocomplete="off" v-model:value.text="username" />
+            <input autocomplete="off" v-model:value.text="username"/>
         </li>
         <li>
             <i class="password"></i>
-            <input autocomplete="new-password" v-model:value.password="password" />
+            <input autocomplete="new-password" v-model:value.password="password"/>
         </li>
         <li class="reminder">{{error}}</li>
         <li>
-            <button id="input" v-on:click="login" type="submit">登录</button>
+            <button id="input" type="submit" v-on:click="login">登录</button>
         </li>
     </ul>
 </div>
 </template>
 <script>
 import API from 'src/services/api';
+import {mAjax,setCookie} from 'src/services/functions';
+import store from 'src/vuex/store';
+import router from 'src/services/routes';
 export default {
-    data: function(){
+    data: function () {
         return {
-            username:'',
-            password:'',
-            error:''
+            username: '',
+            password: '',
+            error: ''
         };
     },
     methods: {
@@ -39,13 +44,26 @@ export default {
                 return false;
             }
             var vm = this;
-            this.$http.post(API.login,{
-                username:vm.username,
-                password:vm.password
-            }).then(function(data){
-
-            },function(error){
-
+            mAjax(vm, {
+                url: API.login,
+                data: {
+                    username: vm.username,
+                    password: vm.password
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        mAjax(vm, {
+                            url: API.get_user_info,
+                            success: function (data) {
+                                setCookie('user',user);
+                                router.push('index');
+                            }
+                        });
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
             });
         }
     }

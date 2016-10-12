@@ -11,12 +11,16 @@ Vue.use(Vuex);
 
 const state = {
     showLayer: false,
-    dialog:{
-        crowdInit:false,
-        crowdCreate:false,
-        crowdSelect:false
+    dialog: {
+        crowdInit: false,
+        crowdCreate: false,
+        crowdSelect: false
     },
-    user: {}
+    user: {},
+    header: {
+        account: false,
+        nav: false
+    }
 };
 
 const mutations = {
@@ -50,10 +54,18 @@ const mutations = {
         state.dialog.crowdSelect = true;
         state.showLayer = true;
     },
-    // 登录
-    LOGIN(state){
+    SHOW_NAV: function (state) {
+        state.header.nav = true;
+        state.header.account = false;
+    },
+    SHOW_ACCOUNT_TAB: function (state) {
+        state.header.nav = false;
+        state.header.account = true;
+    },
+    HIDE_NAV: function (state) {
+        state.header.nav = false;
+        state.header.account = false;
     }
-
 };
 
 export default new Vuex.Store({

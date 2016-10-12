@@ -9,8 +9,8 @@
             <li>
                 <a class="icon news-icon" href="/users/message.html"></a>
             </li>
-            <vaccount v-on:click.stop="showTab('account')" v-bind:class="{'li-hover': showAccountTab}"></vaccount>
-            <li v-on:click.stop="showTab('nav')" v-bind:class="{'li-hover': showHeaderNav}">
+            <vaccount></vaccount>
+            <li v-on:click.stop="nav()" v-bind:class="{'li-hover': headerNav}">
                 <i class="icon nav-icon"></i>
                 <div class="nav">
                     <a href="javascript:void(0);" data-dialog="upLoadCrowd" class="clearStorage">
@@ -45,34 +45,26 @@
 <script>
 import Vue from 'vue';
 import vaccount from 'components/header/account.vue';
+import store from 'src/vuex/store';
 export default {
-    data: function () {
-        return {
-            showAccountTab: 0,
-            showHeaderNav: 0
-        };
+    computed: {
+        headerNav: function () {
+            return store.state.header.nav;
+        }
     },
     components: {
         vaccount: vaccount
     },
     methods: {
-        showTab: function (str) {
-            if (str == 'account') {
-                this.showAccountTab = 1;
-                this.showHeaderNav = 0;
-            }
-            if (str == 'nav') {
-                this.showHeaderNav = 1;
-                this.showAccountTab = 0;
-            }
+        nav: function (str) {
+            store.commit('SHOW_NAV');
         }
     },
     mounted: function () {
         var _this = this;
-        Vue.nextTick(function(){
+        Vue.nextTick(function () {
             document.onclick = function () {
-                _this.showAccountTab = 0;
-                _this.showHeaderNav = 0;
+                store.commit('HIDE_NAV');
             };
         });
     }

@@ -1,5 +1,5 @@
 <template>
-    <li>
+    <li v-on:click.stop="show" v-bind:class="{'li-hover': down}">
         <i class="icon login-icon"></i>
         <div id="quit" class="quit">
             <p>{{ username }}</p>
@@ -16,13 +16,24 @@
     </li>
 </template>
 <script>
-import FN from 'src/services/functions.js';
 import store from 'src/vuex/store.js';
+
 export default {
-    data:function(){
+    data: function () {
         return {
-            type:store.user? store.user.type:''
+            type: store.state.user ? store.state.user.type : '',
+            username: store.state.user.username ? store.state.user.username : ''
         };
+    },
+    computed: {
+        down: function () {
+            return store.state.header.account;
+        }
+    },
+    methods: {
+        show: function () {
+            store.commit('SHOW_ACCOUNT_TAB');
+        }
     }
 };
 </script>
