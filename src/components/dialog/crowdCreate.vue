@@ -1,5 +1,5 @@
 <template>
-    <div id="upload_create" class="dialog" v-bind:style="{'display':visual,'margin-left':l,'margin-top':t}">
+    <div id="crowd_create" class="dialog" v-bind:style="{'display':visual,'margin-left':offsetLeft,'margin-top':offsetTop}">
         <a href="javascript:void(0);" class="dialog-close" title="关闭" v-on:click="closeDialog"></a>
         <div class="dialog-header"><h4>上传新人群</h4></div>
         <div class="dialog-body">
@@ -47,8 +47,8 @@ import API from 'src/services/api.js';
 export default {
     data: function () {
         return {
-            l: 0,
-            t: 0,
+            offsetLeft: 0,
+            offsetTop: 0,
             token: '',
             fileName: '',
             fileDesc: '',
@@ -93,12 +93,12 @@ export default {
         },
         changeFilePath: function (event) {
             var fileSize = event.target.files[0].size;
-            this.$data.fileError = '';
+            this.fileError = '';
             if (fileSize < 1024 * 1024 * 100) {
-                this.$data.filePath = this.$data.fileVal;
+                this.filePath = this.fileVal;
             } else {
-                this.$data.filePath = '';
-                this.$data.fileError = '上传文件需要小于100M';
+                this.filePath = '';
+                this.fileError = '上传文件需要小于100M';
             }
         },
         selectFile: function () {
@@ -111,12 +111,12 @@ export default {
         var centerDialog = function (el) {
             var dialog = document.querySelector(el);
             var dh = dialog.offsetHeight, dw = dialog.offsetWidth;
-            _this.$data.l = -dw / 2 + 'px';
-            _this.$data.t = -dh / 2 + 'px';
+            _this.offsetLeft = -dw / 2 + 'px';
+            _this.offsetTop = -dh / 2 + 'px';
         };
 
-        this.$watch('pop2', function (newVal, oldVal) {
-            centerDialog('#upload_create');
+        this.$watch('visual', function (newVal, oldVal) {
+            centerDialog('#crowd_create');
         });
     }
 };

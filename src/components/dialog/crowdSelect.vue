@@ -1,5 +1,6 @@
 <template>
-    <div id="upload_select" class="dialog" v-bind:style="{'display':pop3,'margin-left':l,'margin-top':t}">
+    <div id="crowd_select" class="dialog"
+         v-bind:style="{'display':visual,'margin-left':offsetLeft,'margin-top':offsetTop}">
         <a href="javascript:void(0);" class="dialog-close" v-on:click="closeDialog" title="关闭"></a>
         <div class="dialog-header"><h4>历史上传人群</h4></div>
         <div class="dialog-body w800">
@@ -14,7 +15,13 @@
             </table>
             <div class="scroll-warp w800">
                 <table class="scroll-content dialog-table">
-
+                    <tr v-for="item in lists" v-bind:data-id="item.id" v-bind:data-name="item.name">
+                        <td class="w60"><i></i></td>
+                        <td class="w150">{{item.name}}</td>
+                        <td class="">{{item.uploadDesc}}</td>
+                        <td class="w100">{{item.lines}}</td>
+                        <td class="w100">{{item.createTime}}</td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -26,34 +33,39 @@
 </template>
 <script>
 import store from 'src/vuex/store';
-import API from 'src/services/api.js';
+import API from 'src/services/api';
+import {mAjax} from 'src/services/functions';
 export default {
     data: function () {
         return {
-            l: 0,
-            t: 0
+            offsetLeft: 0,
+            offsetTop: 0,
+            lists:[]
         };
     },
     methods: {
         closeDialog: function () {
-            this.closeDialogs();
+            store.commit('CLOSE_DIALOG');
         },
         selectSubmit: function () {
-
-        },
-        selectFile: function () {
 
         }
     },
     computed: {
-        pop3: function () {
-            if (store.state.uploadSelectDialog) {
-                this.$http.post(API.upload_list,{'page':'1','rows':'20'},{emulateJSON:true,emulateHTTP:true});
+        visual: function () {
+            var vm = this;
+            mAjax(this,{
+                url:API.upload_list_layer,
+                data:{
+                    page:1,
+                    rows:20
+                },
+                success:function(data){
+                    vm.lists = data.detail.rows;
+                }
+            });
 
-                return 'block';
-            } else {
-                return 'none';
-            }
+            return store.state.dialog.crowdSelect ? 'block' : 'none';
         }
     },
     mounted: function () {
@@ -62,12 +74,12 @@ export default {
         var centerDialog = function (el) {
             var dialog = document.querySelector(el);
             var dh = dialog.offsetHeight, dw = dialog.offsetWidth;
-            _this.$data.l = -dw / 2 + 'px';
-            _this.$data.t = -dh / 2 + 'px';
+            _this.offsetLeft = -dw / 2 + 'px';
+            _this.offsetTop = -dh / 2 + 'px';
         };
 
-        this.$watch('pop3', function (newVal, oldVal) {
-            centerDialog('#upload_select');
+        this.$watch('visual', function (newVal, oldVal) {
+            centerDialog('#crowd_select');
         });
     }
 };
