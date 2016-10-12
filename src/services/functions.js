@@ -46,4 +46,13 @@ const getCookie = function(name) {
     return null;
 };
 
-export {mAjax,setCookie,getCookie};
+const indexOf = function(self,clt){
+    for(var i=0;i < clt.length;i++){
+        if(clt[i]==self){
+            return i;
+        }
+    }
+    return -1;
+}
+
+export {mAjax,setCookie,getCookie,indexOf};

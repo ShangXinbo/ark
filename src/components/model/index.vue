@@ -7,7 +7,7 @@
         <ul class="left-nav">
             <li data-id='2' v-bind:class="{active:index[0]}" v-on:mouseover="hover()">英语教育</li>
             <li data-id='11' v-bind:class="{active:index[1]}" v-on:mouseover="hover()">出国英语培训</li>
-            <li data-id='3' v-bind:class="{active:index[1]}" v-on:mouseover="hover()">二手房产</li>
+            <li data-id='3' v-bind:class="{active:index[2]}" v-on:mouseover="hover()">二手房产</li>
             <li data-id='7' v-on:mouseover="hover()">房产抵押</li>
             <li data-id='10' v-on:mouseover="hover()">汽车</li>
             <li data-id='8' v-on:mouseover="hover()">汽车抵押贷款</li>
@@ -312,6 +312,7 @@
 </div>
 </template>
 <script>
+import {indexOf} from 'src/services/functions';
 export default {
     data:function(){
         return {
@@ -320,7 +321,12 @@ export default {
     },
     methods:{
         hover:function(){
-            console.log(document.querySelector('.left-nav li').indexOf(event.target));
+            var indexes = indexOf(event.target,document.querySelectorAll('.left-nav li'));
+            for(var i=0;i<this.index.length;i++){
+                this.index[i] = 0;
+            }
+            this.index[indexes] = 1;
+            console.log(this.index[2]);
         }
     }
 }
