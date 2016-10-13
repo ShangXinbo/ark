@@ -34,12 +34,12 @@
 					</router-link>
 				</li>
 				<li>
-					<a href="/report.html?ana=1">
+					<router-link to="/report">
 						<i class="index-icon sa"></i>
 						<h2>统计分析</h2>
 						<h3>Statistical Analysis</h3>
 						<p>多维度分析统计客户群体特征,<br/>为您的决策和应用提供最直观有效的依据</p>
-					</a>
+					</router-link>
 				</li>
 				<li>
 					<a href="/project/list.html">
