@@ -5,21 +5,21 @@
 <div class="warp">
     <div class="main">
         <ul class="left-nav">
-            <li data-id='2' v-bind:class="{active:index[0]}" v-on:mouseover="hover()">英语教育</li>
+            <li v-bind:class="{active:index[0]}" v-on:mouseover="hover()">英语教育</li>
             <li data-id='11' v-bind:class="{active:index[1]}" v-on:mouseover="hover()">出国英语培训</li>
             <li data-id='3' v-bind:class="{active:index[2]}" v-on:mouseover="hover()">二手房产</li>
-            <li data-id='7' v-on:mouseover="hover()">房产抵押</li>
-            <li data-id='10' v-on:mouseover="hover()">汽车</li>
-            <li data-id='8' v-on:mouseover="hover()">汽车抵押贷款</li>
-            <li data-id='1' v-on:mouseover="hover()">普通信用卡</li>
-            <li data-id='9' v-on:mouseover="hover()">购物信用卡</li>
-            <li data-id='12' v-on:mouseover="hover()">理财</li>
-            <li data-id='4' v-on:mouseover="hover()">活期理财</li>
-            <li data-id='6' v-on:mouseover="hover()">信贷</li>
-            <li data-id='5' v-on:mouseover="hover()">境外旅游</li>
+            <li data-id='7' v-bind:class="{active:index[3]}" v-on:mouseover="hover()">房产抵押</li>
+            <li data-id='10' v-bind:class="{active:index[4]}" v-on:mouseover="hover()">汽车</li>
+            <li data-id='8' v-bind:class="{active:index[5]}" v-on:mouseover="hover()">汽车抵押贷款</li>
+            <li data-id='1' v-bind:class="{active:index[6]}" v-on:mouseover="hover()">普通信用卡</li>
+            <li data-id='9' v-bind:class="{active:index[7]}" v-on:mouseover="hover()">购物信用卡</li>
+            <li data-id='12' v-bind:class="{active:index[8]}" v-on:mouseover="hover()">理财</li>
+            <li data-id='4' v-bind:class="{active:index[9]}" v-on:mouseover="hover()">活期理财</li>
+            <li data-id='6' v-bind:class="{active:index[10]}" v-on:mouseover="hover()">信贷</li>
+            <li data-id='5' v-bind:class="{active:index[11]}" v-on:mouseover="hover()">境外旅游</li>
         </ul>
         <ul class="modeling-screening">
-            <li class="ms-four active">
+            <li class="ms-four" v-bind:class="{active:index[0]}">
                 <img class="ms-img" src="/static/img/ms-img01.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -45,9 +45,9 @@
                     <p>3、职业教育 ：针对有成人自考、驾考、职业考试需求的客户</p>
                     <p>4、应试英语 ：垂直针对有留学、大学应试、出国工作需求的客户</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(2)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[1]}">
                 <img class="ms-img" src="/static/img/ms-img02.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -65,9 +65,9 @@
                     <strong>效果</strong>
                     <p>月均<span>25</span>万用户群体，有需求用户<span>1000</span>， 需求率<span>0.4%</span></p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(11)">使用该模型</a>
             </li>
-            <li class="ms-four">
+            <li class="ms-four" v-bind:class="{active:index[2]}">
                 <img class="ms-img" src="/static/img/ms-img03.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -96,9 +96,9 @@
                     <p>第四步：客户分群，按照强需求、弱需求、高价值、低价值进行分类；</p>
                     <p>第五步：收集反馈数据效果，用来迭代模型</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(3)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[3]}">
                 <img class="ms-img" src="/static/img/ms-img04.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -116,9 +116,9 @@
                     <strong>效果</strong>
                     <p>周均<span>2K</span>，有需求<span>100</span>，其中预约率<span>2%</span></p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(7)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[4]}">
                 <img class="ms-img" src="/static/img/ms-img05.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -140,9 +140,9 @@
                     <p>第四步：4S店运用智能销售话束进行外呼；</p>
                     <p>第五步：客户购买</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(10)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[5]}">
                 <img class="ms-img" src="/static/img/ms-img06.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -160,9 +160,9 @@
                     <strong>效果</strong>
                     <p>周均<span>5K</span>，有需求<span>300</span>，需求率<span>6%</span></p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(8)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[6]}">
                 <img class="ms-img" src="/static/img/ms-img07.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -180,9 +180,9 @@
                     <strong>效果</strong>
                     <p>日均<span>1000</span>进件，核卡率<span>30%</span>，远高于业界水平</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(1)">使用该模型</a>
             </li>
-            <li class="ms-four">
+            <li class="ms-four" v-bind:class="{active:index[7]}">
                 <img class="ms-img" src="/static/img/ms-img08.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -207,9 +207,9 @@
                     <p>2、用户趋于年轻化，过度超前消费现象增加；</p>
                     <p>3、女性相对男性更加喜欢电商、家政等与日常生活息息相关的消费网站</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(9)">使用该模型</a>
             </li>
-            <li class="ms-four">
+            <li class="ms-four" v-bind:class="{active:index[8]}">
                 <img class="ms-img" src="/static/img/ms-img09.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -236,9 +236,9 @@
                     <p>2、<span style="padding-left:0;">1-6</span>个月的理财产品一直是市场主力，占发行产品数量的<span>70%</span>左右；与传统的期限越长收益率越高的认知不同，<span>1-3</span>月、<span>3-6</span>月两类产品的收益超出其他期限的理财产品
                     </p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(12)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[9]}">
                 <img class="ms-img" src="/static/img/ms-img10.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -258,9 +258,9 @@
                             style="padding-left:0;">2</span>周客群数据<span>8</span>万，回复量<span>4000</span>，回复率<span>5%</span>，
                         进件量<span>500</span>，进件率<span>0.626%</span></p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(4)">使用该模型</a>
             </li>
-            <li class="ms-three">
+            <li class="ms-three" v-bind:class="{active:index[10]}">
                 <img class="ms-img" src="/static/img/ms-img11.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -278,9 +278,9 @@
                     <strong>效果</strong>
                     <p>周均<span>1W</span>，标准件<span>2000</span>，其中预约率<span>6%</span></p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(6)">使用该模型</a>
             </li>
-            <li class="ms-four">
+            <li class="ms-four" v-bind:class="{active:index[11]}">
                 <img class="ms-img" src="/static/img/ms-img12.png"/>
                 <div class="ms-edge-feature">
                     <img src="/static/img/ms-edge02.png" width="110" height="102"/>
@@ -305,7 +305,7 @@
                     <p>2、旅游人群中用使用移动端查看旅游攻略的比例较高；</p>
                     <p>3、涉及到签证问题时则多用PC端查询。</p>
                 </div>
-                <a href="javascript:void(0);">使用该模型</a>
+                <a href="javascript:void(0);" v-on:click="select(5)">使用该模型</a>
             </li>
         </ul>
     </div>
@@ -317,19 +317,18 @@ export default {
     data:function(){
         return {
             index:[1,0,0,0,0,0,0,0,0,0,0,0]
-        }
+        };
     },
     methods:{
         hover:function(){
             var indexes = indexOf(event.target,document.querySelectorAll('.left-nav li'));
-            for(var i=0;i<this.index.length;i++){
-                this.index[i] = 0;
-            }
-            this.index[indexes] = 1;
-            console.log(this.index[2]);
+            var newArr = [0,0,0,0,0,0,0,0,0,0,0,0];
+            newArr[indexes] = 1;
+            this.index = newArr;
+        },
+        select:function(id){
+            //TODO SELECT MODULE ID
         }
     }
-}
-
-
+};
 </script>

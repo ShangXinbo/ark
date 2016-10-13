@@ -1,9 +1,9 @@
 <template>
     <div class="header">
         <h1>
-            <a href="/index" title="集奥方舟">
+            <router-link to="index" title="集奥方舟">
                 <img src="/static/img/logo.png" width="148" height="43" alt="集奥方舟" title="集奥方舟"/>
-            </a>
+            </router-link>
         </h1>
         <ul class="header-content">
             <li>

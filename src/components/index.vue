@@ -26,12 +26,12 @@
 					</a>
 				</li>
 				<li class="clearStorage">
-                    <a href="javascript:void(0)" v-on:click="goModel()">
+                    <router-link to="models">
 						<i class="index-icon ms"></i>
 						<h2>建模筛选</h2>
 						<h3>Modeling Screening</h3>
 						<p>使用我们成熟高效的建模模型,<br/>筛选出您想要的目标客户群体</p>
-					</a>
+					</router-link>
 				</li>
 				<li>
 					<a href="/report.html?ana=1">
@@ -69,9 +69,6 @@ export default {
         crowdUpDialog: function(){
             store.commit('CLOSE_DIALOG');
             store.commit('SHOW_UPLOAD_INIT_DIALOG');
-        },
-        goModel:function(){
-            router.push('models');
         }
     }
 };

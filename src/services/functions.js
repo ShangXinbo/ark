@@ -53,6 +53,6 @@ const indexOf = function(self,clt){
         }
     }
     return -1;
-}
+};
 
 export {mAjax,setCookie,getCookie,indexOf};
