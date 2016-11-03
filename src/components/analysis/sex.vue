@@ -10,7 +10,8 @@ import echarts from 'echarts';
 import store from 'src/vuex/store';
 
 export default {
-    mounted:function(){
+    activated:function(){
+        console.log(1);
         var myChart = echarts.init(document.getElementById('genders'));
         var data = store.state.charts.sex;
         var key = ['男', '女'], value = [data['男'] ? data['男'] : 0, data['女'] ? data['女'] : 0];
@@ -35,7 +36,7 @@ export default {
                         normal: {
                             position: "inside",
                             formatter: function (data) {
-                                return data.percent + '%'
+                                return data.percent + '%';
                             }
                         }
                     },

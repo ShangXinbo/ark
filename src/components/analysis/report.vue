@@ -68,5 +68,5 @@ export default {
             return store.state.filters.model;
         }
     }
-}
+};
 </script>
