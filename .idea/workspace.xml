@@ -5,10 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/components/model/index.vue" line="280" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="765b924b-2a73-47f1-8099-5af48ff7c88e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/analysis/sex.vue" afterPath="$PROJECT_DIR$/src/components/analysis/sex.vue" />
-    </list>
+    <list default="true" id="765b924b-2a73-47f1-8099-5af48ff7c88e" name="Default" comment="" />
     <ignored path="vue-try.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
