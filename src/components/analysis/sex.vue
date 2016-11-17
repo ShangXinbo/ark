@@ -9,10 +9,12 @@
 import echarts from 'echarts';
 import store from 'src/vuex/store';
 import $ from 'jquery';
+import Vue from 'vue';
 
 export default {
-    mounted: function () {
-        $(function () {
+    mounted:function(){
+        Vue.nextTick(function() {
+            console.log(document.getElementById('genders').offsetHeight);
             var myChart = echarts.init(document.getElementById('genders'));
             var data = store.state.charts.sex;
             var key = ['男', '女'], value = [data['男'] ? data['男'] : 0, data['女'] ? data['女'] : 0];
@@ -68,5 +70,7 @@ export default {
         });
     }
 };
+
+
 
 </script>

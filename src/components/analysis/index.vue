@@ -52,7 +52,6 @@ export default {
     },
     mounted: function () {
         var _this = this;
-        console.log(document.getElementById('genders').offsetHeight);
         mAjax(this, {
             url: API.filter_searchdim,
             data: {
