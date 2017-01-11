@@ -18,12 +18,12 @@
                 </a>
             </li>
             <li class="clearStorage" data-key="tags">
-                <a href="/filter/index.html">
+                <router-link to="filter">
                     <i class="index-icon ts"></i>
                     <h2>标签筛选</h2>
                     <h3>Tags Screening</h3>
                     <p>通过我们的海量标签和特征属性库,<br/>筛选出您想要的目标客户群体</p>
-                </a>
+                </router-link>
             </li>
             <li class="clearStorage">
                 <router-link to="models">

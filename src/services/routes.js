@@ -24,6 +24,9 @@ const models = function (resolve) {
 const report = function (resolve) {
     require(['components/analysis/index.vue'], resolve);
 };
+const filter = function (resolve) {
+    require(['components/filter/index.vue'], resolve);
+};
 
 const router = new VueRouter({
     routes: [
@@ -34,7 +37,8 @@ const router = new VueRouter({
             path: '/', component: common, children: [
                 {path: 'index', name:'index', component: index},
                 {path: 'models', name:'models', component: models},
-                {path: 'report', name:'report', component: report}
+                {path: 'report', name:'report', component: report},
+                {path: 'filter', name:'filter', component: filter}
             ]
         },
         {
