@@ -4,8 +4,6 @@
  * AUTHOR shangxinbo
  */
 
-
-
 const mAjax = function(vm,options){
     vm.$http.post(options.url,options.data).then(function(data){
         if(data.status==200){

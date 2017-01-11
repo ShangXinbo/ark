@@ -23,7 +23,7 @@
                                 <input v-model.text="filePath" class="input-text" disabled="disabled"/>
                                 <span style="position: relative;">
                                     上传
-                                    <input accept=".txt,.xls,.xlsx" type="file" name="file" class="upload-warp"
+                                    <input accept=".txt,.xls,.xlsx" type="file" class="upload-warp"
                                            v-on:change="changeFilePath"
                                            v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
                                 </span>
@@ -44,6 +44,7 @@
 import store from 'src/vuex/store';
 import API from 'src/services/api.js';
 import {mAjax} from 'src/services/functions.js';
+import VueRouter from 'vue-router';
 export default {
     data: function () {
         return {
@@ -91,7 +92,7 @@ export default {
                 return false;
             }
             
-            mAjax({
+            mAjax(this,{
                 url:API.upload,
                 data:{
                     fileName: this.$data.fileName,
@@ -99,19 +100,28 @@ export default {
                     file: this.$data.fileVal
                 },
                 success:function(data){
-                    console.log(data)
+                    if(data.code == 200){
+                        var crowd = {
+                            id:data.detail.id,
+                            name:data.detail.name
+                        };
+                        localStorage.setItem("crowd", crowd);
+                        var router = new VueRouter();
+                        store.commit('CLOSE_DIALOG');
+                        router.push('report');
+                    }
                 },
                 error:function(err){
                     console.log(err);
                 }
-            })
-
+            });
         },
         changeFilePath: function (event) {
-            var fileSize = event.target.files[0].size;
+            let file = event.target.files[0];
             this.fileError = '';
-            if (fileSize < 1024 * 1024 * 100) {
-                this.filePath = this.fileVal;
+            if (file.size < 1024 * 1024 * 100) {
+                this.filePath = file.name;
+                this.$data.fileVal = file;
             } else {
                 this.filePath = '';
                 this.fileError = '上传文件需要小于100M';
