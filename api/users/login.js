@@ -17,7 +17,7 @@ module.exports = function (req, res) {
     return {
         "user": {
             "id": 1,
-            "user_name": "admin",
+            "username": "admin",
             "nickname": "",
             "password": "admin123",
             "phone": "13488888888",

@@ -15,7 +15,6 @@ import vheader from 'components/header/index.vue';
 import dialogCrowdMethod from 'components/dialog/crowdMethod';
 import dialogCrowdCreate from 'components/dialog/crowdCreate';
 import dialogCrowdSelect from 'components/dialog/crowdSelect';
-
 export default {
     store:store,
     data:function(){

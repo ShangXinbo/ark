@@ -5,12 +5,15 @@
  */
 
 import VueRouter from 'vue-router';
-import common from 'src/common.vue';
+import {getCookie} from 'src/services/functions';
 
 
 // 懒加载组件
 const login = function (resolve) {
     require(['components/login.vue'], resolve);
+};
+const common = function (resolve) {
+    require(['src/common.vue'], resolve);
 };
 const index = function (resolve) {
     require(['components/index.vue'], resolve);
@@ -39,4 +42,13 @@ const router = new VueRouter({
         }
     ]
 });
+router.beforeEach(function(to,from,next){
+    let user = JSON.parse(getCookie('user'));
+    let path = to.path;
+    if(!user&&path!='/login'){
+        next({path: '/login'});
+    }else{
+        next();
+    }
+})
 export default router;

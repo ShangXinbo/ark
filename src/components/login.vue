@@ -7,11 +7,11 @@
     <ul>
         <li>
             <i class="head"></i>
-            <input autocomplete="off" v-model:value.text="username"/>
+            <input autocomplete="off" v-model:value.username="username"/>
         </li>
         <li>
             <i class="password"></i>
-            <input autocomplete="new-password" v-model:value.password="password"/>
+            <input autocomplete="new-password" type="password" v-model:value.password="password"/>
         </li>
         <li class="reminder">{{error}}</li>
         <li>

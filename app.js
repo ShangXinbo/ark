@@ -17,7 +17,6 @@ app
     .use(bodyParser.urlencoded({extended: false}))
     .use(function(req,res,next){
         var file = glob.sync('.'+ req.path+'.js')[0];
-        console.log(req.body);
         if(file){
             var data = require(file);
             res.json({

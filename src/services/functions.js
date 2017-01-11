@@ -25,9 +25,11 @@ const mAjax = function(vm,options){
 const setCookie = function(name,value) {
     var param1 = name + '=' + escape(value) + ';';
     document.cookie = param1 + 'path=/;';
+    console.log('set');
 };
 
 const getCookie = function(name) {
+    console.log('get');
     var cookie_name = name + '=';
     var cookie_length = document.cookie.length;
     var cookie_begin = 0;

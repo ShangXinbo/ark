@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 Vue.use(vueResource);
 
 new Vue({
-    el: 'body',
+    el: '#warp-page',
     router: router,
     render: h => h(App)
 });

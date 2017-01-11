@@ -21,10 +21,9 @@
                             <label>上传</label>
                             <div class="upload-warp">
                                 <input v-model.text="filePath" class="input-text" disabled="disabled"/>
-                                <span style="position: relative;" v-on:click="selectFile">
+                                <span style="position: relative;">
                                     上传
-                                    <input accept=".txt,.xls,.xlsx" name="file" class="upload-warp"
-                                           v-model.file="fileVal"
+                                    <input accept=".txt,.xls,.xlsx" type="file" name="file" class="upload-warp"
                                            v-on:change="changeFilePath"
                                            v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
                                 </span>
@@ -44,6 +43,7 @@
 <script>
 import store from 'src/vuex/store';
 import API from 'src/services/api.js';
+import {mAjax} from 'src/services/functions.js';
 export default {
     data: function () {
         return {
@@ -90,6 +90,22 @@ export default {
                 this.$data.fileError = '请上传文件';
                 return false;
             }
+            
+            mAjax({
+                url:API.upload,
+                data:{
+                    fileName: this.$data.fileName,
+                    fileDesc: this.$data.fileDesc,
+                    file: this.$data.fileVal
+                },
+                success:function(data){
+                    console.log(data)
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            })
+
         },
         changeFilePath: function (event) {
             var fileSize = event.target.files[0].size;
@@ -100,10 +116,7 @@ export default {
                 this.filePath = '';
                 this.fileError = '上传文件需要小于100M';
             }
-        },
-        selectFile: function () {
-
-        },
+        }
     },
     mounted: function () {
         var _this = this;
