@@ -4,30 +4,28 @@
  * AUTHOR shangxinbo
  */
 
-const mAjax = function(vm,options){
-    vm.$http.post(options.url,options.data).then(function(data){
-        if(data.status==200){
+export const mAjax = (vm, options) => {
+    vm.$http.post(options.url, options.data).then(function (data) {
+        if (data.status == 200) {
             options.success(data.body);
-        }else if(data.status==404){
+        } else if (data.status == 404) {
             //TODO 404
-        }else if(data.status == 403){
+        } else if (data.status == 403) {
             //TODO 403
-        }else if(data.status == 500){
+        } else if (data.status == 500) {
             //TODO 500
-        }else{
+        } else {
             //TODO other error
         }
-    },options.error);
-};
+    }, options.error);
+}
 
-const setCookie = function(name,value) {
+export const setCookie = (name, value) => {
     var param1 = name + '=' + escape(value) + ';';
     document.cookie = param1 + 'path=/;';
-    console.log('set');
-};
+}
 
-const getCookie = function(name) {
-    console.log('get');
+export const getCookie = (name) => {
     var cookie_name = name + '=';
     var cookie_length = document.cookie.length;
     var cookie_begin = 0;
@@ -46,19 +44,24 @@ const getCookie = function(name) {
         }
     }
     return null;
-};
+}
 
-const indexOf = function(self,clt){
-    for(var i=0;i < clt.length;i++){
-        if(clt[i]==self){
+export const delCookie = (name) => {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    document.cookie = name + '=;path=/;expires=' + exp.toUTCString();
+}
+
+export const indexOf = (self, clt) => {
+    for (var i = 0; i < clt.length; i++) {
+        if (clt[i] == self) {
             return i;
         }
     }
     return -1;
-};
+}
 
-
-const accAdd = function(arg1, arg2) {
+export const accAdd = (arg1, arg2) => {
     var r1, r2, m, c;
     try {
         r1 = arg1.toString().split(".")[1].length;
@@ -88,9 +91,9 @@ const accAdd = function(arg1, arg2) {
         arg2 = Number(arg2.toString().replace(".", ""));
     }
     return (arg1 + arg2) / m;
-};
+}
 
-const accSub = function(arg1, arg2) {
+export const accSub = (arg1, arg2) => {
     var r1, r2, m, n;
     try {
         r1 = arg1.toString().split(".")[1].length;
@@ -107,43 +110,40 @@ const accSub = function(arg1, arg2) {
     m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
     n = (r1 >= r2) ? r1 : r2;
     return ((arg1 * m - arg2 * m) / m).toFixed(n);
-};
+}
 
-const accMul = function(arg1, arg2) {
+export const accMul = (arg1, arg2) => {
     var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
     try {
         m += s1.split(".")[1].length;
     }
     catch (e) {
-        //console.log(e);
+        console.log(e);
     }
     try {
         m += s2.split(".")[1].length;
     }
     catch (e) {
-        //console.log(e);
+        console.log(e);
     }
     return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
-};
+}
 
-const accDiv = function(arg1, arg2) {
+export const accDiv = (arg1, arg2) => {
     var t1 = 0, t2 = 0, r1, r2;
     try {
         t1 = arg1.toString().split(".")[1].length;
     }
     catch (e) {
-        //console.log(e);
+        console.log(e);
     }
     try {
         t2 = arg2.toString().split(".")[1].length;
     }
     catch (e) {
-        //console.log(e);
+        console.log(e);
     }
     r1 = Number(arg1.toString().replace(".", ""));
     r2 = Number(arg2.toString().replace(".", ""));
     return (r1 / r2) * Math.pow(10, t2 - t1);
-};
-
-
-export {mAjax,setCookie,getCookie,indexOf,accAdd,accSub,accMul,accDiv};
+}

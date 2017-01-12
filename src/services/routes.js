@@ -5,8 +5,7 @@
  */
 
 import VueRouter from 'vue-router';
-import {getCookie} from 'src/services/functions';
-
+import { getCookie } from 'src/services/functions';
 
 // 懒加载组件
 const login = function (resolve) {
@@ -35,10 +34,10 @@ const router = new VueRouter({
         },
         {
             path: '/', component: common, children: [
-                {path: 'index', name:'index', component: index},
-                {path: 'models', name:'models', component: models},
-                {path: 'report', name:'report', component: report},
-                {path: 'filter', name:'filter', component: filter}
+                { path: 'index', name: 'index', component: index },
+                { path: 'models', name: 'models', component: models },
+                { path: 'report', name: 'report', component: report },
+                { path: 'filter', name: 'filter', component: filter }
             ]
         },
         {
@@ -46,14 +45,14 @@ const router = new VueRouter({
         }
     ]
 });
-router.beforeEach(function(to,from,next){
+router.beforeEach(function (to, from, next) {
     let user = JSON.parse(getCookie('user'));
     let path = to.path;
-    if(!user&&path!='/login'){
-        next({path: '/login'});
-    }else if(path=='/'){
-        next({path:'/index'});
-    }else{
+    if (!user && path != '/login') {
+        next({ path: '/login' });
+    } else if (path == '/') {
+        next({ path: '/index' });
+    } else {
         next();
     }
 })

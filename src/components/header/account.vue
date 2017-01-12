@@ -8,7 +8,7 @@
                 <span v-if="type>0">账号管理</span>
                 <span v-else>我的账号</span>
             </a>
-            <a data-quit="1" href="javascript:void(0)">
+            <a v-on:click="logout" href="javascript:void(0)">
                 <i class="icon icon02"></i>
                 <span>退 出</span>
             </a>
@@ -17,9 +17,8 @@
 </template>
 <script>
 import store from 'src/vuex/store.js';
-import {getCookie} from 'src/services/functions';
+import {getCookie,delCookie} from 'src/services/functions';
 import router from 'src/services/routes';
-
 let user = JSON.parse(getCookie('user'));
 
 export default {
@@ -37,6 +36,10 @@ export default {
     methods: {
         show: function () {
             store.commit('SHOW_ACCOUNT_TAB');
+        },
+        logout:function(){
+            delCookie('user');
+            router.push('login');
         }
     }
 };
