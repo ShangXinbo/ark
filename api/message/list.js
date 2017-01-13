@@ -11,7 +11,9 @@ module.exports = function(req,res){
     var d = {
         messages:{
             data:[]
-        }
+        },
+        current_page:1,
+        total:115
     };
     for(var i=10;i<(10+parseInt(rows));i++){
         d.messages.data.push({

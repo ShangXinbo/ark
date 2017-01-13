@@ -26,6 +26,9 @@ const report = function (resolve) {
 const filter = function (resolve) {
     require(['components/filter/index.vue'], resolve);
 };
+const message = function (resolve) {
+    require(['components/message/index.vue'], resolve);
+};
 
 const router = new VueRouter({
     routes: [
@@ -37,7 +40,8 @@ const router = new VueRouter({
                 { path: 'index', name: 'index', component: index },
                 { path: 'models', name: 'models', component: models },
                 { path: 'report', name: 'report', component: report },
-                { path: 'filter', name: 'filter', component: filter }
+                { path: 'filter', name: 'filter', component: filter },
+                { path: 'message', name: 'message', component: message }
             ]
         },
         {

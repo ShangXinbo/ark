@@ -7,7 +7,7 @@
         </h1>
         <ul class="header-content">
             <li>
-                <a class="icon news-icon" href="/users/message.html"></a>
+                <router-link class="icon news-icon" to="message"></router-link>
             </li>
             <vaccount></vaccount>
             <li v-on:click.stop="nav()" v-bind:class="{'li-hover': headerNav}">
