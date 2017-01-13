@@ -18,12 +18,12 @@ export const mAjax = (vm, options) => {
             //TODO other error
         }
     }, options.error);
-}
+};
 
 export const setCookie = (name, value) => {
     var param1 = name + '=' + escape(value) + ';';
     document.cookie = param1 + 'path=/;';
-}
+};
 
 export const getCookie = (name) => {
     var cookie_name = name + '=';
@@ -44,13 +44,13 @@ export const getCookie = (name) => {
         }
     }
     return null;
-}
+};
 
 export const delCookie = (name) => {
     var exp = new Date();
     exp.setTime(exp.getTime() - 1);
     document.cookie = name + '=;path=/;expires=' + exp.toUTCString();
-}
+};
 
 export const indexOf = (self, clt) => {
     for (var i = 0; i < clt.length; i++) {
@@ -59,7 +59,7 @@ export const indexOf = (self, clt) => {
         }
     }
     return -1;
-}
+};
 
 export const accAdd = (arg1, arg2) => {
     var r1, r2, m, c;
@@ -91,7 +91,7 @@ export const accAdd = (arg1, arg2) => {
         arg2 = Number(arg2.toString().replace(".", ""));
     }
     return (arg1 + arg2) / m;
-}
+};
 
 export const accSub = (arg1, arg2) => {
     var r1, r2, m, n;
@@ -110,7 +110,7 @@ export const accSub = (arg1, arg2) => {
     m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
     n = (r1 >= r2) ? r1 : r2;
     return ((arg1 * m - arg2 * m) / m).toFixed(n);
-}
+};
 
 export const accMul = (arg1, arg2) => {
     var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
@@ -127,7 +127,7 @@ export const accMul = (arg1, arg2) => {
         console.log(e);
     }
     return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
-}
+};
 
 export const accDiv = (arg1, arg2) => {
     var t1 = 0, t2 = 0, r1, r2;
@@ -146,4 +146,4 @@ export const accDiv = (arg1, arg2) => {
     r1 = Number(arg1.toString().replace(".", ""));
     r2 = Number(arg2.toString().replace(".", ""));
     return (r1 / r2) * Math.pow(10, t2 - t1);
-}
+};

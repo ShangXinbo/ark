@@ -11,7 +11,10 @@ require('echarts/map/js/china');
 import store from 'src/vuex/store';
 import $ from 'jquery';
 import {mAjax,accAdd,accSub,accMul,accDiv} from 'src/services/functions';
-
+/**
+ * @param arr1
+ * @param arr2
+*/
 function arrMerge(arr1, arr2) {
     for (var i = 0; i < arr1.length; i++) {
         var item = arr1[i];

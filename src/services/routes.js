@@ -55,5 +55,5 @@ router.beforeEach(function (to, from, next) {
     } else {
         next();
     }
-})
+});
 export default router;
