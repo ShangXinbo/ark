@@ -1,7 +1,5 @@
 <template>
-    <div id="warp-page">
-        <router-view>
-        </router-view>
-    </div>
+    <router-view>
+    </router-view>
 </template>
 <style lang="less">@import '../static/less/common.less';</style>

@@ -12,7 +12,7 @@ module.exports = function(req,res){
         messages:{
             data:[]
         },
-        current_page:1,
+        current_page:page,
         total:115
     };
     for(var i=10;i<(10+parseInt(rows));i++){

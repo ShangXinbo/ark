@@ -31,7 +31,7 @@ module.exports = {
     'new-parens': 1,
     'no-mixed-spaces-and-tabs': 1,
     'require-jsdoc': 0,
-    'semi': 1,
+    'semi': 0,
     'no-console':0,
     'no-unused-vars':0
   }

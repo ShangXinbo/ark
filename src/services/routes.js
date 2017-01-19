@@ -37,11 +37,11 @@ const router = new VueRouter({
         },
         {
             path: '/', component: common, children: [
-                { path: 'index', name: 'index', component: index },
-                { path: 'models', name: 'models', component: models },
-                { path: 'report', name: 'report', component: report },
-                { path: 'filter', name: 'filter', component: filter },
-                { path: 'message', name: 'message', component: message }
+                { path: '/index', name: 'index', component: index },
+                { path: '/models', name: 'models', component: models },
+                { path: '/report', name: 'report', component: report },
+                { path: '/filter', name: 'filter', component: filter },
+                { path: '/message/:page?', name: 'message', component: message }
             ]
         },
         {

@@ -1,6 +1,5 @@
 <style lang="less" scoped>
     @import '../../../static/less/crowd.less';
-
 </style>
 <template>
     <div class="warp">
@@ -21,8 +20,8 @@
                         <td><a href="javascript:void(0);">删除</a></td>
                     </tr>
                 </table>
+                <pages :total="totalPage" :current="currentPage" @jump='refresh' :url="api"></pages>
             </div>
-            <pages v-bind:total="totalPage" v-bind:current="currentPage"></pages>
         </div>
     </div>
 </template>
@@ -36,12 +35,33 @@
         data: function () {
             return {
                 list: [],
-                currentPage: '',
-                totalPage: ''
+                currentPage: '1',
+                totalPage: '1',
+                api: API.message_list
             };
         },
         components: {
             pages
+        },
+        methods: {
+            refresh: function () {
+                let _this = this
+                let page = this.$route.params.page
+                mAjax(this, {
+                    url: API.message_list,
+                    data: {
+                        page: page ? page : 1,
+                        rows: 10
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            _this.list = data.detail.messages.data;
+                            _this.currentPage = parseInt(data.detail.current_page);
+                            _this.totalPage = Math.floor(data.detail.total / 10);
+                        }
+                    }
+                });
+            }
         },
         filters: {
             subDate: function (value) {
@@ -51,22 +71,7 @@
             }
         },
         mounted: function () {
-            let _this = this;
-            mAjax(this, {
-                url: API.message_list,
-                data: {
-                    page: 1,
-                    rows: 10
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-                        _this.list = data.detail.messages.data;
-                        _this.currentPage = parseInt(data.detail.messages.current_page);
-                        _this.totalPage = Math.floor(data.detail.messages.total / data.detail.messages.per_page);
-                    }
-                }
-            });
+            this.refresh();
         }
     };
-
 </script>
