@@ -13,30 +13,30 @@
             <li v-on:click.stop="nav()" v-bind:class="{'li-hover': headerNav}">
                 <i class="icon nav-icon"></i>
                 <div class="nav">
-                    <a href="javascript:void(0);" data-dialog="upLoadCrowd" class="clearStorage">
+                    <a class="clearStorage">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav01"></i><span>人群上传</span>
                     </a>
-                    <a href="/filter/index.html" class="clearStorage">
+                    <router-link to="/filter">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav02"></i><span>标签筛选</span>
-                    </a>
-                    <a href="/modeling-screening.html" class="clearStorage">
+                    </router-link>
+                    <router-link to="/models">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav03"></i><span>建模筛选</span>
-                    </a>
-                    <a href="/report.html?ana=1">
+                    </router-link>
+                    <router-link to="/report">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav04"></i><span>统计分析</span>
-                    </a>
+                    </router-link>
                     <a data-href="datause" href="/project/list.html">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav05"></i><span>标签应用</span>
                     </a>
-                    <a href="/upload/history/index.html">
+                    <router-link to="/crowd/filter">
                         <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav06"></i><span>人群管理</span>
-                    </a>
+                    </router-link>
                 </div>
             </li>
         </ul>

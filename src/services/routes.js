@@ -29,6 +29,19 @@ const filter = function (resolve) {
 const message = function (resolve) {
     require(['components/message/index.vue'], resolve);
 };
+const crowd = function (resolve) {
+    require(['components/crowd/index.vue'], resolve);
+};
+const crowd_filter = function (resolve) {
+    require(['components/crowd/filter.vue'], resolve);
+};
+const crowd_tag = function (resolve) {
+    require(['components/crowd/tag.vue'], resolve);
+};
+const crowd_upload = function (resolve) {
+    require(['components/crowd/upload.vue'], resolve);
+};
+
 
 const router = new VueRouter({
     routes: [
@@ -37,11 +50,18 @@ const router = new VueRouter({
         },
         {
             path: '/', component: common, children: [
-                { path: '/index', name: 'index', component: index },
-                { path: '/models', name: 'models', component: models },
-                { path: '/report', name: 'report', component: report },
-                { path: '/filter', name: 'filter', component: filter },
-                { path: '/message/:page?', name: 'message', component: message }
+                { path: 'index', name: 'index', component: index },
+                { path: 'models', name: 'models', component: models },
+                { path: 'report', name: 'report', component: report },
+                { path: 'filter', name: 'filter', component: filter },
+                { path: 'message/:page?', name: 'message', component: message },
+                {
+                    path: 'crowd/', component: crowd, children: [
+                        { path: 'filter/:page?', name: 'crowd_filter', component: crowd_filter },
+                        { path: 'tag/:page?', name: 'crowd_tag', component: crowd_tag },
+                        { path: 'upload/:page?', name: 'crowd_upload', component: crowd_upload },
+                    ]
+                }
             ]
         },
         {

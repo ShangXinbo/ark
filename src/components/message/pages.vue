@@ -2,7 +2,7 @@
     @import '../../../static/less/page.less';
 </style>
 <template>
-    <div class="page">
+    <div class="page" v-show="total>1">
         <a class="prev" :class="{disabled:current==1}" @click="goPage(current-1)" href="javascript:void(0);">上一页</a>
         <a href="javascript:void(0);" :class="{active:current==1}" @click="goPage(1)">1</a>
         <span v-show="current>3">...</span>

@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="clearStorage" data-key="tags">
-                <router-link to="filter">
+                <router-link to="/filter">
                     <i class="index-icon ts"></i>
                     <h2>标签筛选</h2>
                     <h3>Tags Screening</h3>
@@ -26,7 +26,7 @@
                 </router-link>
             </li>
             <li class="clearStorage">
-                <router-link to="models">
+                <router-link to="/models">
                     <i class="index-icon ms"></i>
                     <h2>建模筛选</h2>
                     <h3>Modeling Screening</h3>
@@ -50,12 +50,12 @@
                 </a>
             </li>
             <li>
-                <a href="/upload/history/index.html">
+                <router-link to="/crowd/filter">
                     <i class="index-icon cm"></i>
                     <h2>人群管理</h2>
                     <h3>Crowd Management</h3>
                     <p>对本账号历史上传人群,<br/>和以往筛选记录的相关管理与应用</p>
-                </a>
+                </router-link>
             </li>
         </ul>
     </div>
