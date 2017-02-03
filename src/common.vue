@@ -17,11 +17,6 @@ import dialogCrowdCreate from 'components/dialog/crowdCreate';
 import dialogCrowdSelect from 'components/dialog/crowdSelect';
 export default {
     store:store,
-    data:function(){
-        return {
-            layerStatus:''
-        };
-    },
     components: {
         'vheader':vheader,
         'dialog-crowd-method':dialogCrowdMethod,
@@ -30,7 +25,6 @@ export default {
     },
     computed:{
         wholePage: function(){
-            console.log(store.state.wholePage)
             return store.state.wholePage
         },
         layerStatus:function(){

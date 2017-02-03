@@ -5,52 +5,43 @@
  */
 var Mock = require('mockjs');
 var Random = Mock.Random;
-module.exports = function(req,res){
+module.exports = function(req, res) {
     var code = req.body.code;
     var level = req.body.level;
     var dataLength = 16;
-    if(!code){
+
+    //resolve level
+    if (level > 0) {
+        dataLength = 5
+    }
+
+    //resolve code
+    if (!code) {
         code = 10;
     }
-    if(level=='0'){
+    if (level == '0') {
         code = 100;
-    }else{
+    } else {
         code = parseInt(code) * 10;
-        dataLength = 30;
     }
+
     var d = [];
-    for(var i=1;i<dataLength;i++){
-    	if(dataLength<30){
-	    	d.push({
-	            "code": code + i,
-	            "hasChildrend":true,
-	            "page":0,
-	            "pageSize":0,
-	            "tagLevel": parseInt(level)+1,
-	            "tagName":Random.cword(3,6),
-	            "spritClass":function(j){
-				            	if(j<10){
-				            		return "icon0"+j;
-				            	}else{
-				            		return "icon"+j;
-				            	}
-				            }(i)
-	        });
-    	}else{
-	    	d.push({
-	            "code": code + i,
-	            "hasChildrend":function(){
-	            	if(String(code).length <= 6)
-	            		return true;
-	            	else
-	            		return false;
-	            },
-	            "page":0,
-	            "pageSize":0,
-	            "tagLevel": parseInt(level)+1,
-	            "tagName":Random.cword(3,6)
-	        });
-    	}
+    for (var i = 1; i < dataLength; i++) {
+        d.push({
+            "code": code + i,
+            "hasChildren": function() {
+                return level < 2
+            },
+            "tagLevel": parseInt(level) + 1,
+            "tagName": Random.cword(3, 6),
+            "spritClass": function(j) {
+                if (j < 10) {
+                    return "icon0" + j;
+                } else {
+                    return "icon" + j;
+                }
+            }(i)
+        });
     }
     return Mock.mock(d);
 }

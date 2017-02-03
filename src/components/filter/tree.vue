@@ -3,47 +3,75 @@
 </style>
 <template>
     <ul v-show="show" class="screening-sub">
-        <li v-for="(item,index) in tagsLs" ref="li" v-on:click="getChilds(item.code)">
-            <div class="checkbox-warp" v-bind:title="item.tagName"><i class="icon"></i><span>{{item.tagName}}</span></div>
-            <tree-list :ref="item.code"></tree-list>
+        <li v-for="(item,index) in tagsLs" :class="{show:item.show,checked:item.checked}">
+            <div class="checkbox-warp" v-bind:title="item.tagName">
+                <i class="icon" @click="toStage(item.code)"></i>
+                <span @click="getChilds(item.code)">{{item.tagName}}</span>
+            </div>
+            <tree-list :level="item.tagLevel" :code="item.code" :show="item.show" :child="item.hasChildren"></tree-list>
         </li>
     </ul>
 </template>
 <script>
-    import API from 'src/services/api';
+    import API from 'src/services/api'
     import {
         mAjax
-    } from 'src/services/functions';
+    } from 'src/services/functions'
+    import store from 'src/vuex/store'
+
     export default {
         name: 'tree-list',
+        props: [
+            'level',
+            'code',
+            'show',
+            'child'
+        ],
         data: function() {
             return {
-                show: 0,
                 tagsLs: []
             };
         },
         methods: {
             getChilds: function(code) {
-                let li = this.$refs.li
-                for (let i = 0; i < li.length; i++) {
-                    li[i].className = ''
+                for (let i in this.tagsLs) {
+                    this.tagsLs[i].show = false
                 }
-                event.currentTarget.className = 'show'
-                this.$refs[code][0].$data.show = 1
+                this.tagsLs[code].show = true
+            },
+            toStage: function(code) {
+                if (this.tagsLs[code].checked) {
+                    this.tagsLs[code].checked = false
+                } else {
+                    this.tagsLs[code].checked = true
+                }
+
             }
         },
         watch: {
-            show: function() {
+            show: function(val, old) {
+                if (!val) return
                 const _this = this;
                 mAjax(this, {
                     url: API.filter_getTagStructure,
                     data: {
-                        code: _this.tagid,
+                        code: _this.code,
                         level: _this.level
                     },
                     success: function(data) {
                         if (data.code == 200) {
-                            _this.tagsLs = data.detail;
+                            let obj = {}
+                            let list = data.detail
+                            for (let i = 0; i < list.length; i++) {
+                                obj[list[i].code] = Object.assign({}, list[i], {
+                                    show: false,
+                                    checked: false
+                                })
+                            }
+                            if (_this.child) {
+                                _this.tagsLs = obj
+                            }
+                            store.commit('CHANGE_FILTER_FOLDER', _this.tagsLs)
                         } else {
                             //TODO: 未加载数据
                         }

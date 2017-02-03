@@ -16,38 +16,39 @@ const state = {
         crowdCreate: false,
         crowdSelect: false
     },
-    wholePage:false,
+    wholePage: false,
     user: {},
     header: {
         account: false,
         nav: false
     },
+    tagFolder: [],
     filters: {
-        crowd: {"id":185,"name":"啊手动阀手动阀"},  //default null
+        crowd: { "id": 185, "name": "啊手动阀手动阀" }, //default null
         filter: {
             "tagcode": [
                 [
-                    {"code": "10301", "text": "资讯论坛", "level": 2}
+                    { "code": "10301", "text": "资讯论坛", "level": 2 }
                 ],
                 [
-                    {"code": "10301", "text": "资讯论坛", "level": 2},
-                    {"code": "10304", "text": "保养维修", "level": 2}
+                    { "code": "10301", "text": "资讯论坛", "level": 2 },
+                    { "code": "10304", "text": "保养维修", "level": 2 }
                 ]
             ],
             "fixedpros": {
                 "area": [],
                 "interest": [],
-                "sex": [{"code": 10002, "text": "女"}],
+                "sex": [{ "code": 10002, "text": "女" }],
                 "mobile": [
-                    {"code": 410007000000000000, "text": "酷派"},
-                    {"code": 410006000000000000, "text": "联想"}
+                    { "code": 410007000000000000, "text": "酷派" },
+                    { "code": 410006000000000000, "text": "联想" }
                 ],
                 "age": []
             }
         },
-        model: {"id":11,"name":"出国英语培训"}
+        model: { "id": 11, "name": "出国英语培训" }
     },
-    charts:{
+    charts: {
         "interest": {
             "百率天影积": "39%",
             "记界半": "87%",
@@ -122,53 +123,56 @@ const state = {
 
 const mutations = {
     //全屏
-    PAGE_NO_SCROLL(state){
+    PAGE_NO_SCROLL(state) {
         state.wholePage = true
     },
-    PAGE_WIDTH_SCROLL(state){
+    PAGE_WIDTH_SCROLL(state) {
         state.wholePage = false
     },
     // 显示遮罩层
-    SHOW_LAYER(state){
+    SHOW_LAYER(state) {
         state.showLayer = true;
     },
     // 隐藏遮罩层
-    HIDE_LAYER(state){
+    HIDE_LAYER(state) {
         state.showLayer = false;
     },
     // 关闭所有弹窗
-    CLOSE_DIALOG(state){
+    CLOSE_DIALOG(state) {
         state.dialog.crowdInit = false;
         state.dialog.crowdCreate = false;
         state.dialog.crowdSelect = false;
         state.showLayer = false;
     },
     // 显示上传人群初始化弹窗
-    SHOW_UPLOAD_INIT_DIALOG(state){
+    SHOW_UPLOAD_INIT_DIALOG(state) {
         state.dialog.crowdInit = true;
         state.showLayer = true;
     },
     // 显示上传人群初始化弹窗
-    SHOW_UPLOAD_CREATE_DIALOG(state){
+    SHOW_UPLOAD_CREATE_DIALOG(state) {
         state.dialog.crowdCreate = true;
         state.showLayer = true;
     },
     // 显示上传人群初始化弹窗
-    SHOW_UPLOAD_SELECT_DIALOG(state){
+    SHOW_UPLOAD_SELECT_DIALOG(state) {
         state.dialog.crowdSelect = true;
         state.showLayer = true;
     },
-    SHOW_NAV: function (state) {
+    SHOW_NAV: function(state) {
         state.header.nav = true;
         state.header.account = false;
     },
-    SHOW_ACCOUNT_TAB: function (state) {
+    SHOW_ACCOUNT_TAB: function(state) {
         state.header.nav = false;
         state.header.account = true;
     },
-    HIDE_NAV: function (state) {
+    HIDE_NAV: function(state) {
         state.header.nav = false;
         state.header.account = false;
+    },
+    CHANGE_FILTER_FOLDER: function(state, json) {
+        state.tagFolder = json
     }
 };
 

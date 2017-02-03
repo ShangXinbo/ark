@@ -9,32 +9,18 @@
                     <dl>
                         <dt>全部</dt>
                     </dl>
-                    <label class="search">
-                        <i class="icon"></i>
-                        <input type="text" />
-                        <em class="icon" style="display: none;"></em>
-                    </label>
                 </div>
                 <div class="screening-left">
-                    <div class="scroll-warp">
+                    <div class="scroll-warp" style="overflow-y:auto">
                         <ul class="scroll-content screening-one">
-                            <li v-for="(item,index) in tagsL1" ref="li" v-on:click="getChilds(item.code)">
+                            <li v-for="(item,key) in tagsL1" :class="{show:item.show}" v-on:click="getChilds(item.code)">
                                 <div class="sort-first" v-bind:title="item.tagName"><i v-bind:class="item.spritClass" class="icon"></i><span>{{item.tagName}}</span></div>
-                                <item :ref="item.code"></item>
+                                <tree :level="item.tagLevel" :code="item.code" :show="item.show" :child="item.hasChildren"></tree>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="screening-right">
-                    <div class="scroll-warp">
-                        <ul class="scroll-content screening-item">
-                        </ul>
-                    </div>
-                    <div class="all-button">
-                        <p><i class="icon"></i><span>全选</span></p>
-                        <input type="submit" value="加入购物篮" />
-                    </div>
-                </div>
+                <tag-folder></tag-folder>   
             </div>
             <div class="cart-warp">
                 <h3>标签购物车</h3>
@@ -76,30 +62,28 @@
 <script>
     import {
         mAjax
-    } from 'src/services/functions';
-    import API from 'src/services/api';
-    import item from './tree.vue';
+    } from 'src/services/functions'
+    import API from 'src/services/api'
+    import tree from './tree.vue'
     import store from 'src/vuex/store'
+    import tagFolder from './folder.vue'
 
     export default {
         data: function() {
             return {
-                tagsL1: [],
-                offsetLeft: 0,
-                offsetTop: 0
+                tagsL1: {}
             };
         },
         components: {
-            item
+            tree,
+            tagFolder
         },
         methods: {
-            getChilds: function(code) {
-                let li = this.$refs.li
-                for (let i = 0; i < li.length; i++) {
-                    li[i].className = ''
+            getChilds: function(code, child) {
+                for (let i in this.tagsL1) {
+                    this.tagsL1[i].show = false
                 }
-                event.currentTarget.className = 'show'
-                this.$refs[code][0].$data.show = 1
+                this.tagsL1[code].show = true
             }
         },
         mounted: function() {
@@ -113,12 +97,22 @@
                 },
                 success: function(data) {
                     if (data.code == 200) {
-                        _this.tagsL1 = data.detail;
+                        let obj = {}
+                        let list = data.detail
+                        for (let i = 0; i < list.length; i++) {
+                            obj[list[i].code] = Object.assign({}, list[i], {
+                                show: false
+                            })
+                        }
+                        _this.tagsL1 = obj
                     } else {
                         //TODO: 未加载数据
                     }
                 }
             });
+        },
+        destroyed: function() {
+            store.commit('PAGE_WIDTH_SCROLL')
         }
     };
 </script>
