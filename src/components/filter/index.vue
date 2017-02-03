@@ -40,7 +40,6 @@
                         <a class="disabled" href="javascript:void(0);"><i class="icon"></i><span>添加新购物篮</span></a>
                     </div>
                 </div>
-                <!--<div class="scrollbar-warp"></div>-->
                 <div class="billing">
                     <a href="javascript:void(0);">删除</a>
                     <a href="javascript:void(0);">清空</a>

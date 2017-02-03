@@ -11,24 +11,38 @@
         </ul>
     </div>
     <div class="all-button">
-        <p><i class="icon"></i><span>全选</span></p>
+        <p :class="{checked:checkedAll}"><i class="icon"></i><span>全选</span></p>
         <input type="submit" value="加入购物篮" />
     </div>
 </div>
 </template>
 <script>
     import store from 'src/vuex/store'
+    import _ from 'lodash'
     export default {
         computed: {
             list: function() {
-                console.log(JSON.parse(JSON.stringify(store.state.tagFolder)))
                 return store.state.tagFolder
-            }
-        },
-        methods: {
-            checked: function(code) {
+            },
+            checkedAll: function() {
+                let list = this.list
+                if (!_.isEmpty(list)) {
+                    let tag = true
+                    for (let i in list) {
+                        if (!list[i].checked) {
+                            tag = false
+                        }
+                    }
+                    return tag
+                } else {
+                    return false
+                }
+            },
+            methods: {
+                checked: function(code) {
 
+                }
             }
         }
-    };
+    }
 </script>
