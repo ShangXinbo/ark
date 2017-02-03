@@ -1,6 +1,7 @@
 @import (reference) "base.less";
 
 @mainBGColor:#3D3D6F;
+@navColor:#8E87A5;
 @navBGColor:#2D2D5A;
 
 body {
@@ -32,7 +33,9 @@ body {
     font-size: 16px;
     line-height: 52px;
     cursor: pointer;
+    color: @navColor;
     &.active{
+      color: @whiteColor;
       background-color: @mainBGColor;
     }
   }

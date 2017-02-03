@@ -6,7 +6,7 @@
 
 .main{
   width: 960px;
-  padding: 35px 0 60px;
+  padding: 40px 0 60px;
   margin: 0 auto;
 }
 h2{
@@ -299,13 +299,38 @@ h2{
       background-color: transparent;
       cursor: pointer;
     }
+    &.w224{
+      width: 224px;
+      input{
+        width: 224px;
+      }
+    }
   }
-
 }
 .li-input-warp{
   width: 50%;
   float: left;
   //overflow: hidden;
+  p.error{
+    padding-left: 150px;
+  }
+}
+.sms-input-warp{
+  width: 700px;
+  min-height: 48px;
+  margin: 0 auto;
+  position: relative;
+  .tips{
+    height: 24px;
+    line-height: 24px;
+    font-size: 16px;
+    padding: 12px 0 12px 15px;
+    color: @grayPurpleColor2;
+    white-space:nowrap;
+    position: absolute;
+    left: 480px;
+    top: 0;
+  }
   p.error{
     padding-left: 150px;
   }
@@ -390,7 +415,7 @@ h2{
   }
 }
 .select-warp{
-  @liHover:#DFDEE3;
+  @ulBG:#2F2F58;
   float: left;
   width: 330px;
   position: relative;
@@ -426,7 +451,7 @@ h2{
     display: none;
     width: 100%;
     padding: 10px 0;
-    background-color: @whiteColor;
+    background-color: @ulBG;
     position: absolute;
     left: 0;
     top: 50px;
@@ -443,16 +468,16 @@ h2{
     margin-top: 2px;
     font-size: 14px;
     line-height: 27px;
-    color: @grayColor;
+    color: @whiteColor;
     cursor: pointer;
     &:first-child{
       margin-top: 0;
     }
     &:hover{
-      background-color: @liHover;
+      background-color: lighten(@ulBG,3%);
     }
   }
 }
 
-
+@import "sms.less";
 @import "calendar.less"; //日历控件样式

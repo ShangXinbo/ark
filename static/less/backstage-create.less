@@ -1,0 +1,305 @@
+@import (reference) "base.less";
+
+@feedbackBGColor: #292952;
+@inputTipColor: #ACA2CE;
+@inputBGColor: #434371;
+
+.main{
+  width: 960px;
+  padding: 40px 0 60px;
+  margin: 0 auto;
+}
+h2{
+  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  padding-bottom: 14px;
+}
+.sms-content{
+  width: 854px;
+  margin: 0 auto;
+  padding-top: 36px;
+  overflow: hidden;
+}
+
+@import "sms.less";
+
+
+
+
+
+
+.create-warp{
+  width: 480px;
+  float: left;
+  &.spacing{
+    margin-top: 110px;
+  }
+  li{
+    margin-top: 28px;
+    min-height: 48px;
+    &:first-child{
+      margin-top: 0 !important;
+    }
+    &:after{
+      display: block;
+      content: '';
+      clear: both;
+      height: 0;
+      .flo();
+    }
+    label{
+      float: left;
+      width: 120px;
+      height: 48px;
+      padding-right: 30px;
+      font-size: 16px;
+      line-height: 48px;
+      text-align: right;
+    }
+    &.upload{
+      min-height: 40px;
+      position: relative;
+      label{
+        height: 40px;
+      }
+      .button{
+        float: left;
+        width: 164px;
+        height: 40px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 39px;
+        background-color: @greenColor;
+        color: @whiteColor;
+        border-radius: 4px;
+      }
+      .img{
+        float: left;
+        width: 100px;
+        height: 70px;
+        margin-left: 15px;
+      }
+      i{
+        display: inline-block;
+        vertical-align: top;
+        .wh(14px);
+        .flo();
+        margin: 13px 8px 0 0;
+        background: url("@{url}/right-button.png") no-repeat -28px -15px;
+      }
+    }
+  }
+  .fixed{
+    float: left;
+    width: 330px;
+    height: 48px;
+    font-size: 18px;
+    line-height: 48px;
+    cursor: default;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  input,textarea{
+    width: 330px;
+    border:none;
+    background-color: @inputBGColor;
+    .box-sizing();
+    color: @whiteColor;
+    font: 16px/18px @YaHei;
+    &.tips{
+      color: @inputTipColor;
+    }
+    &.disabled{
+      color: @inputTipColor;
+      cursor: default;
+    }
+  }
+  input{
+    &.text{
+      float: left;
+      height: 48px;
+      padding: 15px 20px;
+    }
+    &.w228{
+      width: 228px;
+      margin-left: 15px;
+    }
+    &.w87{
+      width: 87px;
+    }
+  }
+  textarea{
+    height: 118px;
+    padding: 8px 20px;
+    line-height: 26px;
+  }
+  p.error{
+    clear: both;
+    font-size: 14px;
+    color: @redColor;
+    padding: 8px 0 0 150px;
+  }
+  p.tips{
+    clear: both;
+    font-size: 16px;
+    color: @grayPurpleColor2;
+    padding: 8px 0 0 150px;
+  }
+  .calendar-warp{
+    width: 330px;
+    float: left;
+    background-color: @inputBGColor;
+    position: relative;
+    &:before{
+      display: block;
+      content: '';
+      width: 19px;
+      height: 21px;
+      position: absolute;
+      right: 12px;
+      top: 13px;
+      z-index: 1;
+      background: data-uri('@{url}/calendar-icon.png') no-repeat 0 0;
+    }
+    input{
+      padding-right: 40px;
+      position: relative;
+      z-index: 2;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+}
+.select-warp{
+  @ulBG:#2F2F58;
+  float: left;
+  width: 330px;
+  position: relative;
+  &.w145{
+    width: 145px;
+  }
+  &.w170{
+    width: 170px;
+    margin-left: 15px;
+  }
+  p{
+    background-color: @inputBGColor;
+    height: 48px;
+    padding: 0 35px 0 20px;
+    font-size: 16px;
+    line-height: 48px;
+    cursor: pointer;
+    .user-select();
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    &:before{
+      display: block;
+      content: '';
+      width: 15px;
+      height: 9px;
+      .flo();
+      background: data-uri('@{url}/select-icon02.png') no-repeat 0 0;
+      position: absolute;
+      right: 14px;
+      top: 20px;
+    }
+  }
+  ul{
+    display: none;
+    width: 100%;
+    padding: 10px 0;
+    background-color: @ulBG;
+    position: absolute;
+    left: 0;
+    top: 50px;
+    z-index: 2;
+  }
+  &.select-open{
+    ul{
+      display: block;
+    }
+  }
+  li{
+    height: 28px;
+    min-height: 0;
+    padding: 0 20px;
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 27px;
+    color: @whiteColor;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &:first-child{
+      margin-top: 0;
+    }
+    &:hover{
+      background-color: lighten(@ulBG,3%);
+    }
+  }
+}
+.sms-phone-bottom{
+  margin-top: 42px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  span{
+    display: inline-block;
+    vertical-align: top;
+    color: @grayPurpleColor2;
+    padding-left: 70px;
+    &:first-child{
+      padding-left: 0;
+    }
+  }
+}
+.sms-content{
+  .select-warp{
+    ul{
+      max-height: 238px;
+      overflow-y: auto;
+    }
+  }
+}
+.create-button{
+  margin-top: 60px;
+  height: 50px;
+  font-size: 0;
+  text-align: center;
+  a{
+    display: inline-block;
+    width: 134px;
+    height: 100%;
+    font-size: 18px;
+    line-height: 50px;
+    color: @whiteColor;
+    margin: 0 10px;
+    border-radius: 4px;
+    &:hover{
+      box-shadow: 0 0 3px fade(@blackColor ,50%);
+    }
+    &.green{
+      background-color: @greenColor;
+      &:hover{
+        background-color: lighten(@greenColor,3%);
+      }
+    }
+    &.red{
+      background-color: @redColor;
+      &:hover{
+        background-color: lighten(@redColor,3%);
+      }
+    }
+    &.gray{
+      background-color: @grayColor2;
+      &:hover{
+        background-color: lighten(@grayColor2,3%);
+      }
+    }
+  }
+}

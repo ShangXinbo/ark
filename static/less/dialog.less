@@ -1,8 +1,11 @@
 @import (reference) "base.less";
 @import "input.less";
 
+@errorLine: #F8B1BE;
+@error2: #E16E35;
+@errorLine2: #F3BFA6;
 
-.dialog-close,.dialog-bugButton i,.success .icon,.dialog-upload .icon,.dialog-table td i,.label-button i{
+.dialog-close,.dialog-bugButton i,.dialog-bugButton p:before,.success .icon,.dialog-upload .icon,.dialog-table td i,.label-button i,.data-error-title i,.dialog-footer i{
   .flo();
   background: url('@{url}/dialog-icon.png') no-repeat 0 0;
 }
@@ -84,12 +87,36 @@
     &:hover{
       box-shadow: 0 0 3px fade(@blackColor ,50%);
     }
+    &.w170{
+      width: 170px;
+    }
     &.red{
       background-color: @redColor;
       color: @whiteColor;
       border-color: @redColor;
       &:hover{
         background-color: lighten(@redColor,3%); //亮度增加 3%
+      }
+    }
+    &.green{
+      background-color: @greenColor;
+      color: @whiteColor;
+      border-color: @greenColor;
+      &:hover{
+        background-color: lighten(@greenColor,3%); //亮度增加 3%
+      }
+    }
+    span{
+      display: inline-block;
+    }
+    i{
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+      &.add{
+        .wh(19px);
+        margin-top: 15px;
+        background-position:-50px -17px;
       }
     }
   }
@@ -169,6 +196,56 @@
       background-position:-50px -74px;
     }
   }
+  p{
+    display: none;
+    height: 16px;
+    padding: 6px 0 6px 10px;
+    margin: 7px 0 -10px;
+    border: 1px solid @errorLine2;
+    position: relative;
+    &:before{
+      display: block;
+      content: '';
+      width: 10px;
+      height: 6px;
+      overflow: hidden;
+      position: absolute;
+      left: 34px;
+      top: -6px;
+    }
+    i{
+      display: none;
+      .wh(16px);
+      background-position: -84px -108px;
+      margin-right: 5px;
+    }
+    span{
+      display: inline-block;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 16px;
+      overflow: hidden;
+    }
+    &.error1{
+      display: block;
+      border-color: @errorLine2;
+      color: @error2;
+      &:before{
+        background-position: -50px -94px;
+      }
+    }
+    &.error2{
+      display: block;
+      border-color: @errorLine;
+      color: @redColor;
+      &:before{
+        background-position: -60px -94px;
+      }
+      i{
+        display: inline-block;
+      }
+    }
+  }
 }
 .w800{
   .dialog-table{
@@ -189,6 +266,9 @@
   &.w800{
     width: 800px;
   }
+  .w50{
+    width: 50px;
+  }
   .w60{
     width: 60px;
   }
@@ -204,6 +284,12 @@
       width: 100px;
     }
   }
+  .w120{
+    width: 120px;
+    &>p{
+      width: 120px;
+    }
+  }
   .w140{
     width: 140px;
     &>p{
@@ -214,6 +300,12 @@
     width: 150px;
     &>p{
       width: 150px;
+    }
+  }
+  .w170{
+    width: 170px;
+    &>p{
+      width: 170px;
     }
   }
   .w200{
@@ -387,7 +479,9 @@
   }
 }
 .dialog-public{
-  width: 446px;
+  //width: 446px;
+  min-width: 300px;
+  max-width: 450px;
   font-size: 20px;
   line-height: 26px;
   text-align: center;
@@ -398,6 +492,167 @@
     padding: 0 8px;
   }
 }
+.dialog-data-error{
+  width: 410px;
+  text-align: center;
+  padding-top: 40px;
+  color: @grayColor;
+  p{
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  a{
+    color: @greenColor;
+    margin-right: 2px;
+  }
+}
+.data-error-title{
+  margin-top: 10px;
+  height: 25px;
+  font-size: 20px;
+  line-height: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+  i{
+    display: inline-block;
+    vertical-align: top;
+    .wh(25px);
+    background-position: -34px -119px;
+  }
+  span{
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 11px;
+  }
+}
+
+.select-block{
+  width: 414px;
+  overflow: hidden;
+  margin: 0 0 -18px -14px;
+  text-align: center;
+  a{
+    float: left;
+    width: 120px;
+    line-height: 20px;
+    border: 2px solid @lineColor3;
+    margin: 0 0 18px 14px;
+    position: relative;
+    i{
+      background: url('@{url}/select-block.png') no-repeat;
+      &.icon{
+        display: block;
+        .wh(24px);
+        margin: 10px auto 0;
+        height: 24px;
+      }
+      &.tri{
+        display: none;
+        width: 19px;
+        height: 17px;
+        background-position: -208px 0;
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+      }
+      &.gdt{
+        background-position: 0 0;
+      }
+      &.wb{
+        background-position: -24px 0;
+      }
+      &.at{
+        width: 60px;
+        background-position: -52px 0;
+      }
+      &.edm{
+        background-position: -112px 0;
+      }
+      &.dh{
+        background-position: -136px 0;
+      }
+      &.dx{
+        background-position: -160px 0;
+      }
+      &.other{
+        background-position: -184px 0;
+      }
+    }
+    span{
+      display: block;
+      font-size: 16px;
+      color: @grayColor;
+      margin-top: 8px;
+    }
+    em{
+      display: block;
+      font-size: 12px;
+      color: @grayText;
+      margin-top: 2px;
+    }
+    &:hover{
+      border-color: @greenColor;
+    }
+    &.active{
+      border-color: @greenColor;
+      i{
+        &.tri{
+          display: block;
+        }
+        &.gdt{
+          background-position: 0 -24px;
+        }
+        &.wb{
+          background-position: -24px -24px;
+        }
+        &.at{
+          background-position: -52px -24px;
+        }
+        &.edm{
+          background-position: -112px -24px;
+        }
+        &.dh{
+          background-position: -136px -24px;
+        }
+        &.dx{
+          background-position: -160px -24px;
+        }
+        &.other{
+          background-position: -184px -24px;
+        }
+      }
+    }
+  }
+}
+.dialog-external,.dialog-internal{
+  padding-left: 15px;
+  width: 450px;
+  position: relative;
+  .input-area{
+    height: 96px;
+  }
+}
+.dialog-external{
+  .select-block{
+    a{
+      height: 95px;
+    }
+  }
+}
+.dialog-internal{
+  .select-block{
+    a{
+      height: 82px;
+      i{
+        &.icon{
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+
 
 @media (max-width: 1366px){
   .dialog-header{

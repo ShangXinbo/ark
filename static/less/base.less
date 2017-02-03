@@ -61,19 +61,19 @@
 }
 .displayFlex(){
   display: -webkit-flex;
-  display: -moz-box;
+  //display: -moz-box;
   display: -ms-flexbox;
   display: flex;
 }
 .displayFlexW(@content:center){  //横向居中
   -webkit-justify-content: @content;
-  -moz-justify-content: @content;
+  //-moz-justify-content: @content;
   -ms-justify-content: @content;
   justify-content: @content;
 }
 .displayFlexH(@content:center){ // 垂直居中
   -webkit-align-items: @content;
-  -moz-align-items: @content;
+  //-moz-align-items: @content;
   -ms-align-items: @content;
   align-items: @content;
 }
@@ -81,4 +81,5 @@
   -webkit-user-select: @content;
   -moz-user-select: @content;
   -ms-user-select: @content;
+  user-select: @content;
 }

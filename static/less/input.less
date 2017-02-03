@@ -70,11 +70,16 @@
       border-color: @inputLineError;
       background-color: @inputBGError;
     }
+    &.w195{
+      width: 195px;
+      float: left;
+    }
   }
   p{
     display: none;
+    clear: both;
     height: 16px;
-    margin-top: 8px;
+    padding-top: 8px;
     &.error{
       display: block;
     }
@@ -92,6 +97,9 @@
       line-height: 17px;
       overflow: hidden;
       color: @redColor;
+      &:first-child{
+        padding-left: 0;
+      }
     }
   }
 }
@@ -103,6 +111,75 @@
   height: 117px;
   padding: 6px 13px;
 }
+.input-warp{
+  .select-warp{
+    @liHover:#DFDEE3;
+    float: left;
+    height: 100%;
+    position: relative;
+    &.w140{
+      width: 140px;
+      margin-left: 15px;
+    }
+    p{
+      display: block !important;
+      background-color: @inputBG;
+      height: 46px;
+      padding: 0 35px 0 20px;
+      border: 1px solid @inputLine;
+      font-size: 16px;
+      line-height: 46px;
+      color: @grayColor;
+      cursor: pointer;
+      .user-select();
+      position: relative;
+      &:before{
+        display: block;
+        content: '';
+        width: 15px;
+        height: 9px;
+        .flo();
+        background: data-uri('@{url}/select-icon03.png') no-repeat 0 0;
+        position: absolute;
+        right: 14px;
+        top: 20px;
+      }
+    }
+    ul{
+      display: none;
+      width: 100%;
+      height: auto;
+      .box-sizing();
+      border: 1px solid @inputLine;
+      padding: 10px 0;
+      background-color: @whiteColor;
+      position: absolute;
+      left: 0;
+      top: 47px;
+      z-index: 2;
+    }
+    &.select-open{
+      ul{
+        display: block;
+      }
+    }
+    li{
+      min-height: 1px;
+      height: 28px;
+      padding: 0 20px;
+      margin-top: 2px;
+      font-size: 14px;
+      line-height: 27px;
+      color: @grayColor;
+      cursor: pointer;
+      &:hover{
+        background-color: @liHover;
+      }
+    }
+  }
+}
+
+
 
 @media (max-width: 1366px){
   .input-warp li{

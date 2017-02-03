@@ -1,5 +1,5 @@
 <template>
-<div>
+<div :class="{'whole-page':wholePage}">
     <vheader></vheader>
     <router-view></router-view>
     <div class="footer"><p>Copyright&nbsp;&copy;&nbsp;2016&nbsp;集奥聚合</p></div>
@@ -28,11 +28,13 @@ export default {
         'dialog-crowd-create':dialogCrowdCreate,
         'dialog-crowd-select':dialogCrowdSelect
     },
-    vuex: {
-        getters:{
-            layerStatus:function(state){
-                return state.showLayer;
-            }
+    computed:{
+        wholePage: function(){
+            console.log(store.state.wholePage)
+            return store.state.wholePage
+        },
+        layerStatus:function(){
+            return store.state.showLayer;
         }
     }
 };

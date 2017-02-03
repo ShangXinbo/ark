@@ -11,79 +11,127 @@
 @calendarColor04: #3C3C68;
 @calendarColor05: #5C5878;
 @calendarColor06: #0F8A7E;
+@calendarColor07: #5F5F8D;
 
-.ui-widget-content{
+.xdsoft_prev,.xdsoft_today_button,.xdsoft_next,.xdsoft_label i,.xdsoft_prev,.xdsoft_next{
+  background: url("../img/calendar.png") no-repeat;
+}
+.xdsoft_prev,.xdsoft_today_button,.xdsoft_next,.xdsoft_prev,.xdsoft_next{
+  background-color: @calendarColor02;
+  &:hover{
+    background-color: lighten(@calendarColor02,3%);
+  }
+}
+.xdsoft_datetimepicker{
+  display: none;
   width: 330px;
   margin: 3px 0 0;
   padding: 10px 0 18px;
   background-color: @calendarColor01;
-  border: none;
+  .user-select();
 }
-.ui-widget-header{
+.xdsoft_datepicker,.xdsoft_timepicker{
+  display: none;
+  &.active{
+    display: block;
+  }
+}
+.xdsoft_mounthpicker{
   height: 25px;
   font-size: 0;
   text-align: center;
   position: relative;
-  .ui-datepicker-title{
-    width: 100%;
-    height: 100%;
-    font-size: 16px;
-    line-height: 25px;
-  }
-  .ui-datepicker-prev,.ui-datepicker-next{
-    display: block;
+  button{
+    display: inline-block;
+    vertical-align: top;
     .wh(25px);
-    background-color: @calendarColor02;
-    border-radius: 4px;
     cursor: pointer;
-    position: absolute;
-    top: 0;
-    &:hover{
-      background-color: lighten(@calendarColor02,3%);
-    }
-    span{
-      float: left;
-      width: 9px;
-      height: 15px;
-      margin-top: 5px;
-      text-indent: -99px;
-      background-image: data-uri('@{url}/calendar.png');
-    }
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
   }
-  .ui-datepicker-prev{
-    left: 80px;
-    span{
-      margin-left: 8px;
-      background-position: 0 0;
-    }
-    &.ui-state-disabled{
-      span{
-        background-position: 0 -15px;
-      }
-    }
+  .xdsoft_prev{
+    background-position: 0 0;
+    margin-left: 0;
   }
-  .ui-datepicker-next{
-    right: 80px;
-    span{
-      margin-left: 9px;
-      background-position: -9px 0;
-    }
-    &.ui-state-disabled{
-      span{
-        background-position: -9px -15px;
-      }
-    }
+  .xdsoft_today_button{
+    background-position: 0 -25px;
   }
-  .ui-state-disabled{
-    background-color: @calendarColor03;
-    cursor: default;
-    &:hover{
-      background-color: @calendarColor03;
-    }
+  .xdsoft_next{
+    background-position: -25px 0;
   }
 }
-.ui-datepicker-calendar{
-  margin: 5px auto 0;
+.xdsoft_label{
+  display: inline-block;
+  vertical-align: top;
+  width: 35px;
+  height: 100%;
+  padding: 0 15px 0 5px;
+  margin-left: 10px;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+  &.xdsoft_month{
+    margin-left: 5px;
+  }
+  &>span{
+    float: left;
+    line-height: 25px;
+  }
+  &>i{
+    display: block;
+    width: 5px;
+    height: 3px;
+    background-position: -60px 0;
+    position: absolute;
+    right: 5px;
+    top: 11px;
+  }
+}
+.xdsoft_select{
+  display: none;
+  width: 55px;
+  text-align: left;
+  max-height: 154px;
+  background-color: @calendarColor02;
+  overflow-y: hidden;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  &>div{
+    padding: 5px 0;
+  }
+}
+.xdsoft_option{
+  padding-left: 5px;
+  line-height: 24px;
+  &:hover{
+    background-color: lighten(@calendarColor02,3%);
+  }
+  &.xdsoft_current{
+    background-color: @calendarColor06;
+  }
+}
+.xdsoft_scrollbar{
+  padding: 0 !important;
+  position: absolute;
+  width: 4px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: default;
+  .xdsoft_scroller{
+    background-color: @calendarColor07;
+    height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+.xdsoft_calendar{
+  margin-top: 5px;
+  table{
+    margin: 0 auto;
+  }
   th{
     font-size: 14px;
     height: 25px;
@@ -91,46 +139,123 @@
     font-weight: normal;
     width: 41px;
   }
-  .ui-state-default{
+  td{
+    width: 41px;
+    height: 26px;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+.xdsoft_date{
+  div{
     display: block;
     width: 40px;
     height: 25px;
     line-height: 25px;
     border: 1px solid @calendarColor04;
     margin: 0 0 -1px -1px;
+    cursor: pointer;
+    &:hover{
+      background-color: lighten(@calendarColor01,3%);
+    }
   }
-  .ui-state-highlight{
-    background-color: @calendarColor04;
+  &.xdsoft_other_month{
+    div{
+      display: none;
+    }
   }
-  .ui-state-active{
-    background-color: @calendarColor06;
-  }
-  td{
-    width: 41px;
-    height: 26px;
-    font-size: 14px;
-    text-align: center;
-    span{
+  &.xdsoft_disabled{
+    div{
       color: @calendarColor05;
       cursor: default;
-    }
-    a{
-      color: @whiteColor;
       &:hover{
-        background-color: lighten(@calendarColor01,3%);
+        background-color: transparent !important;
       }
-      &.ui-state-highlight{
-        &:hover{
-          background-color: lighten(@calendarColor04,3%);
-        }
+    }
+    &.xdsoft_current{
+      div{
+        background-color: transparent;
       }
-      &.ui-state-active{
-        &:hover{
-          background-color: lighten(@calendarColor06,3%);
-        }
+    }
+  }
+  &.xdsoft_today{
+    div{
+      background-color: @calendarColor04;
+      &:hover{
+        background-color: @calendarColor04;
+      }
+    }
+  }
+  &.xdsoft_current{
+    div{
+      background-color: @calendarColor06;
+      &:hover{
+        background-color: @calendarColor06;
       }
     }
   }
 }
 
-
+.xdsoft_timepicker{
+  width: 65px;
+  height: 100%;
+  padding: 18px 0;
+  .box-sizing();
+  position: absolute;
+  top: 0;
+  right: -68px;
+  button{
+    display: block;
+    width: 100%;
+    height: 18px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+  }
+  .xdsoft_prev{
+    top: 0;
+    background-position: 0 -48px;
+  }
+  .xdsoft_next{
+    bottom: 0;
+    background-position: 0 -63px;
+  }
+}
+.xdsoft_time_box{
+  width: 100%;
+  height: 100%;
+  .box-sizing();
+  overflow: hidden;
+  position: relative;
+  background-color: @calendarColor01;
+}
+.xdsoft_time{
+  font-size: 14px;
+  height: 25px;
+  text-align: center;
+  line-height: 27px;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover{
+    background-color: lighten(@calendarColor01,3%);
+  }
+  &.xdsoft_disabled{
+    color: @calendarColor05;
+    cursor: default;
+    &:hover{
+      background-color: transparent !important;
+    }
+  }
+  &.xdsoft_today{
+    background-color: @calendarColor04;
+    &:hover{
+      background-color: @calendarColor04;
+    }
+  }
+  &.xdsoft_current{
+    background-color: @calendarColor06;
+    &:hover{
+      background-color: @calendarColor06;
+    }
+  }
+}

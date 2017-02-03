@@ -49,18 +49,27 @@
   .search{
     float: left;
     height: 34px;
-    margin-top: 6px;
+    margin-top: 3px;
     position: relative;
     input{
       float: left;
       width: 128px;
       height: 20px;
       padding: 6px 20px 6px 15px;
-      font: 16px/20px @YaHei;
+      font: 14px/20px @YaHei;
       color: @whiteColor;
       border: 1px solid @searchLineColor;
       border-right: none;
       background-color: @searchBGColor;
+      &::-webkit-input-placeholder{
+        color: #8E87A5;
+      }
+      &::-moz-placeholder{
+        color: #8E87A5;
+      }
+      &:-ms-input-placeholder{
+        color: #8E87A5;
+      }
     }
     span{
       float: left;

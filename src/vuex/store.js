@@ -16,6 +16,7 @@ const state = {
         crowdCreate: false,
         crowdSelect: false
     },
+    wholePage:false,
     user: {},
     header: {
         account: false,
@@ -120,6 +121,13 @@ const state = {
 };
 
 const mutations = {
+    //全屏
+    PAGE_NO_SCROLL(state){
+        state.wholePage = true
+    },
+    PAGE_WIDTH_SCROLL(state){
+        state.wholePage = false
+    },
     // 显示遮罩层
     SHOW_LAYER(state){
         state.showLayer = true;

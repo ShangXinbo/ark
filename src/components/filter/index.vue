@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+<style lang="less">
     @import '../../../static/less/tag.less';
 </style>
 <template>
@@ -13,64 +13,65 @@
                         <i class="icon"></i>
                         <input type="text" />
                         <em class="icon" style="display: none;"></em>
-</label>
-</div>
-<div class="screening-left">
-    <div class="scroll-warp">
-        <ul class="scroll-content screening-one">
-            <li v-for="(item,index) in tagsL1" v-on:click="getChilds">
-                <div class="sort-first" v-bind:title="item.tagName"><i v-bind:class="item.spritClass" class="icon"></i><span>{{item.tagName}}</span></div>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="screening-right">
-    <div class="scroll-warp">
-        <ul class="scroll-content screening-item">
-        </ul>
-    </div>
-    <div class="all-button">
-        <p><i class="icon"></i><span>全选</span></p>
-        <input type="submit" value="加入购物篮" />
-    </div>
-</div>
-</div>
-<div class="cart-warp">
-    <h3>标签购物车</h3>
-    <div class="scroll-warp">
-        <div class="scroll-content">
-            <div class="cart" id="cart_1">
-                <h4>购物篮1</h4>
-                <ul class="active">
-                    <li data-init="1">
-                        <strong>请在左侧选择标签，加入购物篮</strong>
-                    </li>
-                </ul>
-                <div class="all-item"></div>
+                    </label>
+                </div>
+                <div class="screening-left">
+                    <div class="scroll-warp">
+                        <ul class="scroll-content screening-one">
+                            <li v-for="(item,index) in tagsL1" ref="li" v-on:click="getChilds(item.code)">
+                                <div class="sort-first" v-bind:title="item.tagName"><i v-bind:class="item.spritClass" class="icon"></i><span>{{item.tagName}}</span></div>
+                                <item :ref="item.code"></item>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="screening-right">
+                    <div class="scroll-warp">
+                        <ul class="scroll-content screening-item">
+                        </ul>
+                    </div>
+                    <div class="all-button">
+                        <p><i class="icon"></i><span>全选</span></p>
+                        <input type="submit" value="加入购物篮" />
+                    </div>
+                </div>
+            </div>
+            <div class="cart-warp">
+                <h3>标签购物车</h3>
+                <div class="scroll-warp">
+                    <div class="scroll-content">
+                        <div class="cart" id="cart_1">
+                            <h4>购物篮1</h4>
+                            <ul class="active">
+                                <li data-init="1">
+                                    <strong>请在左侧选择标签，加入购物篮</strong>
+                                </li>
+                            </ul>
+                            <div class="all-item"></div>
+                        </div>
+                    </div>
+                    <div class="add-cart">
+                        <a class="disabled" href="javascript:void(0);"><i class="icon"></i><span>添加新购物篮</span></a>
+                    </div>
+                </div>
+                <!--<div class="scrollbar-warp"></div>-->
+                <div class="billing">
+                    <a href="javascript:void(0);">删除</a>
+                    <a href="javascript:void(0);">清空</a>
+                    <input type="submit" value="下一步" />
+                </div>
             </div>
         </div>
-        <div class="add-cart">
-            <a class="disabled" href="javascript:void(0);"><i class="icon"></i><span>添加新购物篮</span></a>
+        <div class="base-main" style="display: none;">
+            <h2>基础属性筛选</h2>
+            <div class="base-tag-warp"></div>
+            <div class="edit-btn">
+                <a href="javascript:void(0)" class="prev">上一步</a>
+                <a href="javascript:void(0)" class="pass">跳过</a>
+                <a href="javascript:void(0)" class="next active">下一步</a>
+            </div>
         </div>
     </div>
-    <!--<div class="scrollbar-warp"></div>-->
-    <div class="billing">
-        <a href="javascript:void(0);">删除</a>
-        <a href="javascript:void(0);">清空</a>
-        <input type="submit" value="下一步" />
-    </div>
-</div>
-</div>
-<div class="base-main" style="display: none;">
-<h2>基础属性筛选</h2>
-<div class="base-tag-warp"></div>
-<div class="edit-btn">
-    <a href="javascript:void(0)" class="prev">上一步</a>
-    <a href="javascript:void(0)" class="pass">跳过</a>
-    <a href="javascript:void(0)" class="next active">下一步</a>
-</div>
-</div>
-</div>
 </template>
 <script>
     import {
@@ -78,9 +79,10 @@
     } from 'src/services/functions';
     import API from 'src/services/api';
     import item from './tree.vue';
+    import store from 'src/vuex/store'
 
     export default {
-        data: function () {
+        data: function() {
             return {
                 tagsL1: [],
                 offsetLeft: 0,
@@ -91,19 +93,25 @@
             item
         },
         methods: {
-            getChilds: function () {
-
+            getChilds: function(code) {
+                let li = this.$refs.li
+                for (let i = 0; i < li.length; i++) {
+                    li[i].className = ''
+                }
+                event.currentTarget.className = 'show'
+                this.$refs[code][0].$data.show = 1
             }
         },
-        mounted: function () {
+        mounted: function() {
             let _this = this;
+            store.commit('PAGE_NO_SCROLL')
             mAjax(this, {
                 url: API.filter_getTagStructure,
                 data: {
                     code: -1,
                     level: 0
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.code == 200) {
                         _this.tagsL1 = data.detail;
                     } else {
