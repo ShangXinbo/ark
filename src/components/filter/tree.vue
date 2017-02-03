@@ -3,10 +3,10 @@
 </style>
 <template>
     <ul v-show="show" class="screening-sub">
-        <li v-for="(item,index) in tagsLs" :class="{show:item.show,checked:item.checked}">
+        <li v-for="(item,index) in tagsLs" :class="{show:item.show,checked:item.checked,active:item.code == active}">
             <div class="checkbox-warp" v-bind:title="item.tagName">
-                <i class="icon" @click="toStage(item.code)"></i>
-                <span @click="getChilds(item.code)">{{item.tagName}}</span>
+                <i class="icon" @click.stop="toStage(item.code)"></i>
+                <span @click.stop="getChilds(item.code)">{{item.tagName}}</span>
             </div>
             <tree-list :level="item.tagLevel" :code="item.code" :show="item.show" :child="item.hasChildren"></tree-list>
         </li>
@@ -32,12 +32,21 @@
                 tagsLs: []
             };
         },
+        computed: {
+            active: function() {
+                return store.state.filterTagActive
+            }
+        },
         methods: {
             getChilds: function(code) {
                 for (let i in this.tagsLs) {
                     this.tagsLs[i].show = false
+                    this.tagsLs[i].active = false
                 }
                 this.tagsLs[code].show = true
+                this.tagsLs[code].active = true
+                store.commit('CHANGE_ACTIVE_TAG', code)
+                store.commit('CHANGE_FILTER_FOLDER', this.tagsLs)
             },
             toStage: function(code) {
                 if (this.tagsLs[code].checked) {
@@ -65,12 +74,14 @@
                             for (let i = 0; i < list.length; i++) {
                                 obj[list[i].code] = Object.assign({}, list[i], {
                                     show: false,
-                                    checked: false
+                                    checked: false,
+                                    active: false
                                 })
                             }
                             if (_this.child) {
                                 _this.tagsLs = obj
                             }
+                            console.log(_this.child)
                             store.commit('CHANGE_FILTER_FOLDER', _this.tagsLs)
                         } else {
                             //TODO: 未加载数据

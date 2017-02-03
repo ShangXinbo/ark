@@ -13,7 +13,7 @@
                 <div class="screening-left">
                     <div class="scroll-warp" style="overflow-y:auto">
                         <ul class="scroll-content screening-one">
-                            <li v-for="(item,key) in tagsL1" :class="{show:item.show}" v-on:click="getChilds(item.code)">
+                            <li v-for="(item,key) in tagsL1" :class="{show:item.show,active:item.code==active}" v-on:click.stop="getChilds(item.code)">
                                 <div class="sort-first" v-bind:title="item.tagName"><i v-bind:class="item.spritClass" class="icon"></i><span>{{item.tagName}}</span></div>
                                 <tree :level="item.tagLevel" :code="item.code" :show="item.show" :child="item.hasChildren"></tree>
                             </li>
@@ -77,12 +77,21 @@
             tree,
             tagFolder
         },
+        computed: {
+            active: function() {
+                return store.state.filterTagActive
+            }
+        },
         methods: {
             getChilds: function(code, child) {
                 for (let i in this.tagsL1) {
                     this.tagsL1[i].show = false
+                    this.tagsL1[i].active = false
                 }
                 this.tagsL1[code].show = true
+                this.tagsL1[code].active = true
+                store.commit('CHANGE_ACTIVE_TAG', code)
+                store.commit('CHANGE_FILTER_FOLDER', this.tagsL1)
             }
         },
         mounted: function() {
@@ -100,7 +109,8 @@
                         let list = data.detail
                         for (let i = 0; i < list.length; i++) {
                             obj[list[i].code] = Object.assign({}, list[i], {
-                                show: false
+                                show: false,
+                                active: false
                             })
                         }
                         _this.tagsL1 = obj

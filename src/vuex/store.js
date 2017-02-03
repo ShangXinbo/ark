@@ -48,6 +48,7 @@ const state = {
         },
         model: { "id": 11, "name": "出国英语培训" }
     },
+    filterTagActive: 0,
     charts: {
         "interest": {
             "百率天影积": "39%",
@@ -173,6 +174,9 @@ const mutations = {
     },
     CHANGE_FILTER_FOLDER: function(state, json) {
         state.tagFolder = json
+    },
+    CHANGE_ACTIVE_TAG: function(state, code) {
+        state.filterTagActive = code
     }
 };
 
