@@ -89,9 +89,16 @@
                             let obj = {}
                             let list = data.detail
                             for (let i = 0; i < list.length; i++) {
+
+                                let tag = false
+                                _.forIn(_this.stage, function(value, key) {
+                                    if (value.code == list[i].code) {
+                                        tag = true
+                                    }
+                                })
                                 obj[list[i].code] = Object.assign({}, list[i], {
                                     show: false,
-                                    checked: false,
+                                    checked: tag,
                                     active: false
                                 })
                             }
