@@ -4,8 +4,9 @@
  * AUTHOR shangxinbo
  */
 
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from 'vuex'
+import Vue from 'vue'
+import _ from 'lodash'
 
 Vue.use(Vuex);
 
@@ -49,6 +50,7 @@ const state = {
         model: { "id": 11, "name": "出国英语培训" }
     },
     filterTagActive: 0,
+    tagStage: [],
     charts: {
         "interest": {
             "百率天影积": "39%",
@@ -160,23 +162,37 @@ const mutations = {
         state.dialog.crowdSelect = true;
         state.showLayer = true;
     },
-    SHOW_NAV: function(state) {
+    SHOW_NAV(state) {
         state.header.nav = true;
         state.header.account = false;
     },
-    SHOW_ACCOUNT_TAB: function(state) {
+    SHOW_ACCOUNT_TAB(state) {
         state.header.nav = false;
         state.header.account = true;
     },
-    HIDE_NAV: function(state) {
+    HIDE_NAV(state) {
         state.header.nav = false;
         state.header.account = false;
     },
-    CHANGE_FILTER_FOLDER: function(state, json) {
+    CHANGE_FILTER_FOLDER(state, json) {
         state.tagFolder = json
     },
-    CHANGE_ACTIVE_TAG: function(state, code) {
+    CHANGE_ACTIVE_TAG(state, code) {
         state.filterTagActive = code
+    },
+    CHECKED_FOLDER_TAG(state, tag) {
+        let stage = state.tagStage
+        if (_.indexOf(stage, tag) < 0) {
+            state.tagStage.push(tag)
+        }
+    },
+    UNCHECKED_FOLDER_TAG(state, code) {
+        state.tagStage.forEach(function(element, index, array) {
+            if (element.code == code) {
+                _.pullAt(state.tagStage, index)
+            }
+        })
+        state.tagStage = _.compact(state.tagStage)
     }
 };
 

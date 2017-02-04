@@ -12,13 +12,14 @@
     </div>
     <div class="all-button">
         <p :class="{checked:checkedAll}"><i class="icon"></i><span>全选</span></p>
-        <input type="submit" value="加入购物篮" />
+        <input type="submit" @click="addToCart" value="加入购物篮" />
     </div>
 </div>
 </template>
 <script>
     import store from 'src/vuex/store'
     import _ from 'lodash'
+
     export default {
         computed: {
             list: function() {
@@ -38,10 +39,23 @@
                     return false
                 }
             },
-            methods: {
-                checked: function(code) {
-
+            stage: function() {
+                return store.state.tagStage
+            }
+        },
+        methods: {
+            checked: function(code) {
+                if (this.list[code].checked) {
+                    store.commit('UNCHECKED_FOLDER_TAG', code)
+                } else {
+                    store.commit('CHECKED_FOLDER_TAG', {
+                        'code': code,
+                        'tag': this.list[code].tagName
+                    })
                 }
+            },
+            addToCart: function() {
+                console.log(JSON.parse(JSON.stringify(store.state.tagStage)))
             }
         }
     }

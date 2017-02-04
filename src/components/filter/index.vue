@@ -13,8 +13,11 @@
                 <div class="screening-left">
                     <div class="scroll-warp" style="overflow-y:auto">
                         <ul class="scroll-content screening-one">
-                            <li v-for="(item,key) in tagsL1" :class="{show:item.show,active:item.code==active}" v-on:click.stop="getChilds(item.code)">
-                                <div class="sort-first" v-bind:title="item.tagName"><i v-bind:class="item.spritClass" class="icon"></i><span>{{item.tagName}}</span></div>
+                            <li v-for="(item,key) in tagsL1" :class="{show:item.show,active:item.code==active}" >
+                                <div class="sort-first" v-bind:title="item.tagName">
+                                    <i v-bind:class="item.spritClass" class="icon"></i>
+                                    <span v-on:click.stop="getChilds(item.code)">{{item.tagName}}</span>
+                                </div>
                                 <tree :level="item.tagLevel" :code="item.code" :show="item.show" :child="item.hasChildren"></tree>
                             </li>
                         </ul>
@@ -22,30 +25,7 @@
                 </div>
                 <tag-folder></tag-folder>   
             </div>
-            <div class="cart-warp">
-                <h3>标签购物车</h3>
-                <div class="scroll-warp">
-                    <div class="scroll-content">
-                        <div class="cart" id="cart_1">
-                            <h4>购物篮1</h4>
-                            <ul class="active">
-                                <li data-init="1">
-                                    <strong>请在左侧选择标签，加入购物篮</strong>
-                                </li>
-                            </ul>
-                            <div class="all-item"></div>
-                        </div>
-                    </div>
-                    <div class="add-cart">
-                        <a class="disabled" href="javascript:void(0);"><i class="icon"></i><span>添加新购物篮</span></a>
-                    </div>
-                </div>
-                <div class="billing">
-                    <a href="javascript:void(0);">删除</a>
-                    <a href="javascript:void(0);">清空</a>
-                    <input type="submit" value="下一步" />
-                </div>
-            </div>
+            <cart></cart>
         </div>
         <div class="base-main" style="display: none;">
             <h2>基础属性筛选</h2>
@@ -66,6 +46,7 @@
     import tree from './tree.vue'
     import store from 'src/vuex/store'
     import tagFolder from './folder.vue'
+    import cart from './cart.vue'
 
     export default {
         data: function() {
@@ -75,7 +56,8 @@
         },
         components: {
             tree,
-            tagFolder
+            tagFolder,
+            cart
         },
         computed: {
             active: function() {
@@ -91,7 +73,6 @@
                 this.tagsL1[code].show = true
                 this.tagsL1[code].active = true
                 store.commit('CHANGE_ACTIVE_TAG', code)
-                store.commit('CHANGE_FILTER_FOLDER', this.tagsL1)
             }
         },
         mounted: function() {
