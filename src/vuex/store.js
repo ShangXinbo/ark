@@ -51,7 +51,10 @@ const state = {
     },
     filterTagActive: 0,
     tagStage: [],
-    cart: [],
+    cart: [
+        {}
+    ],
+    current_basket: 0,
     charts: {
         "interest": {
             "百率天影积": "39%",
@@ -196,7 +199,7 @@ const mutations = {
         state.tagStage = _.compact(state.tagStage)
     },
     CHANGE_CART(state, tags) {
-        state.cart = tags
+        state.cart = _.compact(tags)
     }
 };
 
