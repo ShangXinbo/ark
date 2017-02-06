@@ -199,7 +199,11 @@ const mutations = {
         state.tagStage = _.compact(state.tagStage)
     },
     CHANGE_CART(state, tags) {
-        state.cart = _.compact(tags)
+        state.cart = _.cloneDeep(tags)
+    },
+    CHANGE_BASKET(state, index) {
+        let location = index < state.cart.length ? index : state.cart.length - 1
+        state.current_basket = location
     }
 };
 

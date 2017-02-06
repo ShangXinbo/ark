@@ -55,14 +55,14 @@
                 }
             },
             addToCart: function() {
-                let cart = store.state.cart
+                let cart = _.compact(store.state.cart)
                 let current_basket = store.state.current_basket
-                let stage = store.state.tagStage
+                let stage = _.compact(store.state.tagStage)
                 for (let i = 0; i < stage.length; i++) {
                     stage[i].checked = true
                 }
                 cart[current_basket] = {
-                    list: _.compact(stage),
+                    list: stage,
                     allChecked: true
                 }
                 store.commit('CHANGE_CART', cart)

@@ -42,10 +42,13 @@
 <script>
     import store from 'src/vuex/store'
     import _ from 'lodash'
+
+    function log(msg) {
+        console.log(JSON.parse(JSON.stringify(msg)))
+    }
     export default {
         computed: {
             list: function() {
-                console.log(store.state.cart)
                 return store.state.cart
             },
             basket_now: function() {
@@ -79,6 +82,7 @@
                     let cart = _.compact(store.state.cart)
                     cart.push({})
                     store.commit('CHANGE_CART', cart)
+                    store.commit('CHANGE_BASKET', cart.length - 1)
                 }
             }
         }
