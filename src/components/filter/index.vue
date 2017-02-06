@@ -3,7 +3,7 @@
 </style>
 <template>
     <div class="warp">
-        <div class="main">
+        <div class="main" v-show="show">
             <div class="screening">
                 <div class="breadcrumb">
                     <dl>
@@ -27,15 +27,7 @@
             </div>
             <cart></cart>
         </div>
-        <div class="base-main" style="display: none;">
-            <h2>基础属性筛选</h2>
-            <div class="base-tag-warp"></div>
-            <div class="edit-btn">
-                <a href="javascript:void(0)" class="prev">上一步</a>
-                <a href="javascript:void(0)" class="pass">跳过</a>
-                <a href="javascript:void(0)" class="next active">下一步</a>
-            </div>
-        </div>
+        <base-tag></base-tag>
     </div>
 </template>
 <script>
@@ -47,6 +39,7 @@
     import store from 'src/vuex/store'
     import tagFolder from './folder.vue'
     import cart from './cart.vue'
+    import baseTag from './basetag.vue'
 
     export default {
         data: function() {
@@ -57,11 +50,15 @@
         components: {
             tree,
             tagFolder,
-            cart
+            cart,
+            baseTag
         },
         computed: {
             active: function() {
                 return store.state.filterTagActive
+            },
+            show: function() {
+                return !store.state.baseTag_show
             }
         },
         methods: {

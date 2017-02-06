@@ -55,6 +55,7 @@ const state = {
         {}
     ],
     current_basket: 0,
+    baseTag_show: false,
     charts: {
         "interest": {
             "百率天影积": "39%",
@@ -204,6 +205,9 @@ const mutations = {
     CHANGE_BASKET(state, index) {
         let location = index < state.cart.length ? index : state.cart.length - 1
         state.current_basket = location
+    },
+    SHOW_BASETAGS(state, status) {
+        state.baseTag_show = Boolean(status)
     }
 };
 

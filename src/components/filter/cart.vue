@@ -35,7 +35,7 @@
         <div class="billing">
             <a href="javascript:void(0);">删除</a>
             <a href="javascript:void(0);">清空</a>
-            <input type="submit" value="下一步" />
+            <input type="submit" @click="next()" value="下一步" />
         </div>
     </div>
 </template>
@@ -43,9 +43,6 @@
     import store from 'src/vuex/store'
     import _ from 'lodash'
 
-    function log(msg) {
-        console.log(JSON.parse(JSON.stringify(msg)))
-    }
     export default {
         computed: {
             list: function() {
@@ -84,6 +81,9 @@
                     store.commit('CHANGE_CART', cart)
                     store.commit('CHANGE_BASKET', cart.length - 1)
                 }
+            },
+            next: function() {
+                store.commit('SHOW_BASETAGS', true)
             }
         }
     }
