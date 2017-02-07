@@ -12,14 +12,13 @@
     </div>
 </template>
 <script>
-
-import echarts from 'echarts';
-import store from 'src/vuex/store';
-export default {
-    data:function(){
-        return {
-            ages : store.state.charts.age
-        };
-    }
-};
+    //import echarts from 'echarts';
+    import store from 'src/vuex/store';
+    export default {
+        data: function() {
+            return {
+                ages: store.state.charts.age
+            };
+        }
+    };
 </script>

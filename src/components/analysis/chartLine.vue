@@ -3,7 +3,7 @@
 </style>
 <template>
 <div class="line-chart">
-    <div id="chart-line" class="chart-warp"></div>
+    <chart class="chart-warp" :options="options"></chart>
     <div class="line-legend">
         <div class="select-warp">
             <p>客户量</p>
@@ -26,44 +26,50 @@
 </div>
 </template>
 <script>
-import store from 'src/vuex/store';
-import echarts from 'echarts';
-import {mAjax} from 'src/services/functions';
-import API from 'src/services/api';
-import $ from 'jquery';
+    import store from 'src/vuex/store';
+    import ECharts from 'vue-echarts/components/ECharts.vue'
+    import {
+        mAjax
+    } from 'src/services/functions';
+    import API from 'src/services/api';
+    import _ from 'lodash'
+    import Vue from 'vue'
+    Vue.component('chart', ECharts)
 
-export default {
-    data: function () {
-        return {
-            legend:[]
-        };
-    },
-    mounted: function () {
-        var _this = this;
-        mAjax(this, {
-            url: API.filter_searchline,
-            data: {
-                uploadId: store.state.filters.crowd.id,
-                tags: JSON.stringify({
-                    tagcode: store.state.filters.filter.tagcode,
-                    fixedpros: store.state.filters.filter.fixedpros,
-                    file: store.state.filters.crowd,
-                    cuModel: store.state.filters.model
-                })
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    if (data.detail.group_res && data.detail.group_res.length > 0) {
-                        data = data.detail.group_res;
-                        data = data.slice(0, 5);
-                        var xArr = [], itemArr = [], legend = [];
-                        var lineColor = ['#E94D6A', '#09A88D', '#398AD6', '#B84BC8', '#CC855A'];
-                        var lineSybol = ['ring-red.png', 'ring-green.png', 'ring-blue.png', 'ring-violet.png', 'ring-brown.png'];
-                        for (var i = 0; i < data.length; i++) {
+    export default {
+        data: function() {
+            return {
+                options: {},
+                legend: []
+            };
+        },
+        mounted: function() {
+            let _this = this;
+            mAjax(this, {
+                url: API.filter_searchline,
+                data: {
+                    uploadId: store.state.filters.crowd.id,
+                    tags: JSON.stringify({
+                        tagcode: store.state.filters.filter.tagcode,
+                        fixedpros: store.state.filters.filter.fixedpros,
+                        file: store.state.filters.crowd,
+                        cuModel: store.state.filters.model
+                    })
+                },
+                success: function(data) {
+                    if (data.code == 200 && !_.isEmpty(data.detail.group_res)) {
+                        data = data.detail.group_res.slice(0, 5)
+                        let lineColor = ['#E94D6A', '#09A88D', '#398AD6', '#B84BC8', '#CC855A']
+                        let lineSybol = ['ring-red.png', 'ring-green.png', 'ring-blue.png', 'ring-violet.png', 'ring-brown.png']
+                        var xArr = [],
+                            itemArr = [],
+                            legend = [];
+
+                        for (let i = 0; i < data.length; i++) {
                             var ob = {
                                 type: 'line',
                                 symbolSize: 9,
-                                symbol: 'static/img/' + lineSybol[i],
+                                symbol: '/static/img/' + lineSybol[i],
                                 smooth: true,
                                 lineStyle: {
                                     normal: {
@@ -75,27 +81,26 @@ export default {
                                 data: []
                             };
                             xArr = [];
-                            for (var j = 0; j < data[0]['vals'].length; j++) {
-                                xArr.push(data[0]['vals'][j]['date']);
+                            for (var j = 0; j < data[i]['vals'].length; j++) {
+                                xArr.push(data[i]['vals'][j]['date']);
                                 ob.data.push(data[i]['vals'][j]['val']);
                             }
                             itemArr.push(ob);
-                            _this.$data.legend.push({
+                            _this.legend.push({
                                 id: i,
                                 color: lineColor[i],
                                 name: data[i]['label'].replace(/特别行政区|回族自治区|壮族自治区|自治区|省|市/, '')
                             });
                         }
 
-                        var myChart = echarts.init(document.getElementById('chart-line'));
                         var option = {
                             xAxis: {
-                                name:"日期",
+                                name: "日期",
                                 type: 'category',
                                 boundaryGap: false,
                                 data: xArr,
                                 splitLine: {
-                                    show:true,
+                                    show: true,
                                     lineStyle: {
                                         color: '#60597C'
                                     }
@@ -114,71 +119,63 @@ export default {
                                     }
                                 }
                             },
-                            yAxis: [
-                                {
-                                    name: "人数",
-                                    nameTextStyle: {
-                                        color: '#8E87A5',
-                                        fontSize: '14'
-                                    },
-                                    type: 'value',
-                                    splitLine: {
-                                        lineStyle: {
-                                            color: '#60597C'
-                                        }
-                                    },
-                                    splitArea: {
-                                        show: true,
-                                        areaStyle: {
-                                            color: ['rgba(250,250,250,0)', '#3F3D66']
-                                        }
-                                    },
-                                    axisLine: {
-                                        lineStyle: {
-                                            color: '#60597C'
-                                        }
-                                    },
-                                    axisTick: {
-                                        show: false
-                                    },
-                                    axisLabel: {
-                                        textStyle: {
-                                            color: '#fff'
-                                        }
+                            yAxis: [{
+                                name: "人数",
+                                nameTextStyle: {
+                                    color: '#8E87A5',
+                                    fontSize: '14'
+                                },
+                                type: 'value',
+                                splitLine: {
+                                    lineStyle: {
+                                        color: '#60597C'
+                                    }
+                                },
+                                splitArea: {
+                                    show: true,
+                                    areaStyle: {
+                                        color: ['rgba(250,250,250,0)', '#3F3D66']
+                                    }
+                                },
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#60597C'
+                                    }
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                axisLabel: {
+                                    textStyle: {
+                                        color: '#fff'
                                     }
                                 }
-                            ],
+                            }],
                             grid: {
                                 left: '3%',
                                 right: '5%',
                                 containLabel: true
                             },
-                            tooltip : {
+                            tooltip: {
                                 show: true,
-                                formatter: function(obj){
-                                    console.log(obj);
+                                formatter: function(obj) {
                                     return obj.seriesName + '<br />' + obj.name + ' : ' + formatBigNumber(obj.value);
                                 }
                             },
                             series: itemArr
                         };
-                        myChart.setOption(option);
-                    } else {
-                        $('.line-chart').html('<div class="data-null">暂无数据</div>');
+                        _this.options = option
                     }
+                },
+                error: function(err) {
+                    console.log(err);
                 }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+            });
+        }
     }
-};
 
-
-function formatBigNumber(num) {
-    var str = num + '';
-    return str.split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('');
-}
-
+    function formatBigNumber(num) {
+        var str = num + '';
+        return str.split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('');
+    }
 </script>
