@@ -39,7 +39,11 @@
     export default {
         data: function() {
             return {
-                options: {},
+                options: {
+                    xAxis: [],
+                    yAxis: [],
+                    series: []
+                },
                 legend: []
             };
         },
