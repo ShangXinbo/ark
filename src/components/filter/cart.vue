@@ -3,7 +3,7 @@
         <h3>标签购物车</h3>
         <div class="scroll-warp" style="overflow-y: auto">
             <div class="scroll-content">
-                <div v-for="(basket,key) in list" class="cart" :key="key">
+                <div v-for="(basket,key) in list" class="cart" :key="key"  @click="changeBasketNow(key)">
                     <h4>购物篮{{key+1}}</h4>
                     <ul v-if="basket.list" :class="{active:basket_now==key}">
                         <li v-for="(tag,index) in basket.list" :class="{checked:tag.checked}">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="add-cart">
-                <a :class="{disabled:!list[list.length-1].list}" @click="addBasket(list[list.length-1].list)" href="javascript:void(0);">
+                <a :class="{disabled:!list[list.length-1].list}" @click="addBasket(list[list.length-1].list); changeBasketNow(list.length-1)" href="javascript:void(0);">
                     <i class="icon"></i>
                     <span>添加新购物篮</span>
                 </a>
@@ -80,6 +80,9 @@
                     cart.push({})
                     store.commit('CHANGE_CART', cart)
                 }
+            },
+            changeBasketNow: function(key){
+            	store.commit('CHANGE_CURRENT_BASKET',key);
             }
         }
     }

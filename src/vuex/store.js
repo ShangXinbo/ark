@@ -200,6 +200,9 @@ const mutations = {
     },
     CHANGE_CART(state, tags) {
         state.cart = _.compact(tags)
+    },
+    CHANGE_CURRENT_BASKET(state,basket_now){
+    	state.current_basket = basket_now;
     }
 };
 
