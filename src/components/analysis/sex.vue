@@ -9,6 +9,7 @@
     import ECharts from 'vue-echarts/components/ECharts.vue'
     import Vue from 'vue'
     import _ from 'lodash'
+    import 'echarts'
 
     Vue.component('chart', ECharts)
 
@@ -71,9 +72,6 @@
                     }]
                 }
             }
-        },
-        mounted: function() {
-
         }
     }
 </script>
