@@ -28,16 +28,20 @@
 <script>
     import store from 'src/vuex/store'
     import ECharts from 'vue-echarts/components/ECharts.vue'
+    import _ from 'lodash'
+    import Vue from 'vue'
+    import API from 'src/services/api'
     import {
         mAjax
     } from 'src/services/functions'
-    import API from 'src/services/api'
-    import _ from 'lodash'
-    import Vue from 'vue'
+
     Vue.component('chart', ECharts)
 
     export default {
         data: function() {
+            let lineStyle = {
+                color: '#60597C'
+            }
             return {
                 options: {
                     xAxis: {
@@ -47,14 +51,10 @@
                         data: [],
                         splitLine: {
                             show: true,
-                            lineStyle: {
-                                color: '#60597C'
-                            }
+                            lineStyle: lineStyle
                         },
                         axisLine: {
-                            lineStyle: {
-                                color: '#60597C'
-                            }
+                            lineStyle: lineStyle
                         },
                         axisTick: {
                             show: false
@@ -73,9 +73,7 @@
                         },
                         type: 'value',
                         splitLine: {
-                            lineStyle: {
-                                color: '#60597C'
-                            }
+                            lineStyle: lineStyle
                         },
                         splitArea: {
                             show: true,
@@ -84,9 +82,7 @@
                             }
                         },
                         axisLine: {
-                            lineStyle: {
-                                color: '#60597C'
-                            }
+                            lineStyle: lineStyle
                         },
                         axisTick: {
                             show: false
@@ -111,10 +107,10 @@
                     series: []
                 },
                 legend: []
-            };
+            }
         },
         mounted: function() {
-            let _this = this;
+            let _this = this
             mAjax(this, {
                 url: API.filter_searchline,
                 data: {
@@ -133,7 +129,7 @@
                         let lineSybol = ['ring-red.png', 'ring-green.png', 'ring-blue.png', 'ring-violet.png', 'ring-brown.png']
                         var xArr = [],
                             itemArr = [],
-                            legend = [];
+                            legend = []
 
                         for (let i = 0; i < data.length; i++) {
                             var ob = {
@@ -152,8 +148,8 @@
                             };
                             xArr = [];
                             for (var j = 0; j < data[i]['vals'].length; j++) {
-                                xArr.push(data[i]['vals'][j]['date']);
-                                ob.data.push(data[i]['vals'][j]['val']);
+                                xArr.push(data[i]['vals'][j]['date'])
+                                ob.data.push(data[i]['vals'][j]['val'])
                             }
                             itemArr.push(ob);
                             _this.legend.push({
@@ -167,14 +163,14 @@
                     }
                 },
                 error: function(err) {
-                    console.log(err);
+                    console.log(err)
                 }
             });
         }
     }
 
     function formatBigNumber(num) {
-        var str = num + '';
-        return str.split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('');
+        var str = num + ''
+        return str.split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('')
     }
 </script>

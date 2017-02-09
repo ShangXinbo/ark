@@ -3,7 +3,7 @@
         <h2>年龄分布</h2>
         <div class="age-distribution">
             <ul class="chart-histogram">
-                <li v-for="(item,key) in ages">
+                <li v-for="(item,key) in age">
                     <h3>{{key}}</h3>
                     <div class="histogram num-outside"><p v-bind:style="{'width':item}"></p><span>{{item}}</span></div>
                 </li>
@@ -12,13 +12,9 @@
     </div>
 </template>
 <script>
-    //import echarts from 'echarts';
-    import store from 'src/vuex/store';
     export default {
-        data: function() {
-            return {
-                ages: store.state.charts.age
-            };
-        }
-    };
+        props: [
+            'age'
+        ]
+    }
 </script>
