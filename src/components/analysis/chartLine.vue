@@ -26,12 +26,12 @@
 </div>
 </template>
 <script>
-    import store from 'src/vuex/store';
+    import store from 'src/vuex/store'
     import ECharts from 'vue-echarts/components/ECharts.vue'
     import {
         mAjax
-    } from 'src/services/functions';
-    import API from 'src/services/api';
+    } from 'src/services/functions'
+    import API from 'src/services/api'
     import _ from 'lodash'
     import Vue from 'vue'
     Vue.component('chart', ECharts)
@@ -40,8 +40,74 @@
         data: function() {
             return {
                 options: {
-                    xAxis: [],
-                    yAxis: [],
+                    xAxis: {
+                        name: "日期",
+                        type: 'category',
+                        boundaryGap: false,
+                        data: [],
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#60597C'
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#60597C'
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    yAxis: [{
+                        name: "人数",
+                        nameTextStyle: {
+                            color: '#8E87A5',
+                            fontSize: '14'
+                        },
+                        type: 'value',
+                        splitLine: {
+                            lineStyle: {
+                                color: '#60597C'
+                            }
+                        },
+                        splitArea: {
+                            show: true,
+                            areaStyle: {
+                                color: ['rgba(250,250,250,0)', '#3F3D66']
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#60597C'
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        }
+                    }],
+                    grid: {
+                        left: '3%',
+                        right: '5%',
+                        containLabel: true
+                    },
+                    tooltip: {
+                        show: true,
+                        formatter: function(obj) {
+                            return obj.seriesName + '<br />' + obj.name + ' : ' + formatBigNumber(obj.value);
+                        }
+                    },
                     series: []
                 },
                 legend: []
@@ -96,79 +162,8 @@
                                 name: data[i]['label'].replace(/特别行政区|回族自治区|壮族自治区|自治区|省|市/, '')
                             });
                         }
-
-                        var option = {
-                            xAxis: {
-                                name: "日期",
-                                type: 'category',
-                                boundaryGap: false,
-                                data: xArr,
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: '#60597C'
-                                    }
-                                },
-                                axisLine: {
-                                    lineStyle: {
-                                        color: '#60597C'
-                                    }
-                                },
-                                axisTick: {
-                                    show: false
-                                },
-                                axisLabel: {
-                                    textStyle: {
-                                        color: '#fff'
-                                    }
-                                }
-                            },
-                            yAxis: [{
-                                name: "人数",
-                                nameTextStyle: {
-                                    color: '#8E87A5',
-                                    fontSize: '14'
-                                },
-                                type: 'value',
-                                splitLine: {
-                                    lineStyle: {
-                                        color: '#60597C'
-                                    }
-                                },
-                                splitArea: {
-                                    show: true,
-                                    areaStyle: {
-                                        color: ['rgba(250,250,250,0)', '#3F3D66']
-                                    }
-                                },
-                                axisLine: {
-                                    lineStyle: {
-                                        color: '#60597C'
-                                    }
-                                },
-                                axisTick: {
-                                    show: false
-                                },
-                                axisLabel: {
-                                    textStyle: {
-                                        color: '#fff'
-                                    }
-                                }
-                            }],
-                            grid: {
-                                left: '3%',
-                                right: '5%',
-                                containLabel: true
-                            },
-                            tooltip: {
-                                show: true,
-                                formatter: function(obj) {
-                                    return obj.seriesName + '<br />' + obj.name + ' : ' + formatBigNumber(obj.value);
-                                }
-                            },
-                            series: itemArr
-                        };
-                        _this.options = option
+                        _this.options.xAxis.data = xArr
+                        _this.options.series = itemArr
                     }
                 },
                 error: function(err) {
