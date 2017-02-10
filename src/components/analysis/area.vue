@@ -1,7 +1,7 @@
 <template>
     <div class="chart-warp">
         <h2>地域分布</h2>
-        <chart ref='map' :options="options"></chart>
+        <chart :style="{width:'100%',height:'100%'}" ref='map' :options="options"></chart>
     </div>
 </template>
 
@@ -11,6 +11,7 @@
     import Vue from 'vue'
     import _ from 'lodash'
     import chinaMap from './china.json'
+    import 'echarts'
     import {
         mAjax,
         accAdd,
@@ -20,7 +21,7 @@
     } from 'src/services/functions'
     import area_default_data from './default_area'
 
-    //ECharts.registerMap('china', chinaMap)
+    ECharts.registerMap('china', chinaMap)
     Vue.component('chart', ECharts)
 
     function arrMerge(arr1, arr2) {
@@ -74,6 +75,11 @@
                 if (diff <= 0) {
                     diff = 1;
                 }
+
+                let _this = this
+                this.$nextTick(function() {
+                    _this.$refs.map.resize(_this.$el.offsetWidth, _this.$el.offsetHeight)
+                })
 
                 return {
                     visualMap: {
