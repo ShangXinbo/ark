@@ -5,7 +5,7 @@
     <section>
         <div class="center-button"></div>
         <div id="com-table">
-            <table class="com-table">
+            <table class="com-table" v-if="list.length>0">
                 <tr>
                     <th class="w20p tl">名称</th>
                     <th class="w30p tl">描述</th>
@@ -25,6 +25,7 @@
                     </td>
                 </tr>
             </table>
+            <div v-else class="com-table-null">暂无数据</div>
         </div>
         <pages :total="totalPage" :current="currentPage" @jump='refresh' :url="api"></pages>
     </section>
@@ -36,7 +37,7 @@
     import API from 'src/services/api';
     import pages from '../message/pages.vue';
     export default {
-        data: function () {
+        data: function() {
             return {
                 list: [],
                 currentPage: '1',
@@ -48,7 +49,7 @@
             pages
         },
         methods: {
-            refresh: function () {
+            refresh: function() {
                 let _this = this
                 let page = this.$route.params.page
                 mAjax(this, {
@@ -57,7 +58,7 @@
                         page: page ? page : 1,
                         rows: 10
                     },
-                    success: function (data) {
+                    success: function(data) {
                         if (data.code == 200) {
                             _this.list = data.detail.rows;
                             _this.currentPage = parseInt(page);
@@ -68,13 +69,13 @@
             }
         },
         filters: {
-            subDate: function (value) {
+            subDate: function(value) {
                 if (!value) return '';
                 value = value.toString();
                 return value.substr(0, 10);
             }
         },
-        mounted: function () {
+        mounted: function() {
             this.refresh();
         }
     };

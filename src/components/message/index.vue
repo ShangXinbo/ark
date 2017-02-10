@@ -8,7 +8,7 @@
                 <h3>我的消息</h3>
             </div>
             <div id="com-table" class="news-table">
-                <table class="com-table">
+                <table class="com-table" v-if="list.length>0">
                     <tr>
                         <th class="ti10 tl">消息内容</th>
                         <th class="w20p">时间</th>
@@ -20,6 +20,7 @@
                         <td><a href="javascript:void(0);">删除</a></td>
                     </tr>
                 </table>
+                <div v-else class="com-table-null">暂无数据</div>
                 <pages :total="totalPage" :current="currentPage" @jump='refresh' :url="api"></pages>
             </div>
         </div>
@@ -32,7 +33,7 @@
     import API from 'src/services/api';
     import pages from './pages.vue';
     export default {
-        data: function () {
+        data: function() {
             return {
                 list: [],
                 currentPage: '1',
@@ -44,7 +45,7 @@
             pages
         },
         methods: {
-            refresh: function () {
+            refresh: function() {
                 let _this = this
                 let page = this.$route.params.page
                 mAjax(this, {
@@ -53,7 +54,7 @@
                         page: page ? page : 1,
                         rows: 10
                     },
-                    success: function (data) {
+                    success: function(data) {
                         if (data.code == 200) {
                             _this.list = data.detail.messages.data;
                             _this.currentPage = parseInt(data.detail.current_page);
@@ -64,13 +65,13 @@
             }
         },
         filters: {
-            subDate: function (value) {
+            subDate: function(value) {
                 if (!value) return '';
                 value = value.toString();
                 return value.substr(0, 10);
             }
         },
-        mounted: function () {
+        mounted: function() {
             this.refresh();
         }
     };

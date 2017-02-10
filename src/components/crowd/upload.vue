@@ -5,7 +5,7 @@
     <section>
         <div class="center-button"></div>
         <div id="com-table">
-            <table class="com-table">
+            <table class="com-table" v-if="list.length>0">
                 <tr>
                     <th class="w20p tl">名称</th>
                     <th class="tl">描述</th>
@@ -15,14 +15,15 @@
                     <th class="w15p">操作</th>
                 </tr>
                 <tr v-for="item in list" :id="item.id">
-                    <td class="tl" v-if="item.createTime">{{uploadName}}</td><td class="tl" v-else>{{name}}</td>
-                    <td class="tl" v-if="item.createTime">{{uploadDesc}}</td><td class="tl" v-else>{{description}}</td>
-                    <td class="tl" v-if="item.createTime">{{lines}}</td><td class="tl" v-else>{{num}}</td>
-                    <td class="tl" v-if="item.createTime">{{createTime}}</td><td class="tl" v-else>{{updated_at}}</td>
-                    <td>{{tagStr}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.uploadName}}</td><td class="tl" v-else>{{item.name}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.uploadDesc}}</td><td class="tl" v-else>{{item.description}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.lines}}</td><td class="tl" v-else>{{num}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.createTime}}</td><td class="tl" v-else>{{item.updated_at}}</td>
+                    <td>{{item.tagStr}}</td>
                     <td class="edit"></td>
                 </tr>
             </table>
+            <div v-else class="com-table-null">暂无数据</div>
         </div>
         <pages :total="totalPage" :current="currentPage" @jump='refresh' :url="api"></pages>
     </section>
@@ -34,7 +35,7 @@
     import API from 'src/services/api';
     import pages from '../message/pages.vue';
     export default {
-        data: function () {
+        data: function() {
             return {
                 list: [],
                 currentPage: '1',
@@ -46,16 +47,17 @@
             pages
         },
         methods: {
-            refresh: function () {
+            refresh: function() {
                 let _this = this
                 let page = this.$route.params.page
+                page = page ? page : 1
                 mAjax(this, {
                     url: _this.api,
                     data: {
-                        page: page ? page : 1,
+                        page: page,
                         rows: 10
                     },
-                    success: function (data) {
+                    success: function(data) {
                         if (data.code == 200) {
                             _this.list = data.detail.rows;
                             _this.currentPage = parseInt(page);
@@ -66,13 +68,13 @@
             }
         },
         filters: {
-            subDate: function (value) {
+            subDate: function(value) {
                 if (!value) return '';
                 value = value.toString();
                 return value.substr(0, 10);
             }
         },
-        mounted: function () {
+        mounted: function() {
             this.refresh();
         }
     };

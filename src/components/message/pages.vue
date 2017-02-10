@@ -20,11 +20,8 @@
     import router from 'src/services/routes';
     export default {
         props: ['total', 'current', 'url'],
-        data: function () {
-            return {}
-        },
         methods: {
-            goPage: function (page) {
+            goPage: function(page) {
                 router.push(`/message/${page}`)
                 this.$emit('jump')
             }
