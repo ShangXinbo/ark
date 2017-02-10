@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <h1>
-            <router-link to="index" title="集奥方舟">
+            <router-link to="/index" title="集奥方舟">
                 <img src="/static/img/logo.png" width="148" height="43" alt="集奥方舟" title="集奥方舟"/>
             </router-link>
         </h1>
@@ -43,30 +43,30 @@
     </div>
 </template>
 <script>
-import Vue from 'vue';
-import vaccount from 'components/header/account.vue';
-import store from 'src/vuex/store';
-export default {
-    computed: {
-        headerNav: function () {
-            return store.state.header.nav;
+    import Vue from 'vue';
+    import vaccount from 'components/header/account.vue';
+    import store from 'src/vuex/store';
+    export default {
+        computed: {
+            headerNav: function() {
+                return store.state.header.nav;
+            }
+        },
+        components: {
+            vaccount: vaccount
+        },
+        methods: {
+            nav: function(str) {
+                store.commit('SHOW_NAV');
+            }
+        },
+        mounted: function() {
+            var _this = this;
+            Vue.nextTick(function() {
+                document.onclick = function() {
+                    store.commit('HIDE_NAV');
+                };
+            });
         }
-    },
-    components: {
-        vaccount: vaccount
-    },
-    methods: {
-        nav: function (str) {
-            store.commit('SHOW_NAV');
-        }
-    },
-    mounted: function () {
-        var _this = this;
-        Vue.nextTick(function () {
-            document.onclick = function () {
-                store.commit('HIDE_NAV');
-            };
-        });
-    }
-};
+    };
 </script>
