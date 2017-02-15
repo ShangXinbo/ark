@@ -46,13 +46,15 @@
                     </router-link>
                 </li>
                 <li>
-                    <a href="/project/list.html">
+                    <router-link to="/project">
                         <i class="index-icon la"></i>
                         <h2>标签应用</h2>
                         <h3>Label Application</h3>
-                        <p>营销应用筛选出来的目标客户群体,
-                            <br/>并对营销反馈阶段进行管理</p>
-                    </a>
+                        <p>
+                            营销应用筛选出来的目标客户群体,
+                            <br/>并对营销反馈阶段进行管理
+                        </p>
+                    </router-link>
                 </li>
                 <li>
                     <router-link to="/crowd/filter">
