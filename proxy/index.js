@@ -1,22 +1,17 @@
 
-'use strict';
-
 const express = require('express');
 const path = require('path');
 const glob = require('glob');
-const logger = require('morgan');
 const request = require('request');
 const bodyParser = require('body-parser');
-
+const proxy_port = require('../config/prod.env').PROXY_PORT
 const app = express();
-
-app.use(logger('dev'));
 
 app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: false}))
     .use(function(req,res,next){
-        var file = glob.sync('.'+ req.path+'.js')[0];
+        var file = glob.sync(path.join(__dirname,'..'+ req.path+'.js'))[0];
         if(file){
             var data = require(file);
             res.json({
@@ -51,4 +46,4 @@ app
     }
 });*/
 
-app.listen(3009);
+app.listen(proxy_port);

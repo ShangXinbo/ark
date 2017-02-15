@@ -21,53 +21,54 @@
 </div>
 </template>
 <script>
-import API from 'src/services/api';
-import {mAjax,setCookie} from 'src/services/functions';
-import store from 'src/vuex/store';
-import router from 'src/services/routes';
-export default {
-    data: function () {
-        return {
-            username: '',
-            password: '',
-            error: ''
-        };
-    },
-    methods: {
-        login: function () {
-            if (!this.username) {
-                this.error = "请输入您的用户名!";
-                return false;
-            }
-            if (!this.password) {
-                this.error = "请输入您的密码!";
-                return false;
-            }
-            var vm = this;
-            mAjax(vm, {
-                url: API.login,
-                data: {
-                    username: vm.username,
-                    password: vm.password
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-                        mAjax(vm, {
-                            url: API.get_user_info,
-                            success: function (data) {
-                                setCookie('user',JSON.stringify(data.detail.user));
-                                router.push('index');
-                            }
-                        });
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
+    import API from 'src/services/api';
+    import {
+        mAjax,
+        setCookie
+    } from 'src/services/functions';
+    import store from 'src/vuex/store';
+    import router from 'src/router';
+    export default {
+        data: function() {
+            return {
+                username: '',
+                password: '',
+                error: ''
+            };
+        },
+        methods: {
+            login: function() {
+                if (!this.username) {
+                    this.error = "请输入您的用户名!";
+                    return false;
                 }
-            });
+                if (!this.password) {
+                    this.error = "请输入您的密码!";
+                    return false;
+                }
+                var vm = this;
+                mAjax(vm, {
+                    url: API.login,
+                    data: {
+                        username: vm.username,
+                        password: vm.password
+                    },
+                    success: function(data) {
+                        if (data.code == 200) {
+                            mAjax(vm, {
+                                url: API.get_user_info,
+                                success: function(data) {
+                                    setCookie('user', JSON.stringify(data.detail.user));
+                                    router.push('index');
+                                }
+                            });
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }
         }
-    }
-};
+    };
 </script>
-
-

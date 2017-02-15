@@ -16,31 +16,34 @@
     </li>
 </template>
 <script>
-import store from 'src/vuex/store.js';
-import {getCookie,delCookie} from 'src/services/functions';
-import router from 'src/services/routes';
-let user = JSON.parse(getCookie('user'));
+    import store from 'src/vuex/store.js';
+    import {
+        getCookie,
+        delCookie
+    } from 'src/services/functions';
+    import router from 'src/router';
+    let user = JSON.parse(getCookie('user'));
 
-export default {
-    data: function () {
-        return {
-            type: user ? user.type : '',
-            username: user.username ? user.username : ''
-        };
-    },
-    computed: {
-        down: function () {
-            return store.state.header.account;
-        }
-    },
-    methods: {
-        show: function () {
-            store.commit('SHOW_ACCOUNT_TAB');
+    export default {
+        data: function() {
+            return {
+                type: user ? user.type : '',
+                username: user.username ? user.username : ''
+            };
         },
-        logout:function(){
-            delCookie('user');
-            router.push('login');
+        computed: {
+            down: function() {
+                return store.state.header.account;
+            }
+        },
+        methods: {
+            show: function() {
+                store.commit('SHOW_ACCOUNT_TAB');
+            },
+            logout: function() {
+                delCookie('user');
+                router.push('login');
+            }
         }
-    }
-};
+    };
 </script>

@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-    import router from 'src/services/routes';
+    import router from 'src/router';
     export default {
         props: ['total', 'current', 'url'],
         methods: {
