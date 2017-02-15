@@ -31,9 +31,7 @@
     </div>
 </template>
 <script>
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
     import tree from './tree.vue'
     import store from 'src/vuex/store'

@@ -24,10 +24,7 @@
 </template>
 <script>
     import API from 'src/services/api'
-    import {
-        mAjax,
-        setCookie
-    } from 'src/services/functions'
+    import { mAjax, setCookie } from 'src/services/functions'
     import store from 'src/vuex/store'
     import router from 'src/router'
     export default {

@@ -32,9 +32,7 @@
 </template>
 <script>
     import store from 'src/vuex/store'
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
     import filter from 'components/analysis/report.vue'
     import lineChart from 'components/analysis/chartLine.vue'

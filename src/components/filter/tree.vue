@@ -15,9 +15,7 @@
 </template>
 <script>
     import API from 'src/services/api'
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
     import store from 'src/vuex/store'
     import _ from 'lodash'
 

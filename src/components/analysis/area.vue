@@ -12,13 +12,7 @@
     import _ from 'lodash'
     import chinaMap from './china.json'
     import 'echarts'
-    import {
-        mAjax,
-        accAdd,
-        accSub,
-        accMul,
-        accDiv
-    } from 'src/services/functions'
+    import { mAjax, accAdd, accSub, accMul, accDiv } from 'src/services/functions'
     import area_default_data from './default_area'
 
     ECharts.registerMap('china', chinaMap)

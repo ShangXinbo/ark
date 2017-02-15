@@ -31,13 +31,11 @@
     </section>
 </template>
 <script>
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
     import pages from '../message/pages.vue'
     export default {
-        data: function() {
+        data: function () {
             return {
                 list: [],
                 currentPage: '1',
@@ -49,7 +47,7 @@
             pages
         },
         methods: {
-            refresh: function() {
+            refresh: function () {
                 let _this = this
                 let page = this.$route.params.page
                 mAjax(this, {
@@ -58,7 +56,7 @@
                         page: page ? page : 1,
                         rows: 10
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.code == 200) {
                             _this.list = data.detail.rows
                             _this.currentPage = parseInt(page)
@@ -69,14 +67,15 @@
             }
         },
         filters: {
-            subDate: function(value) {
+            subDate: function (value) {
                 if (!value) return ''
                 value = value.toString()
                 return value.substr(0, 10)
             }
         },
-        mounted: function() {
+        mounted: function () {
             this.refresh()
         }
     }
+
 </script>

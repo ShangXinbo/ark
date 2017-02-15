@@ -97,7 +97,7 @@
             var _this = this
 
             var centerDialog = function (el) {
-                var dialog = document.querySelector(el);
+                var dialog = document.querySelector(el)
                 var dh = dialog.offsetHeight, dw = dialog.offsetWidth
                 _this.offsetLeft = -dw / 2 + 'px'
                 _this.offsetTop = -dh / 2 + 'px'

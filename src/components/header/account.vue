@@ -17,10 +17,7 @@
 </template>
 <script>
     import store from 'src/vuex/store.js'
-    import {
-        getCookie,
-        delCookie
-    } from 'src/services/functions'
+    import { getCookie, delCookie } from 'src/services/functions'
     import router from 'src/router'
     let user = JSON.parse(getCookie('user'))
 

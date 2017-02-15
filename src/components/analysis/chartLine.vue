@@ -31,9 +31,7 @@
     import _ from 'lodash'
     import Vue from 'vue'
     import API from 'src/services/api'
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
 
     Vue.component('chart', ECharts)
 

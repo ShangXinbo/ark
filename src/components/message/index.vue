@@ -29,9 +29,7 @@
     </div>
 </template>
 <script>
-    import {
-        mAjax
-    } from 'src/services/functions'
+    import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
     import pages from './pages.vue'
     export default {
