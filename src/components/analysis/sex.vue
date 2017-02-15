@@ -18,13 +18,13 @@
             'sex'
         ],
         computed: {
-            options: function() {
+            options: function () {
                 let data = this.sex
                 let key = ['男', '女']
                 let value = [data['男'] ? data['男'] : 0, data['女'] ? data['女'] : 0]
 
                 let _this = this
-                this.$nextTick(function() {
+                this.$nextTick(function () {
                     _this.$refs.pie.resize(_this.$el.offsetWidth, _this.$el.offsetHeight)
                 })
 
@@ -47,8 +47,8 @@
                         label: {
                             normal: {
                                 position: "inside",
-                                formatter: function(data) {
-                                    return data.percent + '%';
+                                formatter: function (data) {
+                                    return data.percent + '%'
                                 }
                             }
                         },
@@ -74,4 +74,5 @@
             }
         }
     }
+
 </script>

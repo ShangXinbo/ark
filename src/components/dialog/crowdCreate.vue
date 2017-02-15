@@ -1,34 +1,44 @@
 <template>
     <div id="crowd_create" class="dialog" v-bind:style="{'display':visual,'margin-left':offsetLeft,'margin-top':offsetTop}">
         <a href="javascript:void(0);" class="dialog-close" title="关闭" v-on:click="closeDialog"></a>
-        <div class="dialog-header"><h4>上传新人群</h4></div>
+        <div class="dialog-header">
+            <h4>上传新人群</h4>
+        </div>
         <div class="dialog-body">
             <div class="dialog-upload">
                 <form action="" method="post">
-                    <input type="hidden" name="api-token" v-bind:value="token"/>
+                    <input type="hidden" name="api-token" v-bind:value="token" />
                     <ul class="input-warp">
                         <li v-bind:class="{'error':nameError}">
                             <label>名称</label>
-                            <input class="input-text" v-model.text="fileName"/>
-                            <p class="error" v-show="nameError"><i></i><span>{{nameError}}</span></p>
+                            <input class="input-text" v-model.text="fileName" />
+                            <p class="error" v-show="nameError">
+                                <i></i>
+                                <span>{{nameError}}</span>
+                            </p>
                         </li>
                         <li v-bind:class="{'error':descError}">
                             <label>描述</label>
                             <textarea class="input-area" v-model="fileDesc"></textarea>
-                            <p class="error" v-show="descError"><i></i><span>{{descError}}</span></p>
+                            <p class="error" v-show="descError">
+                                <i></i>
+                                <span>{{descError}}</span>
+                            </p>
                         </li>
                         <li v-bind:class="{'error':fileError}">
                             <label>上传</label>
                             <div class="upload-warp">
-                                <input v-model.text="filePath" class="input-text" disabled="disabled"/>
+                                <input v-model.text="filePath" class="input-text" disabled="disabled" />
                                 <span style="position: relative;">
                                     上传
-                                    <input accept=".txt,.xls,.xlsx" type="file" class="upload-warp"
-                                           v-on:change="changeFilePath"
-                                           v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"/>
+                                    <input accept=".txt,.xls,.xlsx" type="file" class="upload-warp" v-on:change="changeFilePath" v-bind:style="{'position':'absolute','top':'0px','left':'0px','opacity':'0'}"
+                                    />
                                 </span>
                             </div>
-                            <p class="error" v-show="fileError"><i></i><span>{{fileError}}</span></p>
+                            <p class="error" v-show="fileError">
+                                <i></i>
+                                <span>{{fileError}}</span>
+                            </p>
                         </li>
                     </ul>
                 </form>
@@ -41,106 +51,107 @@
     </div>
 </template>
 <script>
-import store from 'src/vuex/store';
-import API from 'src/services/api.js';
-import {mAjax} from 'src/services/functions.js';
-import VueRouter from 'vue-router';
-export default {
-    data: function () {
-        return {
-            offsetLeft: 0,
-            offsetTop: 0,
-            token: '',
-            fileName: '',
-            fileDesc: '',
-            fileVal: '',
-            filePath: '',
-            nameError: '',
-            descError: '',
-            fileError: ''
-        };
-    },
-    computed: {
-        visual: function () {
-            return store.state.dialog.crowdCreate ? 'block' : 'none';
-        }
-    },
-    methods: {
-        closeDialog: function () {
-            store.commit('CLOSE_DIALOG');
+    import store from 'src/vuex/store'
+    import API from 'src/services/api.js'
+    import { mAjax } from 'src/services/functions.js'
+    import VueRouter from 'vue-router'
+    export default {
+        data: function () {
+            return {
+                offsetLeft: 0,
+                offsetTop: 0,
+                token: '',
+                fileName: '',
+                fileDesc: '',
+                fileVal: '',
+                filePath: '',
+                nameError: '',
+                descError: '',
+                fileError: ''
+            }
         },
-        createSubmit: function () {
-            this.$data.nameError = '';
-            this.$data.descError = '';
-            this.$data.fileError = '';
-            if (this.$data.fileName == "") {
-                this.$data.nameError = '人群名称不能为空';
-                return false;
-            } else if (this.$data.fileName.length > 20) {
-                this.$data.nameError = '名称超长' + (this.$data.fileName.length - 20) + '字，请重新输入';
-                return false;
+        computed: {
+            visual: function () {
+                return store.state.dialog.crowdCreate ? 'block' : 'none'
             }
-            if (this.$data.fileDesc == "") {
-                this.$data.descError = '人群描述不能为空';
-                return false;
-            } else if (this.$data.fileDesc.length > 20) {
-                this.$data.descError = '描述超长' + (this.$data.fileDesc.length - 20) + '字，请重新输入';
-                return false;
-            }
-            if (!this.$data.filePath) {
-                this.$data.fileError = '请上传文件';
-                return false;
-            }
-            
-            mAjax(this,{
-                url:API.upload,
-                data:{
-                    fileName: this.$data.fileName,
-                    fileDesc: this.$data.fileDesc,
-                    file: this.$data.fileVal
-                },
-                success:function(data){
-                    if(data.code == 200){
-                        var crowd = {
-                            id:data.detail.id,
-                            name:data.detail.name
-                        };
-                        localStorage.setItem("crowd", crowd);
-                        var router = new VueRouter();
-                        store.commit('CLOSE_DIALOG');
-                        router.push('report');
-                    }
-                },
-                error:function(err){
-                    console.log(err);
+        },
+        methods: {
+            closeDialog: function () {
+                store.commit('CLOSE_DIALOG')
+            },
+            createSubmit: function () {
+                this.$data.nameError = ''
+                this.$data.descError = ''
+                this.$data.fileError = ''
+                if (this.$data.fileName == "") {
+                    this.$data.nameError = '人群名称不能为空'
+                    return false
+                } else if (this.$data.fileName.length > 20) {
+                    this.$data.nameError = '名称超长' + (this.$data.fileName.length - 20) + '字，请重新输入'
+                    return false
                 }
-            });
-        },
-        changeFilePath: function (event) {
-            let file = event.target.files[0];
-            this.fileError = '';
-            if (file.size < 1024 * 1024 * 100) {
-                this.filePath = file.name;
-                this.$data.fileVal = file;
-            } else {
-                this.filePath = '';
-                this.fileError = '上传文件需要小于100M';
+                if (this.$data.fileDesc == "") {
+                    this.$data.descError = '人群描述不能为空'
+                    return false
+                } else if (this.$data.fileDesc.length > 20) {
+                    this.$data.descError = '描述超长' + (this.$data.fileDesc.length - 20) + '字，请重新输入'
+                    return false
+                }
+                if (!this.$data.filePath) {
+                    this.$data.fileError = '请上传文件'
+                    return false
+                }
+
+                mAjax(this, {
+                    url: API.upload,
+                    data: {
+                        fileName: this.$data.fileName,
+                        fileDesc: this.$data.fileDesc,
+                        file: this.$data.fileVal
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            var crowd = {
+                                id: data.detail.id,
+                                name: data.detail.name
+                            }
+                            localStorage.setItem("crowd", crowd)
+                            var router = new VueRouter()
+                            store.commit('CLOSE_DIALOG')
+                            router.push('report')
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            },
+            changeFilePath: function (event) {
+                let file = event.target.files[0]
+                this.fileError = ''
+                if (file.size < 1024 * 1024 * 100) {
+                    this.filePath = file.name
+                    this.$data.fileVal = file
+                } else {
+                    this.filePath = ''
+                    this.fileError = '上传文件需要小于100M'
+                }
             }
+        },
+        mounted: function () {
+            var _this = this
+
+            var centerDialog = function (el) {
+                var dialog = document.querySelector(el)
+                var dh = dialog.offsetHeight, dw = dialog.offsetWidth
+                _this.offsetLeft = -dw / 2 + 'px'
+                _this.offsetTop = -dh / 2 + 'px'
+            }
+
+            this.$watch('visual', function (newVal, oldVal) {
+                centerDialog('#crowd_create')
+            })
         }
-    },
-    mounted: function () {
-        var _this = this;
-
-        var centerDialog = function (el) {
-            var dialog = document.querySelector(el);
-            var dh = dialog.offsetHeight, dw = dialog.offsetWidth;
-            _this.offsetLeft = -dw / 2 + 'px';
-            _this.offsetTop = -dh / 2 + 'px';
-        };
-
-        this.$watch('visual', function (newVal, oldVal) {
-            centerDialog('#crowd_create');
-        });
     }
-};
+
 </script>

@@ -17,7 +17,9 @@
             <div class="scroll-warp w800" v-on:scroll="scroll" style="overflow-y:scroll; ">
                 <table class="scroll-content dialog-table">
                     <tr v-for="item in lists" v-bind:data-id="item.id" v-bind:data-name="item.name">
-                        <td class="w60"><i v-on:click="checkItem(item.id,item.name)"></i></td>
+                        <td class="w60">
+                            <i v-on:click="checkItem(item.id,item.name)"></i>
+                        </td>
                         <td class="w150">{{item.name}}</td>
                         <td class="">{{item.uploadDesc}}</td>
                         <td class="w100">{{item.lines}}</td>
@@ -33,10 +35,10 @@
     </div>
 </template>
 <script>
-    import store from 'src/vuex/store';
-    import API from 'src/services/api';
-    import { mAjax } from 'src/services/functions';
-    import VueRouter from 'vue-router';
+    import store from 'src/vuex/store'
+    import API from 'src/services/api'
+    import { mAjax } from 'src/services/functions'
+    import VueRouter from 'vue-router'
     export default {
         data: function () {
             return {
@@ -45,20 +47,20 @@
                 lists: [],
                 selectId: '',
                 selectName: ''
-            };
+            }
         },
         methods: {
             closeDialog: function () {
-                store.commit('CLOSE_DIALOG');
+                store.commit('CLOSE_DIALOG')
             },
             checkItem: function (id, name) {
-                var collection = document.querySelectorAll('.scroll-warp i');
+                var collection = document.querySelectorAll('.scroll-warp i')
                 for (var i = 0; i < collection.length; i++) {
-                    collection[i].className = '';
+                    collection[i].className = ''
                 }
-                this.selectId = id;
-                this.selectName = name;
-                event.target.className = 'checked';
+                this.selectId = id
+                this.selectName = name
+                event.target.className = 'checked'
             },
             scroll: function () {
                 //TODO add lists
@@ -67,16 +69,16 @@
                 var crowd = {
                     id: this.selectId,
                     name: this.selectName
-                };
-                localStorage.setItem("crowd", crowd);
-                var router = new VueRouter();
-                store.commit('CLOSE_DIALOG');
-                router.push('report');
+                }
+                localStorage.setItem("crowd", crowd)
+                var router = new VueRouter()
+                store.commit('CLOSE_DIALOG')
+                router.push('report')
             }
         },
         computed: {
             visual: function () {
-                var vm = this;
+                var vm = this
                 mAjax(this, {
                     url: API.upload_list_layer,
                     data: {
@@ -84,26 +86,27 @@
                         rows: 20
                     },
                     success: function (data) {
-                        vm.lists = data.detail.rows;
+                        vm.lists = data.detail.rows
                     }
-                });
+                })
 
-                return store.state.dialog.crowdSelect ? 'block' : 'none';
+                return store.state.dialog.crowdSelect ? 'block' : 'none'
             }
         },
         mounted: function () {
-            var _this = this;
+            var _this = this
 
             var centerDialog = function (el) {
                 var dialog = document.querySelector(el);
-                var dh = dialog.offsetHeight, dw = dialog.offsetWidth;
-                _this.offsetLeft = -dw / 2 + 'px';
-                _this.offsetTop = -dh / 2 + 'px';
-            };
+                var dh = dialog.offsetHeight, dw = dialog.offsetWidth
+                _this.offsetLeft = -dw / 2 + 'px'
+                _this.offsetTop = -dh / 2 + 'px'
+            }
 
             this.$watch('visual', function (newVal, oldVal) {
-                centerDialog('#crowd_select');
-            });
+                centerDialog('#crowd_select')
+            })
         }
-    };
+    }
+
 </script>

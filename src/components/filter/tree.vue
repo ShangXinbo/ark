@@ -8,12 +8,7 @@
                 <i class="icon" @click.stop="toChecked(item.code)"></i>
                 <span @click.stop="getChilds(item.code)">{{item.tagName}}</span>
             </div>
-            <tree-list 
-                :level="item.tagLevel" 
-                :code="item.code" 
-                :checked="item.checked" 
-                :show="item.show" 
-                :child="item.hasChildren">
+            <tree-list :level="item.tagLevel" :code="item.code" :checked="item.checked" :show="item.show" :child="item.hasChildren">
             </tree-list>
         </li>
     </ul>
@@ -35,35 +30,35 @@
             'child',
             'checked'
         ],
-        data: function() {
+        data: function () {
             return {
                 tagsLs: []
-            };
+            }
         },
         computed: {
-            active: function() {
+            active: function () {
                 return store.state.filterTagActive
             },
-            li: function() {
+            li: function () {
                 if (!this.child) {
                     return {}
                 } else {
                     return this.tagsLs
                 }
             },
-            stage: function() {
+            stage: function () {
                 return store.state.tagStage
             }
         },
         methods: {
-            getChilds: function(code) {
+            getChilds: function (code) {
                 for (let i in this.tagsLs) {
                     this.tagsLs[i].show = false
                 }
                 this.tagsLs[code].show = true
                 store.commit('CHANGE_ACTIVE_TAG', code)
             },
-            toChecked: function(code) {
+            toChecked: function (code) {
                 if (this.tagsLs[code].checked) {
                     store.commit('UNCHECKED_FOLDER_TAG', code)
                 } else {
@@ -75,23 +70,23 @@
             }
         },
         watch: {
-            show: function(val, old) {
+            show: function (val, old) {
                 if (!val) return
-                const _this = this;
+                const _this = this
                 mAjax(this, {
                     url: API.filter_getTagStructure,
                     data: {
                         code: _this.code,
                         level: _this.level
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.code == 200) {
                             let obj = {}
                             let list = data.detail
                             for (let i = 0; i < list.length; i++) {
 
                                 let tag = false
-                                _.forIn(_this.stage, function(value, key) {
+                                _.forIn(_this.stage, function (value, key) {
                                     if (value.code == list[i].code) {
                                         tag = true
                                     }
@@ -108,18 +103,18 @@
                             //TODO: 未加载数据
                         }
                     }
-                });
+                })
             },
-            active: function(val, old) {
+            active: function (val, old) {
                 if (this.code == val && !_.isEmpty(this.tagsLs)) {
                     store.commit('CHANGE_FILTER_FOLDER', this.tagsLs)
                 }
             },
-            stage: function(val, old) {
+            stage: function (val, old) {
                 let _this = this
-                _.forIn(_this.tagsLs, function(value, key) {
+                _.forIn(_this.tagsLs, function (value, key) {
                     let tag = false
-                    val.forEach(function(element, index, array) {
+                    val.forEach(function (element, index, array) {
                         if (element.code == key) {
                             tag = true
                         }
@@ -132,5 +127,6 @@
                 })
             }
         }
-    };
+    }
+
 </script>

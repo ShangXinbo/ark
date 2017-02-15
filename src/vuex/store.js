@@ -8,7 +8,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import _ from 'lodash'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const state = {
     showLayer: false,
@@ -127,7 +127,7 @@ const state = {
             "50+": "39%"
         }
     }
-};
+}
 
 const mutations = {
     //全屏
@@ -139,45 +139,45 @@ const mutations = {
     },
     // 显示遮罩层
     SHOW_LAYER(state) {
-        state.showLayer = true;
+        state.showLayer = true
     },
     // 隐藏遮罩层
     HIDE_LAYER(state) {
-        state.showLayer = false;
+        state.showLayer = false
     },
     // 关闭所有弹窗
     CLOSE_DIALOG(state) {
-        state.dialog.crowdInit = false;
-        state.dialog.crowdCreate = false;
-        state.dialog.crowdSelect = false;
-        state.showLayer = false;
+        state.dialog.crowdInit = false
+        state.dialog.crowdCreate = false
+        state.dialog.crowdSelect = false
+        state.showLayer = false
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_INIT_DIALOG(state) {
-        state.dialog.crowdInit = true;
-        state.showLayer = true;
+        state.dialog.crowdInit = true
+        state.showLayer = true
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_CREATE_DIALOG(state) {
-        state.dialog.crowdCreate = true;
-        state.showLayer = true;
+        state.dialog.crowdCreate = true
+        state.showLayer = true
     },
     // 显示上传人群初始化弹窗
     SHOW_UPLOAD_SELECT_DIALOG(state) {
-        state.dialog.crowdSelect = true;
-        state.showLayer = true;
+        state.dialog.crowdSelect = true
+        state.showLayer = true
     },
     SHOW_NAV(state) {
-        state.header.nav = true;
-        state.header.account = false;
+        state.header.nav = true
+        state.header.account = false
     },
     SHOW_ACCOUNT_TAB(state) {
-        state.header.nav = false;
-        state.header.account = true;
+        state.header.nav = false
+        state.header.account = true
     },
     HIDE_NAV(state) {
-        state.header.nav = false;
-        state.header.account = false;
+        state.header.nav = false
+        state.header.account = false
     },
     CHANGE_FILTER_FOLDER(state, json) {
         state.tagFolder = json
@@ -192,7 +192,7 @@ const mutations = {
         }
     },
     UNCHECKED_FOLDER_TAG(state, code) {
-        state.tagStage.forEach(function(element, index, array) {
+        state.tagStage.forEach(function (element, index, array) {
             if (element.code == code) {
                 _.pullAt(state.tagStage, index)
             }
@@ -209,9 +209,9 @@ const mutations = {
     SHOW_BASETAGS(state, status) {
         state.baseTag_show = Boolean(status)
     }
-};
+}
 
 export default new Vuex.Store({
     state,
     mutations
-});
+})

@@ -3,9 +3,12 @@
         <h2>基础属性筛选</h2>
         <div class="base-tag-warp">
             <div class="base-tag-item" v-for="(item,key) in list">
-                <h3><i :class="key"></i>{{item.label}}：</h3>
+                <h3>
+                    <i :class="key"></i>{{item.label}}：</h3>
                 <div class="base-tag">
-                    <span :class="{active:tag.active}" v-for="(tag,index) in item.rows" @click="toggleActive(tag.active,key,index)">{{tag.val}}<i></i></span>
+                    <span :class="{active:tag.active}" v-for="(tag,index) in item.rows" @click="toggleActive(tag.active,key,index)">{{tag.val}}
+                        <i></i>
+                    </span>
                 </div>
             </div>
         </div>
@@ -22,25 +25,25 @@
     } from 'src/services/functions'
     import API from 'src/services/api'
     import store from 'src/vuex/store'
-    import VueRouter from 'vue-router';
+    import VueRouter from 'vue-router'
     import _ from 'lodash'
 
     export default {
-        data: function() {
+        data: function () {
             return {
                 list: []
             }
         },
         computed: {
-            show: function() {
+            show: function () {
                 return store.state.baseTag_show
             }
         },
-        mounted: function() {
+        mounted: function () {
             let _this = this
             mAjax(this, {
                 url: API.filter_getFixedProperty,
-                success: function(data) {
+                success: function (data) {
                     if (data.code == 200) {
                         let obj = {}
                         let list = data.detail
@@ -58,21 +61,22 @@
             })
         },
         methods: {
-            prev: function() {
+            prev: function () {
                 store.commit('SHOW_BASETAGS', false)
             },
-            toggleActive: function(status, key, index) {
+            toggleActive: function (status, key, index) {
                 let list = this.list
                 list[key].rows[index].active = !status
                 this.list = _.cloneDeep(list)
             },
-            skip: function() {
+            skip: function () {
 
             },
-            next: function() {
-                var router = new VueRouter();
-                router.push('report');
+            next: function () {
+                var router = new VueRouter()
+                router.push('report')
             }
         }
     }
+
 </script>

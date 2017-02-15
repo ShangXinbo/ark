@@ -26,14 +26,14 @@
 
     function arrMerge(arr1, arr2) {
         for (var i = 0; i < arr1.length; i++) {
-            var item = arr1[i];
+            var item = arr1[i]
             for (var j = 0; j < arr2.length; j++) {
                 if (arr2[j].name == item.name) {
-                    item.value = arr2[j].value;
+                    item.value = arr2[j].value
                 }
             }
         }
-        return arr1;
+        return arr1
     }
 
     export default {
@@ -41,10 +41,10 @@
             'area',
         ],
         computed: {
-            options: function() {
-                var arr = [];
-                var max = 0;
-                var min = 0;
+            options: function () {
+                var arr = []
+                var max = 0
+                var min = 0
                 let data = this.area
                 let arr_default = area_default_data
 
@@ -52,32 +52,32 @@
                     arr.push({
                         name: i.replace(/特别行政区|回族自治区|壮族自治区|自治区|省|市/, ''),
                         value: accDiv(Math.round(parseFloat(data[i]) * 100), 100)
-                    });
+                    })
 
                     if (max == 0) {
-                        max = data[i];
+                        max = data[i]
                     } else {
                         if (data[i] > max) {
-                            max = data[i];
+                            max = data[i]
                         }
                     }
                     if (min == 0) {
-                        min = data[i];
+                        min = data[i]
                     } else {
                         if (data[i] < min) {
-                            min = data[i];
+                            min = data[i]
                         }
                     }
                 }
-                max = parseFloat(max);
-                min = parseFloat(min);
-                var diff = accDiv(accSub(max, min), 3);
+                max = parseFloat(max)
+                min = parseFloat(min)
+                var diff = accDiv(accSub(max, min), 3)
                 if (diff <= 0) {
-                    diff = 1;
+                    diff = 1
                 }
 
                 let _this = this
-                this.$nextTick(function() {
+                this.$nextTick(function () {
                     _this.$refs.map.resize(_this.$el.offsetWidth, _this.$el.offsetHeight)
                 })
 
@@ -117,11 +117,11 @@
                         trigger: 'item',
                         fontFamily: 'Microsoft Yahei',
                         fontSize: '12',
-                        formatter: function(param) {
+                        formatter: function (param) {
                             if (param.value > 0) {
-                                return param.name + '：' + accMul(param.value, 10);
+                                return param.name + '：' + accMul(param.value, 10)
                             } else {
-                                return param.name;
+                                return param.name
                             }
                         }
                     },
@@ -153,4 +153,5 @@
             }
         }
     }
+
 </script>

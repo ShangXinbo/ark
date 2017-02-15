@@ -50,5 +50,4 @@ export default {
     project_stop: '/api/project/stop',
     project_close: '/api/project/close',
     project_uptemplate: '/api/project/usetemplate'
-};
-
+}

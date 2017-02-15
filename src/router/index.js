@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import { getCookie } from 'src/services/functions';
+import Vue from 'vue'
+import Router from 'vue-router'
+import { getCookie } from 'src/services/functions'
 
-Vue.use(Router);
+Vue.use(Router)
 
 // 懒加载组件
 const login = resolve => System.import('components/login.vue')
@@ -48,17 +48,17 @@ let mRouter = new Router({
         redirect: '/index'
     }
     ]
-});
+})
 
 mRouter.beforeEach(function (to, from, next) {
-    let user = JSON.parse(getCookie('user'));
-    let path = to.path;
+    let user = JSON.parse(getCookie('user'))
+    let path = to.path
     if (!user && path != '/login') {
-        next({ path: '/login' });
+        next({ path: '/login' })
     } else if (path == '/') {
-        next({ path: '/index' });
+        next({ path: '/index' })
     } else {
-        next();
+        next()
     }
-});
+})
 export default mRouter

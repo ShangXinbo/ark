@@ -33,9 +33,9 @@
 <script>
     import {
         mAjax
-    } from 'src/services/functions';
-    import API from 'src/services/api';
-    import pages from '../message/pages.vue';
+    } from 'src/services/functions'
+    import API from 'src/services/api'
+    import pages from '../message/pages.vue'
     export default {
         data: function() {
             return {
@@ -43,7 +43,7 @@
                 currentPage: '1',
                 totalPage: '1',
                 api: API.template_list
-            };
+            }
         },
         components: {
             pages
@@ -60,23 +60,23 @@
                     },
                     success: function(data) {
                         if (data.code == 200) {
-                            _this.list = data.detail.rows;
-                            _this.currentPage = parseInt(page);
-                            _this.totalPage = Math.floor(data.detail.total / 10);
+                            _this.list = data.detail.rows
+                            _this.currentPage = parseInt(page)
+                            _this.totalPage = Math.floor(data.detail.total / 10)
                         }
                     }
-                });
+                })
             }
         },
         filters: {
             subDate: function(value) {
-                if (!value) return '';
-                value = value.toString();
-                return value.substr(0, 10);
+                if (!value) return ''
+                value = value.toString()
+                return value.substr(0, 10)
             }
         },
         mounted: function() {
-            this.refresh();
+            this.refresh()
         }
-    };
+    }
 </script>

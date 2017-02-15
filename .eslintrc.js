@@ -19,8 +19,8 @@ module.exports = {
     'no-implied-eval': 1,
     'no-loop-func': 1,
     'indent': 1,
+    'semi':["error", "never"],
     'no-mixed-spaces-and-tabs': 1,
-    'semi': 0,
     'no-console':0,
     'no-unused-vars':0,
     // allow debugger during development

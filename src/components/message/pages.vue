@@ -17,14 +17,15 @@
     </div>
 </template>
 <script>
-    import router from 'src/router';
+    import router from 'src/router'
     export default {
         props: ['total', 'current', 'url'],
         methods: {
-            goPage: function(page) {
+            goPage: function (page) {
                 router.push(`/message/${page}`)
                 this.$emit('jump')
             }
         }
     }
+
 </script>

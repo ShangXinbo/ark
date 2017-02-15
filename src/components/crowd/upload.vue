@@ -15,10 +15,14 @@
                     <th class="w15p">操作</th>
                 </tr>
                 <tr v-for="item in list" :id="item.id">
-                    <td class="tl" v-if="item.createTime">{{item.uploadName}}</td><td class="tl" v-else>{{item.name}}</td>
-                    <td class="tl" v-if="item.createTime">{{item.uploadDesc}}</td><td class="tl" v-else>{{item.description}}</td>
-                    <td class="tl" v-if="item.createTime">{{item.lines}}</td><td class="tl" v-else>{{num}}</td>
-                    <td class="tl" v-if="item.createTime">{{item.createTime}}</td><td class="tl" v-else>{{item.updated_at}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.uploadName}}</td>
+                    <td class="tl" v-else>{{item.name}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.uploadDesc}}</td>
+                    <td class="tl" v-else>{{item.description}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.lines}}</td>
+                    <td class="tl" v-else>{{num}}</td>
+                    <td class="tl" v-if="item.createTime">{{item.createTime}}</td>
+                    <td class="tl" v-else>{{item.updated_at}}</td>
                     <td>{{item.tagStr}}</td>
                     <td class="edit"></td>
                 </tr>
@@ -31,23 +35,23 @@
 <script>
     import {
         mAjax
-    } from 'src/services/functions';
-    import API from 'src/services/api';
-    import pages from '../message/pages.vue';
+    } from 'src/services/functions'
+    import API from 'src/services/api'
+    import pages from '../message/pages.vue'
     export default {
-        data: function() {
+        data: function () {
             return {
                 list: [],
                 currentPage: '1',
                 totalPage: '1',
                 api: API.upload_list
-            };
+            }
         },
         components: {
             pages
         },
         methods: {
-            refresh: function() {
+            refresh: function () {
                 let _this = this
                 let page = this.$route.params.page
                 page = page ? page : 1
@@ -57,25 +61,26 @@
                         page: page,
                         rows: 10
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.code == 200) {
-                            _this.list = data.detail.rows;
-                            _this.currentPage = parseInt(page);
-                            _this.totalPage = Math.floor(data.detail.total / 10);
+                            _this.list = data.detail.rows
+                            _this.currentPage = parseInt(page)
+                            _this.totalPage = Math.floor(data.detail.total / 10)
                         }
                     }
-                });
+                })
             }
         },
         filters: {
-            subDate: function(value) {
-                if (!value) return '';
-                value = value.toString();
-                return value.substr(0, 10);
+            subDate: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.substr(0, 10)
             }
         },
-        mounted: function() {
-            this.refresh();
+        mounted: function () {
+            this.refresh()
         }
-    };
+    }
+
 </script>

@@ -17,7 +17,9 @@
                     <tr v-for="(item,index) in list" v-bind:class="{bg:index%2>0}">
                         <td class="tl">{{item.content}}</td>
                         <td>{{item.created_at|subDate}}</td>
-                        <td><a href="javascript:void(0);">删除</a></td>
+                        <td>
+                            <a href="javascript:void(0);">删除</a>
+                        </td>
                     </tr>
                 </table>
                 <div v-else class="com-table-null">暂无数据</div>
@@ -29,23 +31,23 @@
 <script>
     import {
         mAjax
-    } from 'src/services/functions';
-    import API from 'src/services/api';
-    import pages from './pages.vue';
+    } from 'src/services/functions'
+    import API from 'src/services/api'
+    import pages from './pages.vue'
     export default {
-        data: function() {
+        data: function () {
             return {
                 list: [],
                 currentPage: '1',
                 totalPage: '1',
                 api: API.message_list
-            };
+            }
         },
         components: {
             pages
         },
         methods: {
-            refresh: function() {
+            refresh: function () {
                 let _this = this
                 let page = this.$route.params.page
                 mAjax(this, {
@@ -54,25 +56,26 @@
                         page: page ? page : 1,
                         rows: 10
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.code == 200) {
-                            _this.list = data.detail.messages.data;
-                            _this.currentPage = parseInt(data.detail.current_page);
-                            _this.totalPage = Math.floor(data.detail.total / 10);
+                            _this.list = data.detail.messages.data
+                            _this.currentPage = parseInt(data.detail.current_page)
+                            _this.totalPage = Math.floor(data.detail.total / 10)
                         }
                     }
-                });
+                })
             }
         },
         filters: {
-            subDate: function(value) {
-                if (!value) return '';
-                value = value.toString();
-                return value.substr(0, 10);
+            subDate: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.substr(0, 10)
             }
         },
-        mounted: function() {
-            this.refresh();
+        mounted: function () {
+            this.refresh()
         }
-    };
+    }
+
 </script>

@@ -5,7 +5,10 @@
             <ul class="chart-histogram">
                 <li v-for="(item,key) in mobile">
                     <h3>{{key}}</h3>
-                    <div class="histogram num-outside"><p v-bind:style="{'width':item}"></p><span>{{item}}</span></div>
+                    <div class="histogram num-outside">
+                        <p v-bind:style="{'width':item}"></p>
+                        <span>{{item}}</span>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -17,4 +20,5 @@
             'mobile'
         ]
     }
+
 </script>

@@ -13,7 +13,7 @@
                 <div class="screening-left">
                     <div class="scroll-warp" style="overflow-y:auto">
                         <ul class="scroll-content screening-one">
-                            <li v-for="(item,key) in tagsL1" :class="{show:item.show,active:item.code==active}" >
+                            <li v-for="(item,key) in tagsL1" :class="{show:item.show,active:item.code==active}">
                                 <div class="sort-first" v-bind:title="item.tagName">
                                     <i v-bind:class="item.spritClass" class="icon"></i>
                                     <span v-on:click.stop="getChilds(item.code)">{{item.tagName}}</span>
@@ -23,7 +23,7 @@
                         </ul>
                     </div>
                 </div>
-                <tag-folder></tag-folder>   
+                <tag-folder></tag-folder>
             </div>
             <cart></cart>
         </div>
@@ -42,10 +42,10 @@
     import baseTag from './basetag.vue'
 
     export default {
-        data: function() {
+        data: function () {
             return {
                 tagsL1: {}
-            };
+            }
         },
         components: {
             tree,
@@ -54,15 +54,15 @@
             baseTag
         },
         computed: {
-            active: function() {
+            active: function () {
                 return store.state.filterTagActive
             },
-            show: function() {
+            show: function () {
                 return !store.state.baseTag_show
             }
         },
         methods: {
-            getChilds: function(code, child) {
+            getChilds: function (code, child) {
                 for (let i in this.tagsL1) {
                     this.tagsL1[i].show = false
                     this.tagsL1[i].active = false
@@ -72,8 +72,8 @@
                 store.commit('CHANGE_ACTIVE_TAG', code)
             }
         },
-        mounted: function() {
-            let _this = this;
+        mounted: function () {
+            let _this = this
             store.commit('PAGE_NO_SCROLL')
             mAjax(this, {
                 url: API.filter_getTagStructure,
@@ -81,7 +81,7 @@
                     code: -1,
                     level: 0
                 },
-                success: function(data) {
+                success: function (data) {
                     if (data.code == 200) {
                         let obj = {}
                         let list = data.detail
@@ -96,10 +96,11 @@
                         //TODO: 未加载数据
                     }
                 }
-            });
+            })
         },
-        destroyed: function() {
+        destroyed: function () {
             store.commit('PAGE_WIDTH_SCROLL')
         }
-    };
+    }
+
 </script>
