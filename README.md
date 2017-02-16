@@ -1,6 +1,21 @@
 # ark
 
-> A Vue.js project
+> A product named ark written during my work in GEO build with vue single-file components
+
+## Tool & Lib
+* [vue-cli](https://github.com/vuejs/vue-cli)
+* A vue-cli-template [shangxinbo/vue-init](https://github.com/vuejs/vue-cli) written by myself
+* eslint recommended see detail [eslint rules](http://eslint.org/docs/rules/)
+* webpack2.0
+* [mockjs](https://github.com/nuysoft/Mock/tree/refactoring)
+* webpack proxy server written by myself
+* less & less-loader
+* es6
+* [echarts](https://github.com/ecomfe/echarts) & [vue-echarts](https://github.com/Justineo/vue-echarts)
+* [vue-resource](https://github.com/pagekit/vue-resource)
+* [vue-router](https://github.com/vuejs/vue-router) 
+* [vuex](https://github.com/vuejs/vuex)
+* lodash
 
 ## Build Setup
 
