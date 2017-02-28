@@ -13,7 +13,7 @@
             </li>
             <li>
                 <i class="password"></i>
-                <input autocomplete="new-password" type="password" v-model:value.password="password" />
+                <input autocomplete="new-password" type="password" v-model:value.password="password"  @keyup.enter="login"/>
             </li>
             <li class="reminder">{{error}}</li>
             <li>
