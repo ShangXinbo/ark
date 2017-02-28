@@ -43,7 +43,8 @@
                     </tr>
                     <tr v-for="(item,index) in list" :class="{bg:index%2==0}">
                         <td class="tl">
-                            <a href="label-application-detail(general).html">贷款项目</a>
+                            <router-link to="/project/detail?id=2">贷款项目</router-link>
+                            <!--<a href="label-application-detail(general).html">贷款项目</a>-->
                         </td>
                         <td>2</td>
                         <td class="tl">100000</td>

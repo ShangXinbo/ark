@@ -18,6 +18,7 @@ const crowd_tag = resolve => System.import('components/crowd/tag.vue')
 const crowd_upload = resolve => System.import('components/crowd/upload.vue')
 const project_index = resolve => System.import('components/project/index.vue')
 const project_create = resolve => System.import('components/project/create.vue')
+const project_detail = resolve => System.import('components/project/detail/index.vue')
 
 let mRouter = new Router({
     routes: [{
@@ -44,6 +45,7 @@ let mRouter = new Router({
                 ]
             },
             { path: 'project/create', name: 'project_create', component: project_create },
+            { path: 'project/detail', name: 'project_detail', component: project_detail },            
             { path: 'project/:page?', name: 'project_index', component: project_index }
         ]
     },
