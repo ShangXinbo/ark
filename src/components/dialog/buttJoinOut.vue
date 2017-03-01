@@ -1,6 +1,6 @@
 <template>
     <div id="usecase" class="dialog" :style="{'display':visual,'margin-left':offsetLeft,'margin-top':offsetTop}">
-        <a class="dialog-close"  @click="closeDialog" title="关闭" href="javascript:void(0);"></a>
+        <a class="dialog-close"  @click.prevent="closeDialog" title="关闭"></a>
         <div class="dialog-header"><h4>选择营销渠道</h4></div>
         <div class="dialog-body">
             <div class="dialog-external">
@@ -15,8 +15,8 @@
             </div>
         </div>
         <div class="dialog-footer">
-            <a class="red" href="javascript:void(0);" @click="ok">确定</a>
-            <a href="javascript:void(0);" @click="closeDialog">取消</a>
+            <a class="red" @click.prevent="ok">确定</a>
+            <a @click.prevent="closeDialog">取消</a>
         </div>
     </div>
 </template>
