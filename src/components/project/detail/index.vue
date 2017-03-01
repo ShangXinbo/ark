@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+<style lang="less">
     @import "../../../../static/less/label-application.less";
 </style>
 
