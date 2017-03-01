@@ -28,14 +28,15 @@
                 <a v-if="!isAdmin" class="downback" href="javascript:void(0);"><i class="download"></i><span>下载反馈模版</span></a>
             </div>
         </div>
-        <div class="line-chart">
+        <!--<div class="line-chart">
         	<div class="chart-warp" id="cutline">
             </div>
             <div class="line-legend">
                 <ul class="line-legend-item">
                 </ul>
             </div>
-        </div>
+        </div>-->
+        <lineChart :projectId="2"></lineChart>
         <div class="case-table">
             <table class="com-table">
                 <tr>
@@ -124,6 +125,7 @@
 <script>
     import { getCookie,mAjax } from 'src/services/functions'
     import API from 'src/services/api'
+    import lineChart from './lineChar.vue'
     let user = JSON.parse(getCookie('user'))
     
     export default {
@@ -141,7 +143,7 @@
             }
         },
         components: {
-            // pages
+            lineChart
         },
         methods: {
             refresh: function () {
