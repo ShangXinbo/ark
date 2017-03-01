@@ -71,14 +71,7 @@
                             })
 
                         }else{
-                            console.log(pid + '-' + cid)
                             _this.buttJointInErr = data.message
-                            // if($('#dialog01 .dialog-body a:nth-child(2)').next().hasClass('error1')){
-                                
-                            // }else{
-                            //     $('#dialog01 .dialog-body a:nth-child(2)').after('<p class="error1"><i></i><span>' + data.message + '</span></p>');							
-                            // }
-
                         }
                     }
                 })
