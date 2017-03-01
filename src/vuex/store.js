@@ -16,7 +16,8 @@ const state = {
         crowdInit: false,
         crowdCreate: false,
         crowdSelect: false,
-        projectUse: false
+        projectUse: false,
+        buttJointOutUse: false
     },
     project: {
         detail: {
@@ -177,6 +178,9 @@ const mutations = {
     },
     SHOW_PROJECT_USE_DIALOG(state) {
         state.dialog.projectUse = true
+    },
+    SHOW_SMS_BUTT_JOINT_OUT(state){
+        state.dialog.buttJointOutUse = true
     },
     SHOW_NAV(state) {
         state.header.nav = true

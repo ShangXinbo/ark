@@ -7,7 +7,7 @@
                 <p v-if="downdataErr" class="error1"><i></i><span>{{downdataErr}}</span></p>                            
                 <a href="javascript:void(0);" @click="buttJointIn"><i class="icon07"></i><span>对接内部平台</span></a>
                 <p v-if="buttJointInErr" class="error1"><i></i><span>{{buttJointInErr}}</span></p>
-                <a data-waitui="1" href="javascript:void(0);"><i class="icon08"></i><span>对接外部营销渠道</span></a>
+                <a data-waitui="1" @click="buttJointOut" href="javascript:void(0);"><i class="icon08"></i><span>对接外部营销渠道</span></a>
                 <p v-if="waituiErr" class="error1"><i></i><span>{{waituiErr}}</span></p>                
             </div>
         </div>
@@ -77,7 +77,8 @@
                 })
             },
             buttJointOut(){
-               
+                store.commit('CLOSE_DIALOG')                
+                store.commit('SHOW_SMS_BUTT_JOINT_OUT')
             }
 
         },        
