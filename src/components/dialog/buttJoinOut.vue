@@ -8,7 +8,7 @@
                     <li>
                         <label>营销渠道</label>
                         <div class="select-block">
-                            <a v-for="label in labels" :class="{ active: label.isActive }" href="javascript:void(0);"><i class="icon gdt"></i><i class="tri"></i><span>{{label.text}}</span><em></em></a>
+                            <a v-for="(label,index) in labels" @click.prevent="select(index)" :class="{ active: label.isActive }" href="javascript:void(0);"><i class="icon gdt"></i><i class="tri"></i><span>{{label.text}}</span><em></em></a>
                         </div>
                     </li>
                 </ul>
@@ -47,7 +47,8 @@
                         isActive: false,
                         text: '短信营销'
                     }
-                ]
+                ],
+                activeIndex: 0
             }
         },
         computed: {
@@ -62,6 +63,13 @@
             },
             ok(){
                 store.commit('CLOSE_DIALOG')                
+            },
+            select(index){
+                let oldLabel = this.labels[this.activeIndex],
+                    newLabel = this.labels[index]
+                oldLabel.isActive = false
+                newLabel.isActive = true
+                this.activeIndex = index
             }
         },
         mounted: function () {
