@@ -4,15 +4,21 @@
         <div class="dialog-body">
             <div class="dialog-bugButton">
                 <a data-downdata="1" @click="downCrowd" href="javascript:void(0);"><i class="icon06"></i><span>下载人群</span></a>
-                <a href="javascript:void(0);"><i class="icon07"></i><span>对接内部平台</span></a>
+                <p v-if="downdataErr" class="error1"><i></i><span>{{downdataErr}}</span></p>                            
+                <a href="javascript:void(0);" @click="buttJointIn"><i class="icon07"></i><span>对接内部平台</span></a>
+                <p v-if="buttJointInErr" class="error1"><i></i><span>{{buttJointInErr}}</span></p>
                 <a data-waitui="1" href="javascript:void(0);"><i class="icon08"></i><span>对接外部营销渠道</span></a>
+                <p v-if="waituiErr" class="error1"><i></i><span>{{waituiErr}}</span></p>                
             </div>
         </div>
     </div>
 </template>
 <script>
     import VueRouter from 'vue-router'
+    import API from 'src/services/api'
     import store from 'src/vuex/store'
+    import { downFile,mAjax } from 'src/services/functions'
+
 
     export default {
         data(){
@@ -21,7 +27,10 @@
                 offsetTop: 0,
                 lists: [],
                 selectId: '',
-                selectName: ''
+                selectName: '',
+                buttJointInErr: '',
+                waituiErr: '',
+                downdataErr: ''   
             }
         },        
         computed: {
@@ -31,13 +40,48 @@
         },
         methods: {
             downCrowd(){
-            
+                downFile(API.tags_downloaddata,'?id=' + store.state.project.detail.cycleId)
+
+                store.commit('CLOSE_DIALOG')
             },
             closeDialog(){
                 store.commit('CLOSE_DIALOG')
             },
             buttJointIn(){
+                let pid = this.$route.query.id,
+                    cid = store.state.project.detail.cycleId,
+                    _this = this,
+                    router = new VueRouter()
 
+                mAjax(this,{
+                    url: API.sms_to_send,
+                    data:{
+                        project_id: pid,
+                        cycle_id: cid
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            store.commit('CLOSE_DIALOG')
+                            router.push({ 
+                                path: '/project/sms_record_save', 
+                                query: { 
+                                    'sms_tid': data.detail.template_id,
+                                    pid:pid,cid:cid 
+                                }
+                            })
+
+                        }else{
+                            console.log(pid + '-' + cid)
+                            _this.buttJointInErr = data.message
+                            // if($('#dialog01 .dialog-body a:nth-child(2)').next().hasClass('error1')){
+                                
+                            // }else{
+                            //     $('#dialog01 .dialog-body a:nth-child(2)').after('<p class="error1"><i></i><span>' + data.message + '</span></p>');							
+                            // }
+
+                        }
+                    }
+                })
             },
             buttJointOut(){
                

@@ -50,5 +50,7 @@ export default {
     project_stop: '/api/project/stop',
     project_close: '/api/project/close',
     project_uptemplate: '/api/project/usetemplate',
-    project_detail_linechart:'/api/tags/lineharts'
+    project_detail_linechart:'/api/tags/lineharts',
+    sms_to_send:'/api/sms/to_send'
+
 }
