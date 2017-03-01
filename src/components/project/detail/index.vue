@@ -7,7 +7,7 @@
     <div class="main">
         <ul class="breadcrumb">
             <li><a data-href="datause" href="/project/list.html">营销项目</a></li>
-            <li><span></span></li>
+            <li><span>{{project.name}}</span></li>
         </ul>
         <div class="title-bar">
             <h2>{{project.name}}</h2>
@@ -25,7 +25,7 @@
                         <span v-else="cycle.upload_status==1">-</span>
                     </li>
                 </ul>
-                <a v-if="!isAdmin" class="downback" href="javascript:void(0);"><i class="download"></i><span>下载反馈模版</span></a>
+                <a v-if="!isAdmin" @click="downloadFbTemplate" class="downback" href="javascript:void(0);"><i class="download"></i><span>下载反馈模版</span></a>
             </div>
         </div>
         <!--<div class="line-chart">
@@ -86,12 +86,12 @@
                         <template v-if="item.effect_total>0">
                             <a v-if="!item.clue_download_status" :data-upback="-1" href="javascript:void(0)">上传反馈</a>
                             <a v-else="!item.clue_download_status" :data-upback="item.id" href="javascript:void(0)">上传反馈</a>
-                            <em class="line"></em>
                             <template v-if="item.upload_status">
-                                <a :data-downupback="item.id" href="javascript:void(0)">查看反馈</a>
                                 <em class="line"></em>
+                                <a :data-downupback="item.id" href="javascript:void(0)">查看反馈</a>
                             </template>
                             <template v-if="item.clue_create_status">
+                                <em class="line"></em>
                                 <a :data-turn="item.effect_total" class="{'market':item.effect_total>0}" data-alert="周期数据未匹配成功" href="javascript:void(0)">应用</a>
                             </template>
                         </template>
@@ -123,7 +123,7 @@
 </div>
 </template>
 <script>
-    import { getCookie,mAjax } from 'src/services/functions'
+    import { getCookie,mAjax,downFile } from 'src/services/functions'
     import API from 'src/services/api'
     import lineChart from './lineChar.vue'
     let user = JSON.parse(getCookie('user'))
@@ -160,7 +160,7 @@
                             data = data.detail
                             var isAdmin = false
                             if ((user.type == 1||user.type==5) && user.id != data.user_id) {
-                                isAdmin = 1
+                                isAdmin = 0
                             }
                             if (!data.all.level || data.all.level.length == 0) {
                                 data.all.level = []
@@ -212,6 +212,13 @@
                         }
                     }
                 })
+            },
+            downloadFbTemplate(){
+                let project_id = this.$route.query.id
+                if(project_id){
+                    downFile(API.tags_template, '?project_id=' + project_id)
+                }
+
             }
         },
         mounted: function () {

@@ -143,3 +143,12 @@ export const accDiv = (arg1, arg2) => {
     r2 = Number(arg2.toString().replace(".", ""))
     return (r1 / r2) * Math.pow(10, t2 - t1)
 }
+
+export const downFile = (url, paramStr) => {
+    var session = getCookie('MLG')
+    if (paramStr) {
+        window.location.href = url + paramStr + '&api-token=' + session
+    } else {
+        window.location.href = url + '?api-token=' + session
+    }
+}
