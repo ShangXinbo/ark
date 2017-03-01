@@ -158,7 +158,8 @@ const mutations = {
         state.dialog.crowdInit = false
         state.dialog.crowdCreate = false
         state.dialog.crowdSelect = false
-        state.dialog.projectUse = false        
+        state.dialog.projectUse = false   
+        state.dialog.buttJointOutUse = false             
         state.showLayer = false
     },
     // 显示上传人群初始化弹窗

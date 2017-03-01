@@ -9,6 +9,7 @@
         <dialog-crowd-create></dialog-crowd-create>
         <dialog-crowd-select></dialog-crowd-select>
         <dialog-project-use></dialog-project-use>
+        <dialog-butt-join-out></dialog-butt-join-out>
         <div id="shadowLayer" v-show="layerStatus"></div>
     </div>
 </template>
@@ -18,7 +19,9 @@
     import dialogCrowdMethod from 'components/dialog/crowdMethod'
     import dialogCrowdCreate from 'components/dialog/crowdCreate'
     import dialogCrowdSelect from 'components/dialog/crowdSelect'
-    import dialogProjectUse from 'components/dialog/projectUse' 
+    import dialogProjectUse from 'components/dialog/projectUse'
+    import dialogButtJoinOut from 'components/dialog/buttJoinOut'
+     
     export default {
         store: store,
         components: {
@@ -26,7 +29,8 @@
             'dialog-crowd-method': dialogCrowdMethod,
             'dialog-crowd-create': dialogCrowdCreate,
             'dialog-crowd-select': dialogCrowdSelect,
-            'dialog-project-use': dialogProjectUse
+            'dialog-project-use': dialogProjectUse,
+            'dialog-butt-join-out': dialogButtJoinOut
         },
         computed: {
             wholePage: function () {
