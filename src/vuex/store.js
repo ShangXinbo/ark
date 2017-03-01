@@ -15,7 +15,14 @@ const state = {
     dialog: {
         crowdInit: false,
         crowdCreate: false,
-        crowdSelect: false
+        crowdSelect: false,
+        projectUse: false
+    },
+    project: {
+        detail: {
+            cycleId: '',
+            turnNumer: ''
+        }
     },
     wholePage: false,
     user: {},
@@ -150,6 +157,7 @@ const mutations = {
         state.dialog.crowdInit = false
         state.dialog.crowdCreate = false
         state.dialog.crowdSelect = false
+        state.dialog.projectUse = false        
         state.showLayer = false
     },
     // 显示上传人群初始化弹窗
@@ -166,6 +174,9 @@ const mutations = {
     SHOW_UPLOAD_SELECT_DIALOG(state) {
         state.dialog.crowdSelect = true
         state.showLayer = true
+    },
+    SHOW_PROJECT_USE_DIALOG(state) {
+        state.dialog.projectUse = true
     },
     SHOW_NAV(state) {
         state.header.nav = true
@@ -208,6 +219,12 @@ const mutations = {
     },
     SHOW_BASETAGS(state, status) {
         state.baseTag_show = Boolean(status)
+    },
+    UPDATE_CYCLE_ID(state,cycleId){
+        state.project.detail.cycleId = cycleId
+    },
+    UPDATE_TURN_NUMBER(state,turnNumer){
+        state.project.detail.turnNumer = turnNumer
     }
 }
 

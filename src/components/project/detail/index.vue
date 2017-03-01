@@ -88,11 +88,11 @@
                             <a v-else="!item.clue_download_status" :data-upback="item.id" href="javascript:void(0)">上传反馈</a>
                             <template v-if="item.upload_status">
                                 <em class="line"></em>
-                                <a :data-downupback="item.id" href="javascript:void(0)">查看反馈</a>
+                                <a :data-downupback="item.id" @click="downFeedback(item.id)" href="javascript:void(0)">查看反馈</a>
                             </template>
                             <template v-if="item.clue_create_status">
                                 <em class="line"></em>
-                                <a :data-turn="item.effect_total" class="{'market':item.effect_total>0}" data-alert="周期数据未匹配成功" href="javascript:void(0)">应用</a>
+                                <a :data-turn="item.effect_total" :data-id="item.id" @click="use(item.id,item.effect_total)" class="{'market':item.effect_total>0}" data-alert="周期数据未匹配成功" href="javascript:void(0)">应用</a>
                             </template>
                         </template>
                     </td>
@@ -126,6 +126,8 @@
     import { getCookie,mAjax,downFile } from 'src/services/functions'
     import API from 'src/services/api'
     import lineChart from './lineChar.vue'
+    import store from 'src/vuex/store'
+
     let user = JSON.parse(getCookie('user'))
     
     export default {
@@ -219,7 +221,20 @@
                     downFile(API.tags_template, '?project_id=' + project_id)
                 }
 
+            },
+            downFeedback(apply_cycle_id){
+                downFile(API.tags_feedbackdata,'?id=' + apply_cycle_id)
+            },
+            uploadFeedback(){
+
+            },
+            use(apply_cycle_id,apply_turn_number){
+                store.commit('UPDATE_CYCLE_ID',apply_cycle_id)
+                store.commit('UPDATE_TURN_NUMBER',apply_turn_number)
+                store.commit('SHOW_PROJECT_USE_DIALOG')
             }
+
+
         },
         mounted: function () {
             this.refresh()

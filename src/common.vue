@@ -8,6 +8,7 @@
         <dialog-crowd-method></dialog-crowd-method>
         <dialog-crowd-create></dialog-crowd-create>
         <dialog-crowd-select></dialog-crowd-select>
+        <dialog-project-use></dialog-project-use>
         <div id="shadowLayer" v-show="layerStatus"></div>
     </div>
 </template>
@@ -17,13 +18,15 @@
     import dialogCrowdMethod from 'components/dialog/crowdMethod'
     import dialogCrowdCreate from 'components/dialog/crowdCreate'
     import dialogCrowdSelect from 'components/dialog/crowdSelect'
+    import dialogProjectUse from 'components/dialog/projectUse' 
     export default {
         store: store,
         components: {
             'vheader': vheader,
             'dialog-crowd-method': dialogCrowdMethod,
             'dialog-crowd-create': dialogCrowdCreate,
-            'dialog-crowd-select': dialogCrowdSelect
+            'dialog-crowd-select': dialogCrowdSelect,
+            'dialog-project-use': dialogProjectUse
         },
         computed: {
             wholePage: function () {
