@@ -84,8 +84,17 @@
                     </td>
                     <td v-if="!isAdmin">
                         <template v-if="item.effect_total>0">
-                            <a v-if="!item.clue_download_status" :data-upback="-1" href="javascript:void(0)">上传反馈</a>
-                            <a v-else="!item.clue_download_status" :data-upback="item.id" href="javascript:void(0)">上传反馈</a>
+                            <a v-if="!item.clue_download_status" :data-upback="-1" href="javascript:void(0)">
+                                <!--上传反馈-->
+                                    <input id="id" type="file" accept=".txt,.xls,.xlsx" @change="submitFile" />
+                                    <label for="id">上传反馈</label>
+                                </a>
+                            <a v-else="!item.clue_download_status" :data-upback="item.id" href="javascript:void(0)">
+                                <!--上传反馈-->
+
+                                    <input id="uploadFB" accept=".txt,.xls,.xlsx" name="file" @change="submitFile" style=" position: absolute;left: -9999px;" type="file" />
+                                    <label for="uploadFB">上传反馈</label>
+                            </a>
                             <template v-if="item.upload_status">
                                 <em class="line"></em>
                                 <a :data-downupback="item.id" @click="downFeedback(item.id)" href="javascript:void(0)">查看反馈</a>
@@ -128,6 +137,7 @@
     import lineChart from './lineChar.vue'
     import store from 'src/vuex/store'
 
+
     let user = JSON.parse(getCookie('user'))
     
     export default {
@@ -141,7 +151,12 @@
                 level: '',
                 list: '',
                 all: '',
-                api:API.tags_list
+                file: {
+                    fileVal: '',
+                    fileError: ''
+                },
+                tagsApi: API.tags_upload,
+                api: API.tags_list
             }
         },
         components: {
@@ -202,9 +217,9 @@
                             _this.level = levelData
                             _this.list = data.list
                             _this.all = data.all
-                            console.log(isAdmin)
-                            console.log(_this.level)
-                            console.log(_this)
+                            // console.log(isAdmin)
+                            // console.log(_this.level)
+                            // console.log(_this)
                         } else {
                             _this.project = {}
                             _this.user_name = ''
@@ -232,6 +247,35 @@
                 store.commit('UPDATE_CYCLE_ID',apply_cycle_id)
                 store.commit('UPDATE_TURN_NUMBER',apply_turn_number)
                 store.commit('SHOW_PROJECT_USE_DIALOG')
+            },
+            submitFile(event){
+                console.log('event.target')
+
+                let file = event.target.files[0],
+                    _this = this
+                console.log(file)
+                if (file.size < 1024 * 1024 * 100) {
+                    this.file.fileVal = file
+                } else {
+                    this.file.fileError = '上传文件需要小于100M'
+                }
+                // console.log(_this.file.fileVal)
+                var formData = new FormData()
+                formData.append(this.file.fileVal.name,this.file.fileVal)
+                console.log(formData)
+                mAjax(this, {
+                    url: _this.tagsApi,
+                    data: formData,
+                    success: function (data) {
+                        if (data.code == 200) {
+                            console.log(data)
+                            _this.refresh()
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
             }
 
 
