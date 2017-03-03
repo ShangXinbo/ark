@@ -43,8 +43,8 @@
                     </tr>
                     <tr v-for="(item,index) in list" :class="{bg:index%2==0}">
                         <td class="tl">
-                            <router-link to="/project/detail?id=2">贷款项目</router-link>
-                            <!--<a href="label-application-detail(general).html">贷款项目</a>-->
+                            <!--<router-link to="">贷款项目</router-link>-->
+                            <a @click = "jumps">贷款项目</a>
                         </td>
                         <td>2</td>
                         <td class="tl">100000</td>
@@ -71,6 +71,8 @@
     import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
     import pages from '../message/pages.vue'
+    import router from '../../router/index'
+
     export default {
         data: () => {
             return {
@@ -105,6 +107,14 @@
                         } else {
                             _this.list = ''
                         }
+                    }
+                })
+            },
+            jumps(){
+                router.push({
+                    name:"project_detail",
+                    query:{
+                        id:2
                     }
                 })
             }
