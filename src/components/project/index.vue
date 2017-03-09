@@ -44,7 +44,7 @@
                     <tr v-for="(item,index) in list" :class="{bg:index%2==0}">
                         <td class="tl">
                             <!--<router-link to="">贷款项目</router-link>-->
-                            <a @click = "jumps">贷款项目</a>
+                            <a style="cursor: pointer" @click = "jumps">贷款项目</a>
                         </td>
                         <td>2</td>
                         <td class="tl">100000</td>

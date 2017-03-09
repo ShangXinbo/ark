@@ -87,13 +87,13 @@
                             <a v-if="!item.clue_download_status" :data-upback="-1" href="javascript:void(0)">
                                 <!--上传反馈-->
                                     <input id="id" type="file" accept=".txt,.xls,.xlsx" @change="submitFile" />
-                                    <label for="id">上传反馈</label>
+                                    <label style="cursor: pointer" for="id">上传反馈</label>
                                 </a>
                             <a v-else="!item.clue_download_status" :data-upback="item.id" href="javascript:void(0)">
                                 <!--上传反馈-->
 
                                     <input id="uploadFB" accept=".txt,.xls,.xlsx" name="file" @change="submitFile" style=" position: absolute;left: -9999px;" type="file" />
-                                    <label for="uploadFB">上传反馈</label>
+                                    <label style="cursor: pointer" for="uploadFB">上传反馈</label>
                             </a>
                             <template v-if="item.upload_status">
                                 <em class="line"></em>
