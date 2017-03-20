@@ -13,7 +13,7 @@
 </template>
 <script>
     import store from 'src/vuex/store'
-    import vheader from 'components/header/index.vue'
+    import vheader from 'components/common/header.vue'
     import dialogCrowdMethod from 'components/dialog/crowdMethod'
     import dialogCrowdCreate from 'components/dialog/crowdCreate'
     import dialogCrowdSelect from 'components/dialog/crowdSelect'

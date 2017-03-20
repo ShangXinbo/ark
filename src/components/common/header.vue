@@ -50,7 +50,7 @@
 </template>
 <script>
     import Vue from 'vue'
-    import vaccount from 'components/header/account.vue'
+    import vaccount from 'components/common/account.vue'
     import store from 'src/vuex/store'
     export default {
         computed: {

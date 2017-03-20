@@ -1,5 +1,5 @@
 <style lang="less" scoped>
-    @import '../../static/less/login.less';
+    @import '../../../static/less/login.less';
 </style>
 <template>
     <div class="main">
