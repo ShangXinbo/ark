@@ -1,8 +1,3 @@
-/**
- * NAME 2016/9/27
- * DATE 2016/9/27
- * AUTHOR shangxinbo
- */
 
 export default {
     login: '/api/users/login',
