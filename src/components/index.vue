@@ -90,42 +90,43 @@
     </div>
 </template>
 <script>
-import store from 'src/vuex/store'
-import router from 'src/router'
-export default {
-    data: function () {
-        return {
-            visual: 'none',
-            offsetLeft: 0,
-            offsetTop: 0
-        }
-    },
-    methods: {
-        closeDialog: function () {
-            this.$data.visual = 'none'
+    import store from 'src/vuex/store'
+    import router from 'src/router'
+    export default {
+        data: function () {
+            return {
+                visual: 'none',
+                offsetLeft: 0,
+                offsetTop: 0
+            }
         },
-        crowdUpDialog: function () {
-            store.commit('CLOSE_DIALOG')
-            store.commit('SHOW_UPLOAD_INIT_DIALOG')
+        methods: {
+            closeDialog: function () {
+                this.$data.visual = 'none'
+            },
+            crowdUpDialog: function () {
+                store.commit('CLOSE_DIALOG')
+                store.commit('SHOW_UPLOAD_INIT_DIALOG')
+            },
+            newCustomerDialog: function () {
+                this.$data.visual = 'block'
+            }
         },
-        newCustomerDialog: function () {
-            this.$data.visual = 'block'
-        }
-    },
-    mounted: function () {
-        var _this = this
+        mounted: function () {
+            var _this = this
 
-        var centerDialog = function (el) {
-            var dialog = document.querySelector(el)
-            var dh = dialog.offsetHeight,
-                dw = dialog.offsetWidth
-            _this.offsetLeft = -dw / 2 + 'px'
-            _this.offsetTop = -dh / 2 + 'px'
-        }
+            var centerDialog = function (el) {
+                var dialog = document.querySelector(el)
+                var dh = dialog.offsetHeight,
+                    dw = dialog.offsetWidth
+                _this.offsetLeft = -dw / 2 + 'px'
+                _this.offsetTop = -dh / 2 + 'px'
+            }
 
-        this.$watch('visual', function (newVal, oldVal) {
-            centerDialog('#new_customer')
-        })
+            this.$watch('visual', function (newVal, oldVal) {
+                centerDialog('#new_customer')
+            })
+        }
     }
-}
+
 </script>
