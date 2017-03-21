@@ -53,7 +53,7 @@ export const delCookie = (name, path, domain) => {
 
 export const listCookie = () => {
     let aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/)
-    for (var nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]) }
+    for (let nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]) }
     return aKeys
 }
 
@@ -72,7 +72,7 @@ export const accAdd = (arg1, arg2) => {
     c = Math.abs(r1 - r2)
     m = Math.pow(10, Math.max(r1, r2))
     if (c > 0) {
-        var cm = Math.pow(10, c)
+        let cm = Math.pow(10, c)
         if (r1 > r2) {
             arg1 = Number(arg1.toString().replace(".", ""))
             arg2 = Number(arg2.toString().replace(".", "")) * cm
@@ -88,7 +88,7 @@ export const accAdd = (arg1, arg2) => {
 }
 
 export const accSub = (arg1, arg2) => {
-    var r1, r2, m, n
+    let r1, r2, m, n
     try {
         r1 = arg1.toString().split(".")[1].length
     } catch (e) {
@@ -105,7 +105,7 @@ export const accSub = (arg1, arg2) => {
 }
 
 export const accMul = (arg1, arg2) => {
-    var m = 0,
+    let m = 0,
         s1 = arg1.toString(),
         s2 = arg2.toString()
     try {
@@ -122,7 +122,7 @@ export const accMul = (arg1, arg2) => {
 }
 
 export const accDiv = (arg1, arg2) => {
-    var t1 = 0,
+    let t1 = 0,
         t2 = 0,
         r1, r2
     try {
@@ -141,8 +141,8 @@ export const accDiv = (arg1, arg2) => {
 }
 
 export const getQuery = (name) => {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
-    var r = window.location.search.substr(1).match(reg)
+    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+    let r = window.location.search.substr(1).match(reg)
     if (r != null) return decodeURIComponent(r[2])
     return null
 }
@@ -155,10 +155,10 @@ export const removeHTMLTag = (str) => {
 }
 
 export const isRealPhone = (mobile) => {
-    var patten1 = /^1(3[456789]{1}|47|5[012789]{1}|78|8[23478]{1})\d{8}$/   //移动
-    var patten2 = /^1(3[012]{1}|45|5[56]{1}|76|8[56]{1})\d{8}$/             //联通
-    var patten3 = /^1(33|53|77|8[019]{1})\d{8}$/                            //电信
-    var patten4 = /^170\d{8}$/                                              //虚拟运营商
+    let patten1 = /^1(3[456789]{1}|47|5[012789]{1}|78|8[23478]{1})\d{8}$/   //移动
+    let patten2 = /^1(3[012]{1}|45|5[56]{1}|76|8[56]{1})\d{8}$/             //联通
+    let patten3 = /^1(33|53|77|8[019]{1})\d{8}$/                            //电信
+    let patten4 = /^170\d{8}$/                                              //虚拟运营商
 
     if (patten1.test(mobile)) {
         return 1
