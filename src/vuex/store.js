@@ -7,12 +7,12 @@ Vue.use(Vuex)
 
 const state = {
     showLayer: false,
+    wholePage: false,
     dialog: {
         crowdInit: false,
         crowdCreate: false,
         crowdSelect: false
     },
-    wholePage: false,
     user: {},
     header: {
         account: false,
