@@ -195,3 +195,14 @@ export const numberFormatter = (num) => {
         return NaN
     }
 }
+
+export const random = (max, min) => {
+    if (!isNaN(max)) {
+        min = isNaN(min) ? 0 : min
+        var sect = max - min
+        return Math.floor(accMul(Math.random(), sect) + min)
+    } else {
+        console.info('random param is not available')
+        return false
+    }
+}

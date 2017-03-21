@@ -12,13 +12,11 @@
     </div>
 </template>
 <script>
-    import store from 'src/vuex/store'
     import vheader from 'components/common/header.vue'
     import dialogCrowdMethod from 'components/dialog/crowdMethod'
     import dialogCrowdCreate from 'components/dialog/crowdCreate'
     import dialogCrowdSelect from 'components/dialog/crowdSelect'
     export default {
-        store: store,
         components: {
             'vheader': vheader,
             'dialog-crowd-method': dialogCrowdMethod,
@@ -27,10 +25,10 @@
         },
         computed: {
             wholePage: function () {
-                return store.state.wholePage
+                return this.$store.state.wholePage
             },
             layerStatus: function () {
-                return store.state.showLayer
+                return this.$store.state.showLayer
             }
         }
     }

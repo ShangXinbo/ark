@@ -1,8 +1,3 @@
-/**
- * NAME 2016/9/29
- * DATE 2016/9/29
- * AUTHOR shangxinbo
- */
 
 import Vuex from 'vuex'
 import Vue from 'vue'

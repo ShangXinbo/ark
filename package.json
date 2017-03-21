@@ -20,7 +20,7 @@
     "vue-echarts": "^2.3.1",
     "vue-resource": "^1.2.0",
     "vue-router": "^2.2.0",
-    "vuex": "^2.1.2"
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "body-parser": "^1.16.1",
