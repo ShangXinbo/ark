@@ -358,7 +358,6 @@
     </div>
 </template>
 <script>
-    import { indexOf } from 'src/services/functions'
     export default {
         data: function () {
             return {
@@ -367,7 +366,10 @@
         },
         methods: {
             hover: function () {
-                var indexes = indexOf(event.target, document.querySelectorAll('.left-nav li'))
+                let li = Array.prototype.slice.call(document.querySelectorAll('.left-nav li'))
+                var indexes = li.findIndex((item) => {
+                    return item == event.target
+                })
                 var newArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                 newArr[indexes] = 1
                 this.index = newArr
