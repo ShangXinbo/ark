@@ -23,10 +23,10 @@
                 <th class="w10p">状态</th>
                 <th class="w22p">操作</th>
             </tr>
-            <tr v-for="(item,index) in list " :id="item.id">
+            <tr v-for="(item,index) in list" :id="item.id">
                 <td>{{item.username}}</td>
                 <td>{{item.nickname}}</td>
-                <td>{{item.usertype}}</td>
+                <td>{{item.type}}</td>
                 <td>{{item.phone}}</td>
                 <td>{{item.email}}</td>
                 <td>{{item.created_at}}</td>
