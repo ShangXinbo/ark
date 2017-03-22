@@ -4,10 +4,10 @@
  * AUTHOR shangxinbo
  */
 
-var Mock = require('mockjs');
-var Random = Mock.Random;
+var Mock = require('mockjs')
+var Random = Mock.Random
 module.exports = function (req, res) {
-    var param = req.body;
+    var param = req.body
     if (!param.username) {
         return 'username null'
     }
@@ -42,5 +42,5 @@ module.exports = function (req, res) {
             "id": 1
         },
         "token": "fca928bd6b9353cca2080936106e41449cffe1ee8b144b282aa563603771afbe"
-    };
-};
+    }
+}

@@ -1,27 +1,19 @@
 
-const express = require('express')
+
+const fs = require('fs')
 const path = require('path')
-const glob = require('glob')
-const request = require('request')
-const bodyParser = require('body-parser')
-const proxy_port = require('../config/prod.env').PROXY_PORT
-const app = express()
+const fork = require('child_process').fork
 
-app
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({extended: false}))
-    .use(function(req,res,next){
-        var file = glob.sync(path.join(__dirname,'..'+ req.path+'.js'))[0]
-        if(file){
-            var data = require(file)
-            res.json({
-                code:200,
-                message:"",
-                detail: data(req,res)
-            })
-        }else{
-            res.send('error')
-        }
-    })
-
-app.listen(proxy_port)
+let ls = fork(path.join(__dirname, './start'))
+let restarting = false
+fs.watch(path.join(__dirname, '../api'), { recursive: true }, (eventType, filename) => {
+    if (!restarting) {
+        restarting = true
+        setTimeout(() => {
+            console.log(123)
+            ls.kill()
+            ls = fork(path.join(__dirname, './start'))
+            restarting = false
+        }, 1000)
+    }
+})

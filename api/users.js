@@ -1,13 +1,8 @@
-/**
- * NAME 2016/8/9
- * DATE 2016/8/9
- * AUTHOR shangxinbo
- */
 
-var Mock = require('mockjs');
-var Random = Mock.Random;
+var Mock = require('mockjs')
+var Random = Mock.Random
 module.exports = function (req, res) {
-    console.log(req.header('api_token'));
+    console.log(req.header('api_token'))
     return {
         "user": {
             "id": 1,
@@ -22,4 +17,4 @@ module.exports = function (req, res) {
             "updated_at": "2016-08-22 18:16:54"
         }
     }
-};
+}

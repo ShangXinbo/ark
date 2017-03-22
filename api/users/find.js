@@ -4,12 +4,12 @@
  * AUTHOR shangxinbo
  */
 
-var Mock = require('mockjs');
+var Mock = require('mockjs')
 var Random = Mock.Random;
 module.exports = function(req,res){
-    var param = req.body;
+    var param = req.body
     if (!param.user_name) {
         return 'user_name null'
     }
-    return '';
+    return ''
 }

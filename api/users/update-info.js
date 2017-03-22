@@ -4,10 +4,10 @@
  * AUTHOR shangxinbo
  */
 
-var Mock = require('mockjs');
-var Random = Mock.Random;
+var Mock = require('mockjs')
+var Random = Mock.Random
 module.exports = function(req,res){
-    var param = req.body;
+    var param = req.body
     if (!param.nickname) {
         return 'nickname null'
     }
@@ -17,5 +17,5 @@ module.exports = function(req,res){
     if (!param.email) {
         return 'email null'
     }
-    return '';
+    return ''
 };
