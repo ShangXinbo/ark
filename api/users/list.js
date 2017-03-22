@@ -21,7 +21,7 @@ module.exports = function(req,res){
             "data":[]
         }
     };
-    for(var i=0;i<param.rows;i++){
+    for(var i=0;i<10;i++){
         d.users.data.push({
             "id": Random.natural(),
             "username": Random.word(4,9),
