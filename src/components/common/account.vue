@@ -16,7 +16,6 @@
     </li>
 </template>
 <script>
-    import store from 'src/vuex/store.js'
     import { getCookie, delCookie } from 'src/services/functions'
     import router from 'src/router'
     let user = JSON.parse(getCookie('user'))
@@ -29,13 +28,13 @@
             }
         },
         computed: {
-            down: function () {
-                return store.state.header.account
+            down() {
+                return this.$store.state.header.account
             }
         },
         methods: {
             show: function () {
-                store.commit('SHOW_ACCOUNT_TAB')
+                this.$store.commit('SHOW_ACCOUNT_TAB')
             },
             logout: function () {
                 delCookie('user')

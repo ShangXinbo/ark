@@ -10,36 +10,30 @@
                 <router-link class="icon news-icon" to="/message"></router-link>
             </li>
             <vaccount></vaccount>
-            <li v-on:click.stop="nav()" v-bind:class="{'li-hover': headerNav}">
+            <li v-on:click.stop="showNav()" v-bind:class="{'li-hover': navToggle}">
                 <i class="icon nav-icon"></i>
-                <div class="nav">
-                    <a class="clearStorage">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
+                <div class="nav" v-on:click.stop>
+                    <a class="clearStorage" v-on:click="hideNav()" href="javascript:void(0)">
                         <i class="icon nav01"></i>
                         <span>人群上传</span>
                     </a>
                     <router-link to="/filter">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav02"></i>
                         <span>标签筛选</span>
                     </router-link>
                     <router-link to="/models">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav03"></i>
                         <span>建模筛选</span>
                     </router-link>
                     <router-link to="/report">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav04"></i>
                         <span>统计分析</span>
                     </router-link>
-                    <a data-href="datause" href="/project/list.html">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
+                    <router-link to="/project">
                         <i class="icon nav05"></i>
                         <span>标签应用</span>
-                    </a>
+                    </router-link>
                     <router-link to="/crowd/filter">
-                        <!--[if IE 8 ]><em class="icon"></em><![endif]-->
                         <i class="icon nav06"></i>
                         <span>人群管理</span>
                     </router-link>
@@ -51,27 +45,34 @@
 <script>
     import Vue from 'vue'
     import vaccount from 'components/common/account.vue'
-    import store from 'src/vuex/store'
+    import router from 'src/router'
+
     export default {
-        computed: {
-            headerNav: function () {
-                return store.state.header.nav
+        computed:{
+            navToggle(){
+                return this.$store.state.header.nav
             }
         },
         components: {
-            vaccount: vaccount
+            vaccount
         },
         methods: {
-            nav: function (str) {
-                store.commit('SHOW_NAV')
+            showNav: function () {
+                this.$store.commit('SHOW_NAV')
+            },
+            hideNav: function () {
+                this.$store.commit('HIDE_NAV')
             }
         },
         mounted: function () {
-            var _this = this
+            let _this = this
             Vue.nextTick(function () {
                 document.onclick = function () {
-                    store.commit('HIDE_NAV')
+                    _this.hideNav()
                 }
+            })
+            router.afterEach(route => {
+                _this.hideNav()
             })
         }
     }

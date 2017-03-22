@@ -13,11 +13,11 @@ const state = {
         crowdCreate: false,
         crowdSelect: false
     },
-    user: {},
     header: {
         account: false,
-        nav: false
+        nav:false
     },
+    user: {},
     tagFolder: [],
     filters: {
         crowd: { "id": 185, "name": "啊手动阀手动阀" }, //default null
@@ -207,6 +207,7 @@ const mutations = {
 }
 
 export default new Vuex.Store({
+    strict:true,
     state,
     mutations
 })
