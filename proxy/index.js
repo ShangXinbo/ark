@@ -10,7 +10,6 @@ fs.watch(path.join(__dirname, '../api'), { recursive: true }, (eventType, filena
     if (!restarting) {
         restarting = true
         setTimeout(() => {
-            console.log(123)
             ls.kill()
             ls = fork(path.join(__dirname, './start'))
             restarting = false
